@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FirstScreens from './../screens/First_Screens';
 import HomeScreen from './../screens/Home';
 import { Details } from './../screens/Details';
-import OnboardingScreen from "../components/onboarding";
+import OnboardingScreen from "../screens/OnboardingScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +39,11 @@ function StackNavigator() {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="OnboardingScreen"
+        component={OnboardingScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
