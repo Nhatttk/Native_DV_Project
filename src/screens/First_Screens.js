@@ -54,7 +54,7 @@ const FirstScreens = ({ navigation }) => {
           </Animated.Text>
           <Animated.View entering={FadeInDown.delay(600).springify()}>
             <Pressable
-              onPress={() => navigation.navigate("SignInScreen")}
+              onPress={() => navigation.navigate(" ")}
               style={styles.startButton}
             >
               <Text style={styles.startText}>Start</Text>
