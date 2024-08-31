@@ -5,6 +5,7 @@ import FirstScreens from './../screens/First_Screens';
 import HomeScreen from './../screens/Home';
 import { Details } from './../screens/Details';
 import OnboardingScreen from "../screens/OnboardingScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +33,11 @@ function StackNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Details"
         component={Details}
         options={{ headerShown: false }}
@@ -39,11 +45,6 @@ function StackNavigator() {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="OnboardingScreen"
-        component={OnboardingScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
