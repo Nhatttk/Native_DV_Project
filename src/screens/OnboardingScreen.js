@@ -19,6 +19,7 @@ import { theme } from "./../constains/theme";
 
 import { IntroductionData } from "../utils/introductionData";
 import IntroCard from "../components/IntroCard";
+import LoginScreen from './LoginScreen';
 
 const OnboardingScreen = ({ navigation }) => {
   const [introData, setIntroData] = React.useState(0);
@@ -26,9 +27,13 @@ const OnboardingScreen = ({ navigation }) => {
     if (introData < 2) {
       setIntroData(introData + 1);
     }
+    else{
+      navigation.navigate("LoginScreen");
+    }
   };
   const skipHandle = () => {
     setIntroData(2);
+    navigation.navigate('LoginScreen')
   }
   // const navigation = useNavigation();
 

@@ -6,6 +6,8 @@ import HomeScreen from './../screens/Home';
 import { Details } from './../screens/Details';
 import OnboardingScreen from "../screens/OnboardingScreen";
 import LoginScreen from "../screens/LoginScreen";
+import SignUpScreen from "../screens/SignUpScreen";
+import ProfileDetails from "../screens/ProfileDetails";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,14 +30,24 @@ function StackNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="ProfileDetails"
+        component={ProfileDetails}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
         name="OnboardingScreen"
         component={OnboardingScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUpScreen"
+        component={SignUpScreen}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="Details"

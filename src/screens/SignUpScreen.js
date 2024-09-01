@@ -1,14 +1,22 @@
-import React from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Feather from "react-native-vector-icons/Feather";
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.title}>
@@ -21,14 +29,24 @@ const LoginScreen = ({ navigation }) => {
             marginBottom: 8,
           }}
         >
-          Hi, Welcome back !
+          Create Account
         </Text>
         <Text style={{ fontSize: 14, fontFamily: "Inter", color: "#6B7280" }}>
-          Hope you're doing fine.
+          We are here to help you!
         </Text>
       </View>
 
-      <View style={styles.mail_input}>
+      <View style={styles.input}>
+        <Feather
+          name="user"
+          size={20}
+          color="#9CA3AF"
+          style={{ paddingRight: 8 }}
+        />
+        <TextInput placeholder="Your name" />
+      </View>
+
+      <View style={styles.input}>
         <Ionicons
           name="mail-outline"
           size={20}
@@ -38,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
         <TextInput placeholder="Your email" />
       </View>
 
-      <View style={styles.pass_input}>
+      <View style={styles.input}>
         <Ionicons
           name="lock-closed-outline"
           size={20}
@@ -48,9 +66,12 @@ const LoginScreen = ({ navigation }) => {
         <TextInput placeholder="Password" secureTextEntry />
       </View>
 
-      <TouchableOpacity style={styles.btn_signin}>
+      <TouchableOpacity
+        style={styles.btn_signin}
+        onPress={() => navigation.navigate("ProfileDetails")}
+      >
         <Text style={{ color: "#fff", fontSize: 16, fontFamily: "Inter" }}>
-          Sign In
+          Create Account
         </Text>
       </TouchableOpacity>
 
@@ -60,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.line_item} />
       </View>
 
-      <TouchableOpacity style={styles.btn_google}>
+      <TouchableOpacity style={styles.btn_social}>
         <Image
           source={require("../assets/img/Google__G__logo.svg.webp")} // Đường dẫn đến logo Google
           style={styles.social_logo}
@@ -77,7 +98,7 @@ const LoginScreen = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btn_facebook}>
+      <TouchableOpacity style={styles.btn_social}>
         <Image
           source={require("../assets/img/Facebook_Logo_(2019).png.webp")} // Đường dẫn đến logo Google
           style={styles.social_logo}
@@ -95,16 +116,11 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       <View style={styles.footerContainer}>
-        {/* Forgot Password */}
-        <TouchableOpacity>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-        </TouchableOpacity>
-
         {/* Sign Up */}
         <View style={styles.signUpContainer}>
-          <Text style={styles.signUpText}>Don’t have an account yet? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
-            <Text style={styles.signUpLink}>Sign up</Text>
+          <Text style={styles.signUpText}>Do you have an account ? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <Text style={styles.signUpLink}>Sign in</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -121,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     width: 100,
     height: 100,
-    borderRadius: 180
+    borderRadius: 180,
   },
   title: {
     display: "flex",
@@ -129,19 +145,7 @@ const styles = StyleSheet.create({
     padding: 32,
     // justifyContent: 'center'
   },
-  mail_input: {
-    marginBottom: 23,
-    padding: 16,
-    backgroundColor: "#F9FAFB",
-    borderRadius: 18,
-    marginHorizontal: 24,
-    flexDirection: "row",
-    alignItems: "center",
-    position: "relative",
-    borderColor: "#D1D5DB",
-    borderWidth: 1,
-  },
-  pass_input: {
+  input: {
     marginBottom: 23,
     padding: 16,
     backgroundColor: "#F9FAFB",
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#888",
   },
-  btn_google: {
+  btn_social: {
     borderRadius: 8,
     borderWidth: 1,
     padding: 20,
@@ -193,16 +197,6 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 8,
   },
-  btn_facebook: {
-    borderRadius: 8,
-    borderWidth: 1,
-    padding: 20,
-    marginHorizontal: 24,
-    alignItems: "center",
-    borderColor: "#E5E7EB",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
   footerContainer: {
     alignItems: "center",
     marginTop: 23,
@@ -212,7 +206,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
     color: "#1C64F2",
     marginVertical: 10,
-    marginBottom: 23
+    marginBottom: 23,
   },
   signUpContainer: {
     flexDirection: "row",
@@ -229,4 +223,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;
