@@ -3,18 +3,18 @@ export default [
     id: "1",
     image: require("../assets/slides/1.jpg"),
     title: "Welcome",
-    subtitle: "Welcome to the first slide of the Onboarding Swiper.",
+    subtitle: "Welcome to the app dedicated to combating domestic violence.",
   },
   {
     id: "2",
     image: require("../assets/slides/2.jpg"),
-    title: "Explore",
-    subtitle: "This is the second slide of the Onboarding Swiper.",
+    title: "Knowledge",
+    subtitle: "Explore knowledge and ways to recognize domestic violence.",
   },
   {
     id: "3",
     image: require("../assets/slides/3.jpg"),
-    title: "All Done",
-    subtitle: "This is the Third slide of the Onboarding Swiper.",
+    title: "Support",
+    subtitle: "Find help and connect with support services.",
   },
 ];

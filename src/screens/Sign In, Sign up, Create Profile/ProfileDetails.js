@@ -76,10 +76,10 @@ const ProfileDetails = ({ navigation }) => {
           <Image
             style={{ width: 200, height: 200, borderRadius: 180, zoom: 1 }}
             source={{ uri: selectedImage }}
-            defaultSource={require("../assets/img/avatar2.png")}
+            defaultSource={require("../../assets/img/avatar2.png")}
           />
           <Image
-            source={require("../assets/img/message-edit.1024x1024.png")}
+            source={require("../../assets/img/message-edit.1024x1024.png")}
             style={styles.edit_icon}
           />
         </TouchableOpacity>

@@ -8,12 +8,12 @@ import {
   Pressable,
 } from "react-native";
 // import { hp, wp } from "../helpers/common";
-import { hp, wp } from "../constains/common";
+import { hp, wp } from "../../constains/common";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated, { FadeInDown } from "react-native-reanimated";
 // import { theme } from "../constants/theme";
 import { useNavigation } from "@react-navigation/native";
-import { theme } from './../constains/theme';
+import { theme } from '../../constains/theme';
 const FirstScreens = ({ navigation }) => {
   // const navigation = useNavigation();
 
@@ -21,7 +21,7 @@ const FirstScreens = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar style="light" />
       <Image
-        source={require("../assets/img/first.jpg")}
+        source={require("../../assets/img/first.jpg")}
         style={styles.bgImage}
         resizeMode="cover"
       />
@@ -44,13 +44,13 @@ const FirstScreens = ({ navigation }) => {
             entering={FadeInDown.delay(400).springify()}
             style={styles.title}
           >
-            Wonder Woman
+            Breaking Shadows
           </Animated.Text>
           <Animated.Text
             entering={FadeInDown.delay(500).springify()}
             style={styles.punchLine}
           >
-            Ngại gì vết bẩn ☺
+            Protect yourself
           </Animated.Text>
           <Animated.View entering={FadeInDown.delay(600).springify()}>
             <Pressable

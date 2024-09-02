@@ -20,7 +20,7 @@ const SignUpScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.title}>
-        <Image style={styles.icon} source={require("../assets/img/logo.png")} />
+        <Image style={styles.icon} source={require("../../assets/img/logogpt-removebg-preview.png")} />
         <Text
           style={{
             fontWeight: "bold",
@@ -83,7 +83,7 @@ const SignUpScreen = ({navigation}) => {
 
       <TouchableOpacity style={styles.btn_social}>
         <Image
-          source={require("../assets/img/Google__G__logo.svg.webp")} // Đường dẫn đến logo Google
+          source={require("../../assets/img/Google__G__logo.svg.webp")} // Đường dẫn đến logo Google
           style={styles.social_logo}
         />
         <Text
@@ -100,7 +100,7 @@ const SignUpScreen = ({navigation}) => {
 
       <TouchableOpacity style={styles.btn_social}>
         <Image
-          source={require("../assets/img/Facebook_Logo_(2019).png.webp")} // Đường dẫn đến logo Google
+          source={require("../../assets/img/Facebook_Logo_(2019).png.webp")} // Đường dẫn đến logo Google
           style={styles.social_logo}
         />
         <Text
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginBottom: 32,
-    width: 100,
-    height: 100,
+    width: 125,
+    height: 85,
     borderRadius: 180,
   },
   title: {
