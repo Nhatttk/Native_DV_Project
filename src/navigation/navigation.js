@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from './../screens/Home';
+import HomeScreen from './../screens/Home/Home';
 import { Details } from './../screens/Details';
 import SignUpScreen from "../screens/Sign In, Sign up, Create Profile/SignUpScreen";
 import FirstScreens from './../screens/Onboarding/First_Screens';
