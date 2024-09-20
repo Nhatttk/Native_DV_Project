@@ -1,9 +1,23 @@
 import React from 'react'
 import { Image, View, Text, StyleSheet, Dimensions } from 'react-native'
+import Animated, {
+  FadeInDown,
+  FadeOutUp,
+  useSharedValue,
+  withTiming,
+  useAnimatedStyle,
+} from "react-native-reanimated"; // Animation imports
 
 export default function ({props}) {
+  const opacity = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: withTiming(opacity.value, { duration: 1 }),
+    };
+  });
     return (
-        <View style={styles.container}>
+        <Animated.View withTiming style={styles.container}>
           <View style={styles.imgContainer}>
             <Image style={styles.imgBox} source={{ uri: props.imgUrl }} />
           </View>
@@ -12,7 +26,7 @@ export default function ({props}) {
             <Text style={styles.content}>{props.content}</Text>
           </View>
           
-        </View>
+        </Animated.View>
       );
     };
     
