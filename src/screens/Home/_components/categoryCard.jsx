@@ -12,8 +12,8 @@ export default function CategoryCard({props}) {
         }}
       />
         </View>
-        <View style={{height: 30, width: "100%"}}>
-            <Text style={{fontWeight: "bold", fontSize: 10, color: "#292D32", alignSelf: "center", textAlign: "center"}}>{props.title}</Text>
+        <View style={{height: 18, width: "100%"}}>
+            <Text style={{fontWeight: "bold", fontSize: 12, color: "#4B5563", alignSelf: "center", textAlign: "center"}}>{props.title}</Text>
         </View>
     </View>
   )
@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
         flexDirection: "column",   
         justifyContent: "center",
         alignContent: "flex-start",   
-        width: "100%",
-        height: "100%",       
+        width: 66,
+        height: 84,       
         gap: 5
     },
     img: {
-        width: "100%",
-        height: 70,
+        width: 62,
+        height: 62,
         borderRadius: 10,
     }
 })
