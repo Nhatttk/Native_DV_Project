@@ -120,7 +120,7 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.categoriesContainer}>
             {categoriesData.map((item) => {
               return (
-                <TouchableOpacity key={item.id} style={styles.category}>
+                <TouchableOpacity key={item.id} style={styles.category} onPress={() => navigation.navigate(item.navigationPath)}>
                   <CategoryCard props={item} />
                 </TouchableOpacity>
               );

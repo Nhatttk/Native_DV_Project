@@ -11,6 +11,8 @@ import ProfileDetails from './../screens/Sign In, Sign up, Create Profile/Profil
 import ForgetPasswordScreen from './../screens/Forget Password/ForgetPasswordScreen';
 import VerifyCodeScreen from "../screens/Forget Password/VerifyCodeScreen";
 import ResetPasswordScreen from "../screens/Forget Password/ResetPasswordScreen";
+import AllFriends from "../screens/AllFriends/AllFriends";
+import PsychiatristDetails from "../screens/psychiatristDetails/Psychiatrist_Details";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,6 +84,17 @@ function StackNavigator() {
         component={TabNavigator}
         options={{ headerShown: false }}
       />
+      {/* <Stack.Screen
+        name="AllFriends"
+        component={AllFriends}
+        options={{ headerShown: false }}
+      /> */}
+      <Stack.Screen
+        name="PsychiatristDetails"
+        component={PsychiatristDetails}
+        options={{ headerShown: false }}
+      />
+      
     </Stack.Navigator>
   );
 }
