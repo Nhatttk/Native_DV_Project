@@ -105,7 +105,7 @@ const PsychiatristDetails = ({ navigation }) => {
       </View>
       <View style={{ paddingHorizontal: 24, paddingVertical: 24 }}>
         {/* <Button style={styles.button} title="Book Appointment" /> */}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("bookAppointmentConfirm")}>
             <Text style={{ color: "white", fontSize: 16, fontWeight: "medium" }}>Book Appointment</Text>
         </TouchableOpacity>
       </View>

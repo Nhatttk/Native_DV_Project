@@ -13,6 +13,7 @@ import VerifyCodeScreen from "../screens/Forget Password/VerifyCodeScreen";
 import ResetPasswordScreen from "../screens/Forget Password/ResetPasswordScreen";
 import AllFriends from "../screens/AllFriends/AllFriends";
 import PsychiatristDetails from "../screens/psychiatristDetails/Psychiatrist_Details";
+import BookApointmentConfirm from "../screens/bookApointmentConfirm/BookApointmentConfirm";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -92,6 +93,11 @@ function StackNavigator() {
       <Stack.Screen
         name="PsychiatristDetails"
         component={PsychiatristDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="bookAppointmentConfirm"
+        component={BookApointmentConfirm}
         options={{ headerShown: false }}
       />
       
