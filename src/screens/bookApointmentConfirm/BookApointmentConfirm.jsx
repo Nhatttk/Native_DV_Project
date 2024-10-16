@@ -11,17 +11,21 @@ const BookApointmentConfirm = ({ navigation }) => {
       setDate(date);
     };
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <View>
                 <TopNavigation navigation={navigation} title="Book Appointment" isHeart={false}/>
             </View>
-            <View>
+            <View style={{ marginTop: 16 }}>
                 <CalendarModal />
             </View>
         </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+    }
+})
 
 export default BookApointmentConfirm;
