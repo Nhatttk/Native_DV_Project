@@ -15,7 +15,7 @@ export const categoriesData = [
         id: 3,
         title: "Psychological Support",
         imgUrl: "https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg",
-        navigationPath: ""
+        navigationPath: "bookhistory"
     },
     {
         id: 4,

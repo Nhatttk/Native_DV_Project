@@ -11,7 +11,7 @@ import { Calendar, CalendarUtils } from "react-native-calendars";
 import testIDs from "../../../utils/testIDs";
 import { AntDesign } from "@expo/vector-icons";
 
-const CalendarScreen = () => {
+const CalendarScreen = ({props}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const INITIAL_DATE = currentDate.toISOString().split("T")[0];
   const [selected, setSelected] = useState(INITIAL_DATE);
@@ -201,7 +201,7 @@ const CalendarScreen = () => {
     <ScrollView
       showsVerticalScrollIndicator={false}
       testID={testIDs.calendars.CONTAINER}
-      style={{ backgroundColor: "white" }}
+      style={{ backgroundColor: "white" }}  
     >
       {renderExamples()}
     </ScrollView>
