@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import Icons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icons from "react-native-vector-icons/FontAwesome";
 
 const userdata = {
     name: "Emily Anderson",
@@ -21,10 +21,10 @@ const renderStars = (rating) => {
                 <Icons key={`full-${index}`} name="star" size={20} color="#FEB052" />
             ))}
             {/* Render half star if applicable */}
-            {halfStar === 1 && <Icons name="star-half" size={20} color="#FEB052" />}
+            {halfStar === 1 && <Icons name="star-half-empty" size={20} color="#FEB052" />}
             {/* Render empty stars */}
             {Array(emptyStars).fill().map((_, index) => (
-                <Icons key={`empty-${index}`} name="star-outline" size={20} color="#FEB052" />
+                <Icons key={`empty-${index}`} name="star-o" size={20} color="#FEB052" />
             ))}
         </View>
     );
@@ -39,7 +39,7 @@ const UserCard = () => {
             <View style={{flexDirection: "column", gap: 8}}>
                 <Text style={{fontWeight: "bold", fontSize: '16'}}>{userdata.name}</Text>
                 <View style={{flexDirection: "row", alignItems: "center", gap: 4}}>
-                    <Text>5.0</Text>
+                    <Text>3.5</Text>
                     <View style={{}}>
                     {renderStars(userdata.rating)}
                     </View>

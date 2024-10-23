@@ -62,6 +62,15 @@ const BookHistory = ({ navigation }) => {
             >
               Upcoming
             </Text>
+            {isUpcoming && <View
+              style={{
+                width: "100%",
+                height: 3,
+                backgroundColor: "#1C2A3A",
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+              }}
+            ></View>}
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressCompleted}>
@@ -70,12 +79,21 @@ const BookHistory = ({ navigation }) => {
               style={{
                 fontSize: 16,
                 fontWeight: 600,
-                color: isCompleted ? "#1C2A3A": "#9CA3AF",
+                color: isCompleted ? "#1C2A3A" : "#9CA3AF",
                 marginVertical: 16,
               }}
             >
               Completed
             </Text>
+            {isCompleted && <View
+              style={{
+                width: "100%",
+                height: 3,
+                backgroundColor: "#1C2A3A",
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+              }}
+            ></View>}
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressCaceled}>
@@ -90,9 +108,19 @@ const BookHistory = ({ navigation }) => {
             >
               Canceled
             </Text>
+            {isCancelled && <View
+              style={{
+                width: "100%",
+                height: 3,
+                backgroundColor: "#1C2A3A",
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+              }}
+            ></View>}
           </View>
         </TouchableOpacity>
       </View>
+      <View style={{ width: "100%", height: 1, backgroundColor: "#E5E7EB" }}></View>
       <ScrollView>
         <View
           style={{
@@ -100,6 +128,7 @@ const BookHistory = ({ navigation }) => {
             gap: 10,
             alignContent: "center",
             alignItems: "center",
+            marginTop: 16
           }}
         >
           {BookingData.filter((item) => handleFilter(item.status)).map(
@@ -123,6 +152,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     justifyContent: "center",
+    backgroundColor: "#fff",
     // alignItems: "center",
   },
 });

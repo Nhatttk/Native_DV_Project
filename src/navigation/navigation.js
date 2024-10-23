@@ -15,6 +15,7 @@ import AllFriends from "../screens/AllFriends/AllFriends";
 import PsychiatristDetails from "../screens/psychiatristDetails/Psychiatrist_Details";
 import BookApointmentConfirm from "../screens/bookApointmentConfirm/BookApointmentConfirm";
 import BookHistory from "../screens/bookHistory";
+import FavoritesScreen from "../screens/favorites";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -104,6 +105,11 @@ function StackNavigator() {
       <Stack.Screen
         name="bookhistory"
         component={BookHistory}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="favoritesScreen"
+        component={FavoritesScreen}
         options={{ headerShown: false }}
       />
       

@@ -21,7 +21,7 @@ export const categoriesData = [
         id: 4,
         title: "Stories",
         imgUrl: "https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?cs=srgb&dl=pexels-pixabay-531880.jpg&fm=jpg",
-        navigationPath: ""
+        navigationPath: "favoritesScreen"
     },
     {
         id: 5,
