@@ -11,6 +11,11 @@ import ProfileDetails from './../screens/Sign In, Sign up, Create Profile/Profil
 import ForgetPasswordScreen from './../screens/Forget Password/ForgetPasswordScreen';
 import VerifyCodeScreen from "../screens/Forget Password/VerifyCodeScreen";
 import ResetPasswordScreen from "../screens/Forget Password/ResetPasswordScreen";
+import AllFriends from "../screens/AllFriends/AllFriends";
+import PsychiatristDetails from "../screens/psychiatristDetails/Psychiatrist_Details";
+import BookApointmentConfirm from "../screens/bookApointmentConfirm/BookApointmentConfirm";
+import BookHistory from "../screens/bookHistory";
+import FavoritesScreen from "../screens/favorites";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,6 +87,32 @@ function StackNavigator() {
         component={TabNavigator}
         options={{ headerShown: false }}
       />
+      {/* <Stack.Screen
+        name="AllFriends"
+        component={AllFriends}
+        options={{ headerShown: false }}
+      /> */}
+      <Stack.Screen
+        name="PsychiatristDetails"
+        component={PsychiatristDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="bookAppointmentConfirm"
+        component={BookApointmentConfirm}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="bookhistory"
+        component={BookHistory}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="favoritesScreen"
+        component={FavoritesScreen}
+        options={{ headerShown: false }}
+      />
+      
     </Stack.Navigator>
   );
 }
