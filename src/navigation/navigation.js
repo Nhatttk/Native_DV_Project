@@ -16,6 +16,8 @@ import PsychiatristDetails from "../screens/psychiatristDetails/Psychiatrist_Det
 import BookApointmentConfirm from "../screens/bookApointmentConfirm/BookApointmentConfirm";
 import BookHistory from "../screens/bookHistory";
 import FavoritesScreen from "../screens/favorites";
+import AddFriend from "../screens/Add Friend/AddFriend";
+import Map from "../screens/Map/Map";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +34,16 @@ function TabNavigator() {
 function StackNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Map"
+        component={Map}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddFriend"
+        component={AddFriend}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="FirstScreens"
         component={FirstScreens}
