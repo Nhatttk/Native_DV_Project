@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Icons from "react-native-vector-icons/EvilIcons";
 import IconAntDesign from "react-native-vector-icons/AntDesign";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
+import { TouchableOpacity } from "react-native";
+import { IsFavoritesContext } from "../../../utils/IsFavoritesContext";
 
 const renderStars = (rating) => {
   const fullStars = Math.floor(rating); // Full stars
@@ -40,8 +42,17 @@ const renderStars = (rating) => {
     </View>
   );
 };
-
 const FavoriteCard = ({ props }) => {
+  const { handleSetIsFavorites, handleSetIdItem } = useContext(IsFavoritesContext);  
+
+  const setCancleFavorites = (id) => {
+    handleSetIsFavorites(true);
+    handleSetIdItem(id);
+  }
+
+  const CancelFavorites = (id) => {
+    setCancleFavorites(id);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
@@ -59,7 +70,9 @@ const FavoriteCard = ({ props }) => {
             {props.name}
           </Text>
           {props.isFavorite && (
-            <IconAntDesign name="heart" size={20} color="#4B5563" />
+            <TouchableOpacity onPress={() => CancelFavorites(props.id)}>
+              <IconAntDesign name="heart" size={20} color="#4B5563" />
+            </TouchableOpacity>
           )}
         </View>
         <View style={styles.lineStyle} />

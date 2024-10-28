@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import Icons from "react-native-vector-icons/EvilIcons";
 import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
+import { IsFavoritesContext } from "../../../utils/IsFavoritesContext";
+import { TouchableOpacity } from "react-native";
 
 const renderStars = (rating) => {
   const fullStars = Math.floor(rating); // Full stars
@@ -41,7 +43,8 @@ const renderStars = (rating) => {
   );
 };
 
-const BlogCard = ({ props }) => {
+const BlogCard = ({ props, onPressHandleRemoveFavorites }) => {
+  const {setRemoving} = useContext(IsFavoritesContext);
   return (
     <View style={styles.container}>
       <View>
@@ -54,9 +57,9 @@ const BlogCard = ({ props }) => {
             borderTopRightRadius: 8,
           }}
         />
-        <View style={styles.heartcontainer}>
-          <IconFontAwesome name="heart" size={15} color="#ffff" />
-        </View>
+        <TouchableOpacity style={styles.heartcontainer} onPress={() => onPressHandleRemoveFavorites()} >
+          <IconFontAwesome name="heart" size={15} color="#ffff"/>
+        </TouchableOpacity>
       </View>
       <View style={styles.infocontainer}>
         <Text style={{ fontSize: 14, fontWeight: 700, color: "#4B5563" }}>
@@ -151,7 +154,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 8,
     right: 8,
-    zIndex: 99,
+    zIndex: 1,
     width: 27,
     height: 27,
     backgroundColor: "rgba(211, 206, 209, 0.8)",
