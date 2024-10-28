@@ -35,6 +35,11 @@ function StackNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="FirstScreens"
+        component={FirstScreens}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Map"
         component={Map}
         options={{ headerShown: false }}
@@ -42,11 +47,6 @@ function StackNavigator() {
       <Stack.Screen
         name="AddFriend"
         component={AddFriend}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="FirstScreens"
-        component={FirstScreens}
         options={{ headerShown: false }}
       />
       <Stack.Screen
