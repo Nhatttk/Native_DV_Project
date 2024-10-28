@@ -11,6 +11,8 @@ import ProfileDetails from './../screens/Sign In, Sign up, Create Profile/Profil
 import ForgetPasswordScreen from './../screens/Forget Password/ForgetPasswordScreen';
 import VerifyCodeScreen from "../screens/Forget Password/VerifyCodeScreen";
 import ResetPasswordScreen from "../screens/Forget Password/ResetPasswordScreen";
+import AddFriend from "../screens/Add Friend/AddFriend";
+import Map from "../screens/Map/Map";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,6 +29,16 @@ function TabNavigator() {
 function StackNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Map"
+        component={Map}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddFriend"
+        component={AddFriend}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="FirstScreens"
         component={FirstScreens}
