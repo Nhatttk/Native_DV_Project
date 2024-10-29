@@ -16,6 +16,7 @@ import { categoriesData } from "../../utils/categoriesData";
 import CategoryCard from "./_components/categoryCard";
 import { NearbySupportCentersData } from "../../utils/nearbySupportCentersData";
 import NearbySupportCard from "./_components/nearbySupportCard";
+import NavigationBar from "../../components/NavigationBar";
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -145,6 +146,9 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
+      <View>
+        <NavigationBar navigation={navigation} />
+      </View>
     </SafeAreaView>
   );
 };

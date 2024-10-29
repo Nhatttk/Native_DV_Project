@@ -57,7 +57,7 @@ const BlogCard = ({ props, onPressHandleRemoveFavorites }) => {
             borderTopRightRadius: 8,
           }}
         />
-        <TouchableOpacity style={styles.heartcontainer} onPress={() => onPressHandleRemoveFavorites()} >
+        <TouchableOpacity style={styles.heartcontainer} onPress={() => onPressHandleRemoveFavorites(props.id)} >
           <IconFontAwesome name="heart" size={15} color="#ffff"/>
         </TouchableOpacity>
       </View>

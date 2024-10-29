@@ -16,34 +16,28 @@ import BlogCard from "./_components/BlogCard";
 import IsFavoritesProvider, {
   IsFavoritesContext,
 } from "../../utils/IsFavoritesContext";
+import Button from "../../components/button";
 
 const FavoritesScreen = ({ navigation }) => {
   const [isPsychiatrist, setIsPsychiatrist] = React.useState(true);
   const [psychiatristRemoved, setPsychiatristRemoved] = React.useState();
   const [isBlogs, setIsBlogs] = React.useState(false);
 
-  const { isfavorite, idItem, removing, setRemoving } = useContext(IsFavoritesContext);
+  const { isfavorite, idItem, removing, setRemoving } =
+    useContext(IsFavoritesContext);
 
   const [displayRemove, setDisplayRemove] = React.useState(false);
-
-  // const handleFilter = (status) => {
-  //   if (isPsychiatrist === true) {
-  //     return status === "upcoming";
-  //   } else if (isCompleted === true) {
-  //     return status === "completed";
-  //   }
-  // };
+  const [idItemRemove, setIdItemRemove] = React.useState("");
 
   const onPressPsychiatrist = () => {
     setIsPsychiatrist(true);
     setIsBlogs(false);
   };
 
-  const onPressHandleRemoveFavorites = () => { 
+  const onPressHandleRemoveFavorites = (id) => {
     setDisplayRemove(true);
-    console.log("REMOVE: ", true);
-  }
-
+    setIdItemRemove(id);
+  };
   const onPressBlogs = () => {
     setIsPsychiatrist(false);
     setIsBlogs(true);
@@ -123,22 +117,108 @@ const FavoritesScreen = ({ navigation }) => {
           <View style={styles.Contentcontainer}>
             {isPsychiatrist &&
               PsychiatristData.map((item) => (
-                <FavoriteCard key={item.id} props={item} />
+                <FavoriteCard
+                  key={item.id}
+                  onPressHandleRemoveFavorites={
+                    onPressHandleRemoveFavorites
+                  }
+                  props={item}
+                />
               ))}
             {isBlogs &&
-              BlogsData.map((item) => <BlogCard props={item} onPressHandleRemoveFavorites={onPressHandleRemoveFavorites} key={item.id} />)}
+              BlogsData.map((item) => (
+                <BlogCard
+                  props={item}
+                  onPressHandleRemoveFavorites={onPressHandleRemoveFavorites}
+                  key={item.id}
+                />
+              ))}
           </View>
-          
         </ScrollView>
-        {displayRemove && 
-        <TouchableWithoutFeedback onPress={() => setDisplayRemove(false)}>
-        <View style={styles.removeContainer}onPress={() => setDisplayRemove(false)}>
-            <View style={styles.contentRemove} >
-              <Text>hello world</Text>
+        {displayRemove && (
+          <TouchableWithoutFeedback onPress={() => setDisplayRemove(false)}>
+            <View
+              style={styles.removeContainer}
+              onPress={() => setDisplayRemove(false)}
+            >
+              <View style={[styles.contentRemove, { height: isBlogs ? 472 : 380}]}>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    gap: 19,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Text
+                    style={{ fontSize: 20, fontWeight: 700, color: "#1C2A3A" }}
+                  >
+                    Remove from Favorites?
+                  </Text>
+                  {isBlogs && (
+                    <View>
+                      {BlogsData.filter((item) => item.id === idItemRemove).map(
+                        (item) => (
+                          <BlogCard props={item} key={item.id} />
+                        )
+                      )}
+                    </View>
+                  )}
+                  {isPsychiatrist && (
+                    <View>
+                      {PsychiatristData.filter((item) => item.id === idItemRemove).map(
+                        (item) => (
+                          <FavoriteCard props={item} key={item.id} />
+                        )
+                      )}
+                    </View>
+                  )}
+                  <View style={{ height: 1, backgroundColor: "#E5E7EB", width: "80%" }} />
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    gap: 10,
+                    justifyContent: "space-evenly",
+                    width: "100%",
+                    marginBottom: 24,
+                    // marginHorizontal: 24
+                  }}
+                >
+                  <View style={{ width: 163 }}>
+                    <Button
+                      props={{
+                        navigation: navigation,
+                        navigationPath: "HomeScreen",
+                        title: "Cancle",
+                      }}
+                      customStyle={{
+                        backgroundColor: "#E5E7EB",
+                        height: 40,
+                      }}
+                      textStyles={{ color: "#1C2A3A" }}
+                    />
+                  </View>
+                  <View style={{ width: 163 }}>
+                    <Button
+                      props={{
+                        navigation: navigation,
+                        navigationPath: "favoritesScreen",
+                        title: "Yes, Remove",
+                      }}
+                      customStyle={{
+                        backgroundColor: "#1C2A3A",
+                        height: 40,
+                      }}
+                      textStyles={{ color: "#FFFFFF" }}
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
-            </View>
-            </TouchableWithoutFeedback>
-            }
+          </TouchableWithoutFeedback>
+        )}
       </SafeAreaView>
     </IsFavoritesProvider>
   );
@@ -161,19 +241,22 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 99
+    // zIndex: 99,
   },
   contentRemove: {
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 63,
+    flexDirection: "column",
+    gap: 32,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    height: 300,
-    backgroundColor: "#ffff"
-  }
+    borderTopEndRadius: 34,
+    borderTopStartRadius: 34,
+    backgroundColor: "#ffff",
+  },
 });
 
 export default FavoritesScreen;
