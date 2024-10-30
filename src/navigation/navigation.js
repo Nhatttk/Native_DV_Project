@@ -18,6 +18,7 @@ import BookHistory from "../screens/bookHistory";
 import FavoritesScreen from "../screens/favorites";
 import AddFriend from "../screens/Add Friend/AddFriend";
 import Map from "../screens/Map/Map";
+import ProfileScreen from "../screens/profile";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -122,6 +123,11 @@ function StackNavigator() {
       <Stack.Screen
         name="favoritesScreen"
         component={FavoritesScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
         options={{ headerShown: false }}
       />
       

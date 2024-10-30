@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { Image, StyleSheet, View } from "react-native";
 import IconOctions from "react-native-vector-icons/Octicons";
 import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+import IconFeather from "react-native-vector-icons/Feather";
 
-const NavigationBar = () => {
+const NavigationBar = ({ navigation }) => {
   const [gateState, setGateState] = useState({
     home: true,
     addfriend: false,
@@ -13,10 +14,17 @@ const NavigationBar = () => {
     calendar: false,
     profile: false,
   });
+  const route = useRoute();
+  const [currentRouteName, setCurrentRouteName] = useState(route.name);
 
-  const navigation = useNavigation();
-  const state = navigation.getState();
-  const currentRouteName = state.routes[state.index].name;
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("state", (e) => {
+      setCurrentRouteName(navigation.getState().routes[navigation.getState().index].name);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View
@@ -27,25 +35,15 @@ const NavigationBar = () => {
           width: 48,
           height: 48,
           borderRadius: "100%",
-          backgroundColor: gateState.home ? "#F3F4F6" : "#ffff",
+          backgroundColor: currentRouteName === "HomeScreen" ? "#F3F4F6" : "#ffff",
         }}
       >
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("HomeScreen");
-            setGateState({
-              home: true,
-              addfriend: false,
-              sos: false,
-              calendar: false,
-              profile: false,
-            });
           }}
         >
-          <Image
-            source={require("../assets/images/homeImage.png")}
-            style={{ width: 24, height: 24 }}
-          />
+          <IconFeather name="home" size={24} color={currentRouteName === "HomeScreen" ? "#374151" : "#9CA3AF"} />
         </TouchableOpacity>
       </View>
       <View
@@ -56,25 +54,18 @@ const NavigationBar = () => {
           width: 48,
           height: 48,
           borderRadius: "100%",
-          backgroundColor: gateState.addfriend ? "#F3F4F6" : "#ffff",
+          backgroundColor: currentRouteName === "AddFriend" ? "#F3F4F6" : "#ffff",
         }}
       >
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("AddFriend");
-            setGateState({
-              home: false,
-              addfriend: true,
-              sos: false,
-              calendar: false,
-              profile: false,
-            });
           }}
         >
           <IconOctions
             name="person-add"
             size={24}
-            color={gateState.addfriend ? "#374151" : "#9CA3AF"}
+            color={currentRouteName === "AddFriend" ? "#374151" : "#9CA3AF"}
           />
         </TouchableOpacity>
       </View>
@@ -86,13 +77,6 @@ const NavigationBar = () => {
         <TouchableOpacity style={[styles.sosButtonTouchable]}
              onPress={() => {
                 navigation.navigate("");
-                setGateState({
-                  home: false,
-                  addfriend: false,
-                  sos: true,
-                  calendar: false,
-                  profile: false,
-                });
               }}
         >
           <Image
@@ -109,25 +93,18 @@ const NavigationBar = () => {
             width: 48,
             height: 48,
             borderRadius: "100%",
-            backgroundColor: gateState.calendar ? "#F3F4F6" : "#ffff",
+            backgroundColor: currentRouteName === "bookhistory" ? "#F3F4F6" : "#ffff",
           }}
       >
         <TouchableOpacity
              onPress={() => {
                 navigation.navigate("bookhistory");
-                setGateState({
-                  home: false,
-                  addfriend: false,
-                  sos: false,
-                  calendar: true,
-                  profile: false,
-                });
               }}
         >
           <IconMaterial
             name="calendar-month-outline"
             size={24}
-            color={gateState.calendar ? "#374151" : "#9CA3AF"}
+            color={currentRouteName === "bookhistory" ? "#374151" : "#9CA3AF"}
           />
         </TouchableOpacity>
       </View>
@@ -139,22 +116,15 @@ const NavigationBar = () => {
             width: 48,
             height: 48,
             borderRadius: "100%",
-            backgroundColor: gateState.profile ? "#F3F4F6" : "#ffff",
+            backgroundColor: currentRouteName === "ProfileScreen" ? "#F3F4F6" : "#ffff",
           }}
       >
         <TouchableOpacity
              onPress={() => {
-                navigation.navigate("");
-                setGateState({
-                  home: false,
-                  addfriend: false,
-                  sos: false,
-                  calendar: false,
-                  profile: true,
-                });
+                navigation.navigate("ProfileScreen");
               }}
         >
-          <IconOctions name="person-fill" size={24} color={gateState.profile ? "#374151" : "#9CA3AF"}/>
+          <IconOctions name="person-fill" size={24} color={currentRouteName === "ProfileScreen" ? "#374151" : "#9CA3AF"}/>
         </TouchableOpacity>
       </View>
     </View>
@@ -167,8 +137,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    height: 80,
+    height: "auto",
     paddingHorizontal: 48,
+    backgroundColor: "#ffff",
   },
   sosButton: {
     // backgroundColor: "red",

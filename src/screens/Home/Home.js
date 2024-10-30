@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -146,7 +146,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View>
+      <View style={{ position: "absolute", bottom: 0, width: "100%", height: 90, }}>
         <NavigationBar navigation={navigation} />
       </View>
     </SafeAreaView>

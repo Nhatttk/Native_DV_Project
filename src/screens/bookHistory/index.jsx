@@ -4,6 +4,7 @@ import BookHistoryCard from "./bookHistoryCard";
 import TopNavigation from "../../components/TopNavigation";
 import { BookingData } from "../../utils/bookingData";
 import { TouchableOpacity } from "react-native";
+import NavigationBar from "../../components/NavigationBar";
 
 const BookHistory = ({ navigation }) => {
   const [isUpcoming, setIsUpcoming] = React.useState(true);
@@ -142,6 +143,9 @@ const BookHistory = ({ navigation }) => {
           )}
         </View>
       </ScrollView>
+      <View style={{ position: "absolute", bottom: 40, width: "100%", height: 90, backgroundColor: "#fff" }}>
+      <NavigationBar navigation={navigation} />
+      </View>
     </SafeAreaView>
   );
 };
