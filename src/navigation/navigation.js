@@ -19,6 +19,8 @@ import FavoritesScreen from "../screens/favorites";
 import AddFriend from "../screens/Add Friend/AddFriend";
 import Map from "../screens/Map/Map";
 import ProfileScreen from "../screens/profile";
+import TermAndCondition from "../screens/profile/TermAndCondition";
+import HelpAndSupport from "../screens/profile/HelpAndSupport";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -128,6 +130,16 @@ function StackNavigator() {
       <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TermAndCondition"
+        component={TermAndCondition}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="HelpAndSupport"
+        component={HelpAndSupport}
         options={{ headerShown: false }}
       />
       
