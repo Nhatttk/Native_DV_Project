@@ -7,9 +7,10 @@ export default function CategoryCard({props}) {
         <View>
         <Image
         style={styles.img}
-        source={{
-          uri: props.imgUrl,
-        }}
+        // source={{
+        //   uri: props.imgUrl,
+        // }}
+        source={props.imgUrl}
       />
         </View>
         <View style={{height: 18, width: "100%"}}>

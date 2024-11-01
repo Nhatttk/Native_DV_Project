@@ -19,6 +19,9 @@ import NearbySupportCard from "./_components/nearbySupportCard";
 import NavigationBar from "../../components/NavigationBar";
 
 const HomeScreen = ({ navigation }) => {
+  const [seeAll, setSeeAll] = useState([
+
+  ])
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -146,9 +149,9 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View style={{ position: "absolute", bottom: 0, width: "100%", height: 90, }}>
+      {/* <View style={{ position: "absolute", bottom: 0, width: "100%", height: 90, }}>
         <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

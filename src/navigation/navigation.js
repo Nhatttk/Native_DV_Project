@@ -22,14 +22,24 @@ import ProfileScreen from "../screens/profile";
 import TermAndCondition from "../screens/profile/TermAndCondition";
 import HelpAndSupport from "../screens/profile/HelpAndSupport";
 
+import IconOctions from "react-native-vector-icons/Octicons";
+import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
+import IconFeather from "react-native-vector-icons/Feather";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      <Tab.Screen options={{ tabBarIcon: () => {
+        return (
+          <IconFeather name="home" size={24} color={"#374151"}  />
+        );
+      }, tabBarShowLabel: false, freezeOnBlur: true, headerTintColor: "#374151" }}  name="HomeScreen" component={HomeScreen} />
       <Tab.Screen name="Details" component={Details} />
+      <Tab.Screen name="Calendar" component={BookApointmentConfirm} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }

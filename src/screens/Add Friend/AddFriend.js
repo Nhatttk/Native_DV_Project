@@ -47,7 +47,7 @@ const local_data = {
   city2: [
     {
       value: "1",
-      label: "Country 1",
+      label: "Job",
       image: {
         uri: "https://www.vigcenter.com/public/all/images/default-image.jpg",
       },
@@ -93,7 +93,7 @@ const user_data = [
     profile: {
       avatarUrl:
         "https://internetviettel.vn/wp-content/uploads/2017/05/H%C3%ACnh-%E1%BA%A3nh-minh-h%E1%BB%8Da.jpg",
-      bio: "Software engineer with 5 years of experience.",
+      bio: "Software",
       location: "San Francisco, CA",
     },
     roles: ["admin", "editor"],
