@@ -13,8 +13,8 @@ export default function CategoryCard({props}) {
         source={props.imgUrl}
       />
         </View>
-        <View style={{height: 18, width: "100%"}}>
-            <Text style={{fontWeight: "bold", fontSize: 12, color: "#4B5563", alignSelf: "center", textAlign: "center"}}>{props.title}</Text>
+        <View style={{height: 30, width: "100%"}}>
+            <Text style={{fontWeight: 600, fontSize: 10, color: "#4B5563", alignSelf: "center", textAlign: "center"}}>{props.title}</Text>
         </View>
     </View>
   )

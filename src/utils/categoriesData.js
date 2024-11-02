@@ -6,6 +6,7 @@ import legalInformation from "../assets/images/legalInformation.png";
 import supportlocation from "../assets/images/supportlocation.png";
 import onlinecounsel from "../assets/images/onlinecounsel.png";
 import settings from "../assets/images/settings.png";
+import messageIcon from "../assets/images/messageIcon.png";
 
 export const categoriesData = [
     {
@@ -54,6 +55,12 @@ export const categoriesData = [
         id: 8,
         title: "Settings",
         imgUrl: settings,
+        navigationPath: ""
+    },
+    {
+        id: 9,
+        title: "Message",
+        imgUrl: messageIcon,
         navigationPath: ""
     },
 ]

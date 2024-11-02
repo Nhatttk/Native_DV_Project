@@ -1,14 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from './../screens/Home/Home';
-import { Details } from './../screens/Details';
+import HomeScreen from "./../screens/Home/Home";
+import { Details } from "./../screens/Details";
 import SignUpScreen from "../screens/Sign In, Sign up, Create Profile/SignUpScreen";
-import FirstScreens from './../screens/Onboarding/First_Screens';
-import OnboardingScreen from './../screens/Onboarding/OnboardingScreen';
-import LoginScreen from './../screens/Sign In, Sign up, Create Profile/LoginScreen';
-import ProfileDetails from './../screens/Sign In, Sign up, Create Profile/ProfileDetails';
-import ForgetPasswordScreen from './../screens/Forget Password/ForgetPasswordScreen';
+import FirstScreens from "./../screens/Onboarding/First_Screens";
+import OnboardingScreen from "./../screens/Onboarding/OnboardingScreen";
+import LoginScreen from "./../screens/Sign In, Sign up, Create Profile/LoginScreen";
+import ProfileDetails from "./../screens/Sign In, Sign up, Create Profile/ProfileDetails";
+import ForgetPasswordScreen from "./../screens/Forget Password/ForgetPasswordScreen";
 import VerifyCodeScreen from "../screens/Forget Password/VerifyCodeScreen";
 import ResetPasswordScreen from "../screens/Forget Password/ResetPasswordScreen";
 import AllFriends from "../screens/AllFriends/AllFriends";
@@ -25,21 +25,163 @@ import HelpAndSupport from "../screens/profile/HelpAndSupport";
 import IconOctions from "react-native-vector-icons/Octicons";
 import IconMaterial from "react-native-vector-icons/MaterialCommunityIcons";
 import IconFeather from "react-native-vector-icons/Feather";
+import { Image, Text, View } from "react-native";
+import SosScreen from "../SosScreen";
+import BlurComponent from "../components/blurComponent";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen options={{ tabBarIcon: () => {
-        return (
-          <IconFeather name="home" size={24} color={"#374151"}  />
-        );
-      }, tabBarShowLabel: false, freezeOnBlur: true, headerTintColor: "#374151" }}  name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="Details" component={Details} />
-      <Tab.Screen name="Calendar" component={BookApointmentConfirm} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Navigator screenOptions={{ headerShown: false, tabBarStyle: {
+      paddingHorizontal: 24,
+      backgroundColor: "#ffff",
+    } }}>
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View
+                style={{
+                  alignItems: "center",
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  borderRadius: 24,
+                  // backgroundColor: focused ? "#F3F4F6": "#fff",
+                  backgroundColor: "transparent",
+                  textAlign: "center",
+                  width: 48,
+                  height: 48,
+                  marginTop: 14
+                }}
+              >
+                <IconFeather
+                  name="home"
+                  size={24}
+                  color={focused ? "#4B5563" : "#9CA3AF"}
+                  style={{
+                  }}
+                />
+              </View>
+            );
+          },
+          tabBarShowLabel: false,
+          headerShown: false,
+        }}
+        name="HomeScreen"
+        component={HomeScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View
+              style={{
+                alignItems: "center",
+                alignSelf: "center",
+                justifyContent: "center",
+                borderRadius: 24,
+                backgroundColor: focused ? "#F3F4F6": "#fff",
+                textAlign: "center",
+                width: 48,
+                height: 48,
+                marginTop: 14
+              }}
+            >
+              <IconOctions
+                name="person-add"
+                size={24}
+                color={focused ? "#4B5563" : "#9CA3AF"}
+              />
+            </View>
+            );
+          },
+          tabBarShowLabel: false,
+          headerShown: false,
+        }}
+        name="Details"
+        component={Details}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => {
+            return (
+              <Image
+                source={require("../assets/images/imageSos.png")}
+                style={{ width: 48, height: 48, marginTop: 14 }}
+              />
+            );
+          },
+          tabBarShowLabel: false,
+          headerShown: false,
+        }}
+        name="SosScreen"
+        component={Details}
+      />
+
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View
+              style={{
+                alignItems: "center",
+                alignSelf: "center",
+                justifyContent: "center",
+                borderRadius: 24,
+                backgroundColor: focused ? "#F3F4F6": "#fff",
+                textAlign: "center",
+                width: 48,
+                height: 48,
+                marginTop: 14
+              }}
+            >
+              <IconMaterial
+                name="calendar-month-outline"
+                size={24}
+                color={focused ? "#4B5563" : "#9CA3AF"}
+              />
+            </View>
+            );
+          },
+          tabBarShowLabel: false,
+          headerShown: false,
+        }}
+        name="Calendar"
+        component={BookApointmentConfirm}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View
+              style={{
+                alignItems: "center",
+                alignSelf: "center",
+                justifyContent: "center",
+                borderRadius: 24,
+                backgroundColor: focused ? "#F3F4F6": "#fff",
+                textAlign: "center",
+                width: 48,
+                height: 48,
+                marginTop: 14
+              }}
+            >
+              <IconOctions
+                name="person-fill"
+                size={24}
+                color={focused ? "#4B5563" : "#9CA3AF"}
+              />
+            </View>
+            );
+          },
+          tabBarShowLabel: false,
+          headerShown: false,
+        }}
+        name="Profile"
+        component={ProfileScreen}
+      />
     </Tab.Navigator>
   );
 }
@@ -152,11 +294,18 @@ function StackNavigator() {
         component={HelpAndSupport}
         options={{ headerShown: false }}
       />
-      
+      <Stack.Screen
+        name="SosScreen"
+        component={SosScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="BlurComponent"
+        component={BlurComponent}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
 
 export default StackNavigator;
-
-

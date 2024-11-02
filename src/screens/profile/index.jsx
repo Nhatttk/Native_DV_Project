@@ -181,16 +181,6 @@ const ProfileScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          paddingBottom: 16,
-        }}
-      >
-        <NavigationBar navigation={navigation} />
-      </View>
       {isLogout && <View style={styles.logoutContainer}>
             <View style={[styles.LogoutCheck]}>
                 <View
