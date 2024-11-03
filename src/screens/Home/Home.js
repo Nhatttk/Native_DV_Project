@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,8 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  Modal,
+  Button,
 } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 import Icons from "react-native-vector-icons/AntDesign";
@@ -16,8 +18,14 @@ import { categoriesData } from "../../utils/categoriesData";
 import CategoryCard from "./_components/categoryCard";
 import { NearbySupportCentersData } from "../../utils/nearbySupportCentersData";
 import NearbySupportCard from "./_components/nearbySupportCard";
-
+import IconsAntDesign from "react-native-vector-icons/AntDesign";
+import FavoritesScreen from "../favorites";
+import { BlogsData } from "../../utils/blogsData";
+import BlogCard from "../favorites/_components/BlogCard";
+import TopNavigation from "../../components/TopNavigation";
 const HomeScreen = ({ navigation }) => {
+  const [ModalVisible, setModalVisible] = useState(false);
+  const [seeAllNearbySupport, setSeeAllNearbySupport] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -115,12 +123,18 @@ const HomeScreen = ({ navigation }) => {
             <Text style={{ fontSize: 16, fontWeight: "bold", color: "black" }}>
               Categories
             </Text>
-            <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.categoriesContainer}>
-            {categoriesData.map((item) => {
+            {categoriesData.slice(0, 8).map((item) => {
               return (
-                <TouchableOpacity key={item.id} style={styles.category} onPress={() => navigation.navigate(item.navigationPath)}>
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.category}
+                  onPress={() => navigation.navigate(item.navigationPath)}
+                >
                   <CategoryCard props={item} />
                 </TouchableOpacity>
               );
@@ -138,13 +152,88 @@ const HomeScreen = ({ navigation }) => {
             <Text style={{ fontSize: 16, fontWeight: "bold", color: "black" }}>
               Nearby Support Centers
             </Text>
+            <TouchableOpacity onPress={() => setSeeAllNearbySupport(true)}>
             <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
+            </TouchableOpacity>
           </View>
           <View style={{ width: "100%" }}>
             <NearbySupportCard data={NearbySupportCentersData} />
           </View>
         </View>
       </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={ModalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: 50,
+
+              }}
+            >
+              <TouchableOpacity onPress={() => setModalVisible(false)} style={{ alignSelf: "flex-end" }}>
+              <IconsAntDesign
+                name="closecircleo"
+                size={20}
+                onPress={() => setModalVisible(false)}
+              />
+              </TouchableOpacity>
+              <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1C2A3A", alignSelf: "center" }}>Categories</Text>
+            </View>
+            <View style={styles.manycategoryContainer}>
+              {categoriesData.map((item) => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    style={styles.category}
+                    onPress={() => navigation.navigate(item.navigationPath)}
+                  >
+                    <CategoryCard props={item} />
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        </View>
+      </Modal>
+      {/*  */}
+      {seeAllNearbySupport &&
+          <View style={styles.modalNearbySupportContainer}>
+            <View style={{ flexDirection: "column", gap: 16 }}>
+              <View style={{ flexDirection: "column", gap: 14 }}>
+                <View style={{ marginHorizontal: -24}}>
+                <TopNavigation
+                  title="Nearby Support Centers"
+                  isHeart={false}
+                  gobackhandle={() => setSeeAllNearbySupport(false)}
+                />
+                </View>
+                 <View style={styles.inputContainer}>
+            <Icons name="search1" size={24} style={styles.icon} />
+            <TextInput style={styles.input} placeholder=" Search ..." />
+          </View>
+              </View>
+          <ScrollView>
+            <View style={{ flexDirection: "column", gap: 10 }}>
+          {BlogsData.map((item) => (
+                <BlogCard
+                  props={item}
+                  key={item.id}
+                />
+              ))}
+              </View>
+              </ScrollView>
+        </View>
+              </View>
+      }
     </SafeAreaView>
   );
 };
@@ -153,6 +242,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    // backgroundColor:""
   },
   iconWrapper: {
     position: "relative",
@@ -202,6 +292,46 @@ const styles = StyleSheet.create({
     width: 66,
     height: 84,
   },
+
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    flexDirection: "column",
+
+    width: 355,
+    padding: 15,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+    gap: 10,
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 15,
+  },
+  manycategoryContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 19,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    alignContent: "flex-start",
+  },
+  modalNearbySupportContainer: {
+    position: "absolute",
+    top: 45,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    zIndex: 100,
+  }
 });
 
 export default HomeScreen;

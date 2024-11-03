@@ -42,7 +42,7 @@ const renderStars = (rating) => {
     </View>
   );
 };
-const FavoriteCard = ({ props }) => {
+const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
   const { handleSetIsFavorites, handleSetIdItem } = useContext(IsFavoritesContext);  
 
   const setCancleFavorites = (id) => {
@@ -70,7 +70,7 @@ const FavoriteCard = ({ props }) => {
             {props.name}
           </Text>
           {props.isFavorite && (
-            <TouchableOpacity onPress={() => CancelFavorites(props.id)}>
+            <TouchableOpacity onPress={() => onPressHandleRemoveFavorites(props.id)}>
               <IconAntDesign name="heart" size={20} color="#4B5563" />
             </TouchableOpacity>
           )}

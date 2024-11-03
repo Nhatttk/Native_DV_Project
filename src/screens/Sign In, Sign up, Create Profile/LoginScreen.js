@@ -48,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
         <TextInput placeholder="Password" secureTextEntry />
       </View>
 
-      <TouchableOpacity style={styles.btn_signin} onPress={() => navigation.navigate("HomeScreen")}>
+      <TouchableOpacity style={styles.btn_signin} onPress={() => navigation.navigate("TabNavigator")}>
         <Text style={{ color: "#fff", fontSize: 16, fontFamily: "Inter" }}>
           Sign In
         </Text>
