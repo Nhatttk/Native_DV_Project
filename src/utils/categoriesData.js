@@ -55,7 +55,7 @@ export const categoriesData = [
         id: 8,
         title: "Settings",
         imgUrl: settings,
-        navigationPath: ""
+        navigationPath: "SettingScreen"
     },
     {
         id: 9,

@@ -28,6 +28,7 @@ import IconFeather from "react-native-vector-icons/Feather";
 import { Image, Text, View } from "react-native";
 import SosScreen from "../SosScreen";
 import BlurComponent from "../components/blurComponent";
+import SettingScreen from "../screens/settings";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -117,7 +118,7 @@ function TabNavigator() {
           headerShown: false,
         }}
         name="SosScreen"
-        component={Details}
+        component={SosScreen}
       />
 
       <Tab.Screen
@@ -302,6 +303,11 @@ function StackNavigator() {
       <Stack.Screen
         name="BlurComponent"
         component={BlurComponent}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SettingScreen"
+        component={SettingScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
