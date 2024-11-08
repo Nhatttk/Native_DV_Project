@@ -7,24 +7,6 @@ import { useRoute } from "@react-navigation/native";
 import IconFeather from "react-native-vector-icons/Feather";
 
 const NavigationBar = ({ navigation }) => {
-  // const [gateState, setGateState] = useState({
-  //   home: true,
-  //   addfriend: false,
-  //   sos: false,
-  //   calendar: false,
-  //   profile: false,
-  // });
-  // const route = useRoute();
-  // const [currentRouteName, setCurrentRouteName] = useState(route.name);
-
-
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener("state", (e) => {
-  //     setCurrentRouteName(navigation.getState().routes[navigation.getState().index].name);
-  //   });
-
-  //   return unsubscribe;
-  // }, [navigation]);
   return (
     <View style={styles.container}>
       <View
@@ -35,7 +17,6 @@ const NavigationBar = ({ navigation }) => {
           height: 48,
           borderRadius: "100%",
           backgroundColor: "#ffff",
-          // backgroundColor: currentRouteName === "HomeScreen" ? "#F3F4F6" : "#ffff",
         }}
       >
         <TouchableOpacity
@@ -146,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "auto",
-    paddingHorizontal: 48,
+    paddingHorizontal: 38,
     backgroundColor: "#ffff",
   },
   sosButton: {

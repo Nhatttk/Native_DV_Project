@@ -29,6 +29,8 @@ import { Image, Text, View } from "react-native";
 import SosScreen from "../SosScreen";
 import BlurComponent from "../components/blurComponent";
 import SettingScreen from "../screens/settings";
+import AllExpertScreen from "../screens/AllExperts";
+import KnowLeadgeScreen from "../screens/knowleadge";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -308,6 +310,16 @@ function StackNavigator() {
       <Stack.Screen
         name="SettingScreen"
         component={SettingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AllExpertScreen"
+        component={AllExpertScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="KnowLeadgeScreen"
+        component={KnowLeadgeScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

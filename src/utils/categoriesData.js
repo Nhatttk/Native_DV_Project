@@ -13,7 +13,7 @@ export const categoriesData = [
         id: 1,
         title: "Knowledge",
         imgUrl: knowledge,
-        navigationPath: ""
+        navigationPath: "KnowLeadgeScreen"
     },
     {
         id: 2,
@@ -25,7 +25,7 @@ export const categoriesData = [
         id: 3,
         title: "Psychological Support",
         imgUrl: PsycholicalSupport,
-        navigationPath: "bookhistory"
+        navigationPath: "AllExpertScreen"
     },
     {
         id: 4,
@@ -37,7 +37,7 @@ export const categoriesData = [
         id: 5,
         title: "Legal Information",
         imgUrl: legalInformation,
-        navigationPath: ""
+        navigationPath: "TermAndCondition"
     },
     {
         id: 6,
