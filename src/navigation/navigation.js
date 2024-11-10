@@ -31,6 +31,8 @@ import BlurComponent from "../components/blurComponent";
 import SettingScreen from "../screens/settings";
 import AllExpertScreen from "../screens/AllExperts";
 import KnowLeadgeScreen from "../screens/knowleadge";
+import StorieScreen from "../screens/stories";
+import OnlineCounseling from "../screens/onlineCounseling";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -320,6 +322,16 @@ function StackNavigator() {
       <Stack.Screen
         name="KnowLeadgeScreen"
         component={KnowLeadgeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="StorieScreen"
+        component={StorieScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="OnlineCounsellingScreen"
+        component={OnlineCounseling}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

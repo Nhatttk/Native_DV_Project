@@ -31,7 +31,7 @@ export const categoriesData = [
         id: 4,
         title: "Stories",
         imgUrl: stories,
-        navigationPath: "favoritesScreen"
+        navigationPath: "StorieScreen"
     },
     {
         id: 5,
@@ -49,7 +49,7 @@ export const categoriesData = [
         id: 7,
         title: "Online Counseling",
         imgUrl: onlinecounsel,
-        navigationPath: ""
+        navigationPath: "OnlineCounsellingScreen"
     },
     {
         id: 8,
