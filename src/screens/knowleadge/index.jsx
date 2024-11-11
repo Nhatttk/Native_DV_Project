@@ -1,62 +1,48 @@
 import React from "react";
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TopNavigation from "../../components/TopNavigation";
 import Icons from "react-native-vector-icons/AntDesign";
-import NavigationBar from "../../components/NavigationBar";
-import FriendCard from "./_components/FriendCard";
+import { TextInput } from "react-native";
 import { PsychiatristData } from "../../utils/psychiatristData";
+import FavoriteCard from "../favorites/_components/FavoriteCard";
+import NavigationBar from "../../components/NavigationBar";
+import ItemSection from "../AllExperts/_components/ItemSection";
+import { knowleadgeData } from "../../utils/knowleadgeData";   
+import KnowleadgeCard from "./_components/knowleadgeCard";
 
-
-const AllFriends = ({ navigation }) => {
+const KnowLeadgeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <TopNavigation navigation={navigation} title={"All Friends"} />
+        <TopNavigation navigation={navigation} title={"Knowleadge"} />
+      </View>
+      <View style={{ marginHorizontal: 24, gap: 14, marginTop: 14 }}>
+        <View style={styles.inputContainer}>
+          <Icons name="search1" size={24} style={styles.icon} />
+          <TextInput style={styles.input} placeholder=" Search ..." />
+        </View>
       </View>
       <View style={styles.contentcontainer}>
-        <View style={styles.inputContainer}>
-            <Icons name="search1" size={24} style={styles.icon} />
-            <TextInput style={styles.input} placeholder=" Search by email or username..." />
-        </View>
-        <View style={{marginHorizontal: 24,}}>
-          <Text style={{ fontSize: 16, fontFamily: "Inter", color: "#1F2A37", fontWeight: "bold" }}>32 founds</Text>
-        </View>
         <ScrollView
           style={{
             flexDirection: "column",
             paddingHorizontal: 24,
+            gap: 18,
             marginTop: 16,
           }}
         >
-          <View style={{ flexDirection: "column", gap: 16 }}>
-{/*  */} 
-          {
-            PsychiatristData.map((item) => (
-              <View key={item.id}>
-                <FriendCard props={item} navigation={navigation}/>
-              </View>
-            ))
-          }
-          </View>
+          {knowleadgeData.map((item) => (
+            <TouchableOpacity key={item.id} style={{ marginBottom: 8 }} onPress={() => navigation.navigate("KnowLeadgeArticle", { id: item.id }) }>
+              <KnowleadgeCard
+                props={item}
+              />
+            </TouchableOpacity>
+          ))}
         </ScrollView>
+        
       </View>
       <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          paddingBottom: 16,
-          backgroundColor: "#fff",
-        }}
+        style={{ position: "absolute", bottom: 0, paddingBottom: 16, backgroundColor: "#fff" }}
       >
         <NavigationBar navigation={navigation} />
       </View>
@@ -73,9 +59,6 @@ const styles = StyleSheet.create({
   },
   contentcontainer: {
     flexDirection: "column",
-    height: "90%",
-    paddingVertical: 16,
-    gap: 16,
   },
   inputContainer: {
     flexDirection: "row",
@@ -87,7 +70,6 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     backgroundColor: "#f3f4f6",
     height: 40,
-    marginHorizontal: 24,
   },
   icon: {
     marginRight: 8, // Space between icon and input
@@ -100,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AllFriends;
+export default KnowLeadgeScreen;

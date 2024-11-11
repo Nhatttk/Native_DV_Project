@@ -26,6 +26,11 @@ import TopNavigation from "../../components/TopNavigation";
 const HomeScreen = ({ navigation }) => {
   const [ModalVisible, setModalVisible] = useState(false);
   const [seeAllNearbySupport, setSeeAllNearbySupport] = useState(false);
+
+  const navigateHandle = (navigationPath) => {
+    setModalVisible(false);
+    navigation.navigate(navigationPath);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -153,7 +158,7 @@ const HomeScreen = ({ navigation }) => {
               Nearby Support Centers
             </Text>
             <TouchableOpacity onPress={() => setSeeAllNearbySupport(true)}>
-            <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
+              <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
             </TouchableOpacity>
           </View>
           <View style={{ width: "100%" }}>
@@ -166,74 +171,87 @@ const HomeScreen = ({ navigation }) => {
         transparent={true}
         visible={ModalVisible}
         onRequestClose={() => setModalVisible(false)}
+        onTouchMove={() => setModalVisible(false)}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View
-              style={{
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: 50,
-
-              }}
+        <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <View style={styles.modalContainer}></View>
+        </TouchableOpacity>
+        <View style={styles.modalContent}>
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: 50,
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => setModalVisible(false)}
+              style={{ alignSelf: "flex-end" }}
             >
-              <TouchableOpacity onPress={() => setModalVisible(false)} style={{ alignSelf: "flex-end" }}>
               <IconsAntDesign
                 name="closecircleo"
                 size={20}
                 onPress={() => setModalVisible(false)}
               />
-              </TouchableOpacity>
-              <Text style={{ fontSize: 16, fontWeight: "bold", color: "#1C2A3A", alignSelf: "center" }}>Categories</Text>
-            </View>
-            <View style={styles.manycategoryContainer}>
-              {categoriesData.map((item) => {
-                return (
-                  <TouchableOpacity
-                    key={item.id}
-                    style={styles.category}
-                    onPress={() => navigation.navigate(item.navigationPath)}
-                  >
-                    <CategoryCard props={item} />
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "#1C2A3A",
+                alignSelf: "center",
+              }}
+            >
+              Categories
+            </Text>
+          </View>
+          <View style={styles.manycategoryContainer}>
+            {categoriesData.map((item) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.category}
+                  onPress={() => {
+                    navigation.navigate(item.navigationPath);
+                    setModalVisible(false);
+                  }}
+                >
+                  <CategoryCard props={item} />
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
       </Modal>
       {/*  */}
-      {seeAllNearbySupport &&
-          <View style={styles.modalNearbySupportContainer}>
-            <View style={{ flexDirection: "column", gap: 16 }}>
-              <View style={{ flexDirection: "column", gap: 14 }}>
-                <View style={{ marginHorizontal: -24}}>
+      {seeAllNearbySupport && (
+        <View style={styles.modalNearbySupportContainer}>
+          <View style={{ flexDirection: "column", gap: 16 }}>
+            <View style={{ flexDirection: "column", gap: 14 }}>
+              <View style={{ marginHorizontal: -24 }}>
                 <TopNavigation
                   title="Nearby Support Centers"
                   isHeart={false}
                   gobackhandle={() => setSeeAllNearbySupport(false)}
                 />
-                </View>
-                 <View style={styles.inputContainer}>
-            <Icons name="search1" size={24} style={styles.icon} />
-            <TextInput style={styles.input} placeholder=" Search ..." />
+              </View>
+              <View style={styles.inputContainer}>
+                <Icons name="search1" size={24} style={styles.icon} />
+                <TextInput style={styles.input} placeholder=" Search ..." />
+              </View>
+            </View>
+            <ScrollView>
+              <View style={{ flexDirection: "column", gap: 10 }}>
+                {BlogsData.map((item) => (
+                  <BlogCard props={item} key={item.id} />
+                ))}
+              </View>
+            </ScrollView>
           </View>
-              </View>
-          <ScrollView>
-            <View style={{ flexDirection: "column", gap: 10 }}>
-          {BlogsData.map((item) => (
-                <BlogCard
-                  props={item}
-                  key={item.id}
-                />
-              ))}
-              </View>
-              </ScrollView>
         </View>
-              </View>
-      }
+      )}
     </SafeAreaView>
   );
 };
@@ -294,14 +312,24 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     flex: 1,
+    height: 1000,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
+    position: "absolute",
+    top: 230,
+    left: 20,
+    right: 0,
     flexDirection: "column",
-
     width: 355,
     padding: 15,
     backgroundColor: "white",
@@ -331,7 +359,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     zIndex: 100,
-  }
+  },
 });
 
 export default HomeScreen;

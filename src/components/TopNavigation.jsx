@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icons from "react-native-vector-icons/AntDesign";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-const TopNavigation = ({navigation, title, isHeart, gobackhandle}) => {
+const TopNavigation = ({ navigation, title, isHeart, gobackhandle, listFriend}) => {
     const handleGoBack = () => {
         if (gobackhandle) {
           gobackhandle(); // Sử dụng gobackhandle nếu có
@@ -20,6 +21,9 @@ const TopNavigation = ({navigation, title, isHeart, gobackhandle}) => {
         </View>
         {
             isHeart && <Icons name="hearto" size={24} color="black" />
+        }
+        {
+            listFriend && <FontAwesome name="list-ul" size={18} color="black" onPress={() => navigation.navigate("AllFriends")}/>
         }
         <TouchableOpacity>
 

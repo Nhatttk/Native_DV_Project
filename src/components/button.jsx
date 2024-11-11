@@ -12,7 +12,6 @@ const Button = ({ props, customStyle, handleConfirm, textStyles }) => {
   };
   return (
     <View>
-      {/* <Button style={styles.button} title="Book Appointment" /> */}
       <TouchableOpacity
         style={[styles.button, customStyle]}
         onPress={handlePress}

@@ -11,7 +11,6 @@ import ProfileDetails from "./../screens/Sign In, Sign up, Create Profile/Profil
 import ForgetPasswordScreen from "./../screens/Forget Password/ForgetPasswordScreen";
 import VerifyCodeScreen from "../screens/Forget Password/VerifyCodeScreen";
 import ResetPasswordScreen from "../screens/Forget Password/ResetPasswordScreen";
-import AllFriends from "../screens/AllFriends/AllFriends";
 import PsychiatristDetails from "../screens/psychiatristDetails/Psychiatrist_Details";
 import BookApointmentConfirm from "../screens/bookApointmentConfirm/BookApointmentConfirm";
 import BookHistory from "../screens/bookHistory";
@@ -28,6 +27,16 @@ import IconFeather from "react-native-vector-icons/Feather";
 import { Image, Text, View } from "react-native";
 import SosScreen from "../SosScreen";
 import BlurComponent from "../components/blurComponent";
+import SettingScreen from "../screens/settings";
+import AllExpertScreen from "../screens/AllExperts";
+import KnowLeadgeScreen from "../screens/knowleadge";
+import StorieScreen from "../screens/stories";
+import OnlineCounseling from "../screens/onlineCounseling";
+import MessageScreen from "../screens/message";
+import AllFriends from "../screens/AllFriends/AllFriends";
+import ChatWithFriend from "../screens/AllFriends/ChatWithFriend";
+import Notifications from "../screens/profile/Notifications";
+import KnowLeadgeArticle from "../screens/knowleadge/KnowleadgeArticle";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -101,7 +110,7 @@ function TabNavigator() {
           headerShown: false,
         }}
         name="Details"
-        component={Details}
+        component={AddFriend}
       />
       <Tab.Screen
         options={{
@@ -117,7 +126,7 @@ function TabNavigator() {
           headerShown: false,
         }}
         name="SosScreen"
-        component={Details}
+        component={SosScreen}
       />
 
       <Tab.Screen
@@ -254,11 +263,6 @@ function StackNavigator() {
         component={TabNavigator}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen
-        name="AllFriends"
-        component={AllFriends}
-        options={{ headerShown: false }}
-      /> */}
       <Stack.Screen
         name="PsychiatristDetails"
         component={PsychiatristDetails}
@@ -302,6 +306,56 @@ function StackNavigator() {
       <Stack.Screen
         name="BlurComponent"
         component={BlurComponent}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AllExpertScreen"
+        component={AllExpertScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="KnowLeadgeScreen"
+        component={KnowLeadgeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="StorieScreen"
+        component={StorieScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="OnlineCounsellingScreen"
+        component={OnlineCounseling}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MessageScreen"
+        component={MessageScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AllFriends"
+        component={AllFriends}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ChatWithFriend"
+        component={ChatWithFriend}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="KnowLeadgeArticle"
+        component={KnowLeadgeArticle}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
