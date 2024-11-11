@@ -1,0 +1,42 @@
+export const SupportLocationData = [
+  {
+    id: 1,
+    title: "ytytyt",
+    address: "Da nang",
+    type: "Hospital",
+    latitude: 16.234,
+    longitude: 108.21,
+  },
+  {
+    id: 2,
+    title: "ABc5645",
+    address: "Da nang",
+    type: "Hospital",
+    latitude: 16.254,
+    longitude: 108.421,
+  },
+  {
+    id: 3,
+    title: "ABc",
+    address: "Da nang",
+    type: "Hospital",
+    latitude: 16.734,
+    longitude: 108.821,
+  },
+  {
+    id: 4,
+    title: "ABc",
+    address: "Da nang",
+    type: "Hospital",
+    latitude: 16.934,
+    longitude: 108.121,
+  },
+  {
+    id: 5,
+    title: "AB5454c",
+    address: "Da nang",
+    type: "Hospital",
+    latitude: 16.634,
+    longitude: 108.221,
+  },
+];

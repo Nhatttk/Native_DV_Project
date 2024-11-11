@@ -199,13 +199,13 @@ function StackNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="FirstScreens"
-        component={FirstScreens}
+        name="Map"
+        component={Map}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Map"
-        component={Map}
+        name="FirstScreens"
+        component={FirstScreens}
         options={{ headerShown: false }}
       />
       <Stack.Screen
