@@ -3,7 +3,6 @@ import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-n
 import  Ionicons from 'react-native-vector-icons/Ionicons';
 
 const LocationInfo = ({data, setLocation}) => {
-    console.log(data)
     const handleUpdateLocation = () => {
       // Cập nhật tọa độ mới cho location
       const newLocation = {
@@ -50,17 +49,25 @@ const LocationInfo = ({data, setLocation}) => {
           />
           <View
             style={{
-              position: 're',
+              flexDirection: "row",
               gap: 5,
               marginVertical: 10,
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
+                width: "40%",
+                borderRadius: 10,
                 gap: 5,
                 borderWidth: 1,
+                alignItems: "center",
+                justifyContent: "center",
+                marginHorizontal: 5,
+                paddingVertical: 8,
               }}
             >
               <Image
@@ -69,9 +76,21 @@ const LocationInfo = ({data, setLocation}) => {
               />
               <Text>{data.type}</Text>
             </View>
-            <View style={{width:1, borderWidth: 1, height: "100%"}}></View>
-            <TouchableOpacity style={{ borderWidth: 1, alignContent: 'center', justifyContent: 'center'}}>
-              <Text>Go</Text>
+            <View style={{ width: 1, borderWidth: 1, height: "100%" }}></View>
+            <TouchableOpacity
+              style={{
+                borderWidth: 1,
+                borderRadius: 10,
+                alignContent: "center",
+                justifyContent: "center",
+                width: "40%",
+                marginHorizontal: 5,
+                height: "auto",
+                paddingVertical: 8,
+                backgroundColor: ''
+              }}
+            >
+              <Text style={{ textAlign: "center", fontSize: 19 }}>Go</Text>
             </TouchableOpacity>
           </View>
         </View>

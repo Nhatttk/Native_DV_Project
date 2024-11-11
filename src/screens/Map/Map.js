@@ -7,12 +7,13 @@ import LoadingPopup from "../../components/loadingPopup";
 // import LocationInfo from './components/LocationInfo';
 import { SupportLocationData } from "../../utils/supportLocationData";
 import LocationInfo from "./components/locationInfo.js";
+import TopNavigation from "../../components/TopNavigation.jsx";
 
 
-export default function App() {
+export default function App({ navigation }) {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadMarker, setLoadMarker] = useState(false)
+  const [loadMarker, setLoadMarker] = useState(false);
   useEffect(() => {
     (async () => {
       // Yêu cầu quyền truy cập vị trí
@@ -21,11 +22,11 @@ export default function App() {
         console.log("Permission to access location was denied");
         return;
       }
-      
-      shareLocation()
+
+      shareLocation();
       // Lấy vị trí hiện tại ban đầu
       let userLocation = await Location.getCurrentPositionAsync({});
-      
+
       setLocation({
         latitude: userLocation.coords.latitude,
         longitude: userLocation.coords.longitude,
@@ -56,7 +57,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {loading && <LoadingPopup />}
+      <View style={{alignItems: 'center', top: 60, zIndex: 9999}}>
+        <TopNavigation
+          navigation={navigation}
+          title="Map"
+          isHeart={false}
+        />
+      </View>
+      {/* {loading && <LoadingPopup />} */}
       <MapView
         style={styles.map}
         showsUserLocation={true}
@@ -91,7 +99,9 @@ export default function App() {
         }}
       >
         {SupportLocationData.map((data) => {
-          return <LocationInfo key={data.id} data={data} setLocation={setLocation} />;
+          return (
+            <LocationInfo key={data.id} data={data} setLocation={setLocation} />
+          );
         })}
       </ScrollView>
     </View>

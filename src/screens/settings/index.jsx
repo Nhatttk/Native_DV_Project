@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 141,
     marginHorizontal: 12,
-    width: 365,
+    width: 'auto',
     backgroundColor: "white",
     gap: 24,
     borderTopLeftRadius: 12,
