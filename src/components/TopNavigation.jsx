@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginTop: 8,
         paddingHorizontal: 24,
+        zIndex: 99999
       },
 })
 

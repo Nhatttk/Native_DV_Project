@@ -43,7 +43,7 @@ export const categoriesData = [
         id: 6,
         title: "Support Locations",
         imgUrl: supportlocation,
-        navigationPath: ""
+        navigationPath: "Map"
     },
     {
         id: 7,

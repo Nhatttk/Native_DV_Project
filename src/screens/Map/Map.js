@@ -1,54 +1,19 @@
 import React, { useEffect, useState } from "react";
 import MapView, { Marker, Polyline } from "react-native-maps";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import * as Location from "expo-location";
 import LoadingPopup from "../../components/loadingPopup";
-
-const marker = [
-  {
-    id: 1,
-    latitude: 16.01344,
-    longitude: 108.20874,
-    title: "Địa điểm 1",
-    description: "Mô tả địa điểm 1",
-  },
-  {
-    id: 2,
-    latitude: 16.02432,
-    longitude: 108.209,
-    title: "Địa điểm 2",
-    description: "Mô tả địa điểm 2",
-  },
-  {
-    id: 3,
-    latitude: 15.019,
-    longitude: 108.21,
-    title: "Địa điểm 3",
-    description: "Mô tả địa điểm 3",
-  },
-  {
-    id: 4,
-    latitude: 16.234,
-    longitude: 108.21,
-    title: "Địa điểm 3",
-    description: "Mô tả địa điểm 3",
-  },
-  {
-    id: 5,
-    latitude: 16.3234,
-    longitude: 108.21,
-    title: "Địa điểm 3",
-    description: "Mô tả địa điểm 3",
-  },
-];
+// import LocationInfo from './components/LocationInfo';
+import { SupportLocationData } from "../../utils/supportLocationData";
+import LocationInfo from "./components/locationInfo.js";
+import TopNavigation from "../../components/TopNavigation.jsx";
 
 
-export default function App() {
+export default function App({ navigation }) {
   const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [loadMarker, setLoadMarker] = useState(false)
-
+  const [loading, setLoading] = useState(true);
+  const [loadMarker, setLoadMarker] = useState(false);
   useEffect(() => {
     (async () => {
       // Yêu cầu quyền truy cập vị trí
@@ -57,11 +22,11 @@ export default function App() {
         console.log("Permission to access location was denied");
         return;
       }
-      
 
+      shareLocation();
       // Lấy vị trí hiện tại ban đầu
       let userLocation = await Location.getCurrentPositionAsync({});
-      
+
       setLocation({
         latitude: userLocation.coords.latitude,
         longitude: userLocation.coords.longitude,
@@ -72,7 +37,7 @@ export default function App() {
   }, []);
 
   const shareLocation = async () => {
-    setLoading(true);
+    setLoading(false);
     // Lấy vị trí hiện tại và đặt Marker tại vị trí đó
     let userLocation = await Location.getCurrentPositionAsync({});
     const userLatLng = {
@@ -92,7 +57,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {loading && <LoadingPopup />}
+      <View style={{alignItems: 'center', top: 60, zIndex: 9999}}>
+        <TopNavigation
+          navigation={navigation}
+          title="Map"
+          isHeart={false}
+        />
+      </View>
+      {/* {loading && <LoadingPopup />} */}
       <MapView
         style={styles.map}
         showsUserLocation={true}
@@ -102,43 +74,36 @@ export default function App() {
         {/* Marker cố định */}
 
         {loadMarker &&
-          marker.map((mk) => (
+          SupportLocationData.map((mk) => (
             <Marker
-              key={marker.id}
+              key={mk.id}
               coordinate={{
                 latitude: mk.latitude,
                 longitude: mk.longitude,
               }}
               title={mk.title}
-              description={mk.description}
+              description={mk.address}
             >
               <Ionicons name="location-sharp" size={30} color="#1C2A3A" />
             </Marker>
           ))}
       </MapView>
-
-      <View style={styles.infoContainer}>
-        <Image
-          width={100}
-          height={100}
-          source={{
-            uri: "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:quality(100)/avatar_dep_cho_nam_0_d82ba08b05.jpg",
-          }}
-          style={styles.profileImage}
-        />
-        <Text style={styles.textName}>nameeeeeeeeeeeeeeeee</Text>
-        <View style={styles.location}>
-          <Ionicons name="location-outline" size={24} color="#374151" />
-          <Text style={styles.textLocation}>123 Oak Street, CA 98765</Text>
-        </View>
-        <View>
-          <Image style={{width: 24, height: 24}} source={require("./../../assets/icon/routing.png")} />
-        </View>
-        <TouchableOpacity style={styles.shareButton} onPress={shareLocation}>
-          <Ionicons name="share-social-outline" size={20} color="#FFF" />
-          <Text style={styles.shareButtonText}>Search Support Locations</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView
+        horizontal
+        style={{
+          bottom: 70,
+          right: 30,
+          left: 30,
+          zIndex: 100,
+          position: "absolute",
+        }}
+      >
+        {SupportLocationData.map((data) => {
+          return (
+            <LocationInfo key={data.id} data={data} setLocation={setLocation} />
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }

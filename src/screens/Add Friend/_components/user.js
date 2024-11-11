@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import  Ionicons  from 'react-native-vector-icons/Ionicons';
 import { theme } from '../../../constains/theme';
-import AddFriend from '../AddFriend';
 
 const UserView = ({user_data}) => {
     return (

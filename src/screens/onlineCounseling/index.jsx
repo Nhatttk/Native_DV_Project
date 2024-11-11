@@ -80,7 +80,7 @@ console.log("comments: ",comments);
             )}
           </View>
             <View
-              style={[styles.inputContainer, { width: addfile ? 240 : 303 }]}
+              style={[styles.inputContainer]}
             >
               <TextInput
                 placeholder="Send message...."
@@ -147,6 +147,8 @@ const styles = StyleSheet.create({
     borderColor: "#1F2A37",
     borderRadius: 50,
     padding: 8,
+    marginHorizontal: 10,
+    flex: 1
   },
   iconContainer: {
     flexDirection: "row",

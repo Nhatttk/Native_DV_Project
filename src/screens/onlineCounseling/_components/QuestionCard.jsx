@@ -11,7 +11,7 @@ const QuestionCard = ({props}) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 254,
+        width: 'auto',
         backgroundColor: "#FFFFFF",
         borderRadius: 12,
         borderWidth: 1,

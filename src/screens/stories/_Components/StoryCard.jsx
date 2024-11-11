@@ -191,7 +191,7 @@ const StoryCard = ({ props, commentHandle }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 342,
+    width: 'auto',
     flexDirection: "column",
     gap: 12,
     padding: 16,
