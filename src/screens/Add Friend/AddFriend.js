@@ -5,6 +5,7 @@ import HeaderTitle from '../../components/header_title';
 import FilterUser from './_components/filterUser';
 import { Dropdown } from 'react-native-element-dropdown';
 import UserView from './_components/user';
+import TopNavigation from '../../components/TopNavigation';
 
 const local_data = {
   city: [
@@ -135,12 +136,14 @@ const user_data = [
 ];
 
 
-const AddFriend = () => {
+const AddFriend = ({navigation}) => {
   
     return (
       <SafeAreaView style={styles.container}>
-        <HeaderTitle title={"Add Friend"} />
-
+        {/* <HeaderTitle title={"Add Friend"} /> */}
+        <View style={styles.header_title}>
+          <TopNavigation navigation={navigation} title={"Add Friend"} listFriend={true}/>
+        </View>
         {/* search bar */}
         <View style={styles.search}>
           <Ionicons name="search-outline" size={24} color="#9CA3AF" />
@@ -150,6 +153,9 @@ const AddFriend = () => {
               fontWeight: "regular",
               fontSize: 14,
               color: "#9CA3AF",
+              styles: {
+                height: 40,
+              }
             }}
             placeholder="Search by email or username..."
           ></TextInput>
@@ -194,12 +200,16 @@ const styles = StyleSheet.create({
     // marginHorizontal: 24,
     backgroundColor: "#fff",
   },
+  header_title: {
+    marginBottom: 14,
+  },
   user : {
     marginHorizontal: 10
   },
   search: {
     flexDirection: "row",
-    padding: 12,
+    paddingVertical: 8,
+    paddingLeft: 12,
     borderRadius: 8,
     backgroundColor: "#F3F4F6",
     marginHorizontal: 24,

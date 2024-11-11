@@ -13,12 +13,14 @@ import {
 import TopNavigation from "../../components/TopNavigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import NavigationBar from "../../components/NavigationBar";
-import AnswerCard from "./_components/AnswerCard";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import QuestionCard from "./_components/QuestionCard";
+import AnswerCard from "../onlineCounseling/_components/AnswerCard";
+import QuestionCard from "../onlineCounseling/_components/QuestionCard";
 
-const OnlineCounseling = ({ navigation }) => {
+const ChatWithFriend = ({ navigation, route }) => {
+    const { userName } = route.params;
+    console.log("userName: ",userName);
   const [addfile, setAddfile] = React.useState(false);
   const [commentText, setCommentText] = React.useState("");
   const [comments, setComments] = React.useState([]);
@@ -28,14 +30,13 @@ const OnlineCounseling = ({ navigation }) => {
     setComments([...comments, commentText]);
     setCommentText(""); // Clear input after sending
   };
-console.log("comments: ",comments);
   return (
     <SafeAreaView style={styles.container}>
 
         <KeyboardAvoidingView behavior="padding">
 
       <View>
-        <TopNavigation navigation={navigation} title={"Online Counseling"} />
+        <TopNavigation navigation={navigation} title={userName} />
       </View>
       <View style={styles.contentcontainer}>
         <View
@@ -49,7 +50,7 @@ console.log("comments: ",comments);
             width:"100%",
           }}
         >
-          <AnswerCard />
+          <AnswerCard friendName={userName}/>
           <View style={{ flexDirection:"row",justifyContent: "flex-end",width:"100%", marginTop: 16 }}>
           {comments.length > 0 && 
             <View >
@@ -154,4 +155,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OnlineCounseling;
+export default ChatWithFriend;

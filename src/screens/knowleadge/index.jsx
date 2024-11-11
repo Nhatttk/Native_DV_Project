@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TopNavigation from "../../components/TopNavigation";
 import Icons from "react-native-vector-icons/AntDesign";
 import { TextInput } from "react-native";
@@ -14,7 +14,7 @@ const KnowLeadgeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <TopNavigation navigation={navigation} title={"All Experts"} />
+        <TopNavigation navigation={navigation} title={"Knowleadge"} />
       </View>
       <View style={{ marginHorizontal: 24, gap: 14, marginTop: 14 }}>
         <View style={styles.inputContainer}>
@@ -32,11 +32,11 @@ const KnowLeadgeScreen = ({ navigation }) => {
           }}
         >
           {knowleadgeData.map((item) => (
-            <View key={item.id} style={{ marginBottom: 8 }}>
+            <TouchableOpacity key={item.id} style={{ marginBottom: 8 }} onPress={() => navigation.navigate("KnowLeadgeArticle", { id: item.id }) }>
               <KnowleadgeCard
                 props={item}
               />
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
         

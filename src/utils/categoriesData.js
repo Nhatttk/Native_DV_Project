@@ -61,6 +61,6 @@ export const categoriesData = [
         id: 9,
         title: "Message",
         imgUrl: messageIcon,
-        navigationPath: ""
+        navigationPath: "MessageScreen"
     },
 ]
