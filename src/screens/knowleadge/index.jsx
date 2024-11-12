@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TopNavigation from "../../components/TopNavigation";
 import Icons from "react-native-vector-icons/AntDesign";
@@ -9,8 +9,29 @@ import NavigationBar from "../../components/NavigationBar";
 import ItemSection from "../AllExperts/_components/ItemSection";
 import { knowleadgeData } from "../../utils/knowleadgeData";   
 import KnowleadgeCard from "./_components/knowleadgeCard";
+import { fetchKnowledgeList } from "../../api/knowledgeApi";
 
 const KnowLeadgeScreen = ({ navigation }) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const knowledgeData = await fetchKnowledgeList();
+      setData(knowledgeData);
+      console.log(data)
+    } catch (error) {
+      console.error("Error in component:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
