@@ -141,7 +141,7 @@ const StorieScreen = ({ navigation }) => {
           </View>
         </ScrollView>
       </View>
-      <View
+      {/* <View
         style={{
           position: "absolute",
           bottom: 0,
@@ -152,7 +152,7 @@ const StorieScreen = ({ navigation }) => {
         }}
       >
         <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

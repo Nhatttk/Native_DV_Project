@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import TopNavigation from "../../components/TopNavigation";
 import Icons from "react-native-vector-icons/AntDesign";
 import { TextInput } from "react-native";
 import ItemSection from "./_components/ItemSection";
-import { PsychiatristData } from "../../utils/psychiatristData";
+// import { PsychiatristData } from "../../utils/psychiatristData";
 import FavoriteCard from "../favorites/_components/FavoriteCard";
 import NavigationBar from "../../components/NavigationBar";
+import { useState } from "react";
+import { fetchExpertList } from "../../api/apis";
 
 const AllExpertScreen = ({ navigation }) => {
+
+  const [PsychiatristData, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const knowledgeData = await fetchExpertList();
+      setData(knowledgeData);
+      console.log(knowledgeData);
+    } catch (error) {
+      console.error("Error in component:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -67,11 +89,11 @@ const AllExpertScreen = ({ navigation }) => {
         </ScrollView>
         
       </View>
-      <View
+      {/* <View
         style={{ position: "absolute", bottom: 0, paddingBottom: 16, backgroundColor: "#fff" }}
       >
         <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

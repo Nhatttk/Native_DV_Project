@@ -143,9 +143,9 @@ const BookHistory = ({ navigation }) => {
           )}
         </View>
       </ScrollView>
-      <View style={{ position: "absolute", bottom: 40, width: "100%", height: 90, backgroundColor: "#fff" }}>
+      {/* <View style={{ position: "absolute", bottom: 40, width: "100%", height: 90, backgroundColor: "#fff" }}>
       <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

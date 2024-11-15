@@ -56,7 +56,7 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        <Image style={styles.image} source={{ uri: props.imgUrl }} />
+        <Image style={styles.image} source={{ uri: props.avatar }} />
       </View>
       <View style={styles.info}>
         <View
@@ -67,10 +67,12 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
           }}
         >
           <Text style={{ fontWeight: "bold", fontSize: "16" }}>
-            {props.name}
+            {props.user.first_name + " " + props.user.last_name}
           </Text>
           {props.isFavorite && (
-            <TouchableOpacity onPress={() => onPressHandleRemoveFavorites(props.id)}>
+            <TouchableOpacity
+              onPress={() => onPressHandleRemoveFavorites(props.id)}
+            >
               <IconAntDesign name="heart" size={20} color="#4B5563" />
             </TouchableOpacity>
           )}
@@ -79,7 +81,7 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
         <Text
           style={{ fontSize: "14", fontWeight: "semibold", color: "#4B5563" }}
         >
-          {props.specialization}
+          {props.jobTitle}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
           <Icons name="location" size={20} color="#4B5563" />
@@ -94,7 +96,7 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
               {props.rating}
             </Text>
           </View>
-          <View style={{width: 1, height: 12, backgroundColor: "#4B5563"}}/>
+          <View style={{ width: 1, height: 12, backgroundColor: "#4B5563" }} />
           <View>
             <Text style={{ fontSize: "12", color: "#6B7280" }}>
               {props.reviews} Reviews

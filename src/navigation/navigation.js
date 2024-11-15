@@ -37,6 +37,7 @@ import AllFriends from "../screens/AllFriends/AllFriends";
 import ChatWithFriend from "../screens/AllFriends/ChatWithFriend";
 import Notifications from "../screens/profile/Notifications";
 import KnowLeadgeArticle from "../screens/knowleadge/KnowleadgeArticle";
+import LoadingPopup from "../components/loadingPopup";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -112,7 +113,7 @@ function TabNavigator() {
         name="Details"
         component={AddFriend}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         options={{
           tabBarIcon: () => {
             return (
@@ -127,7 +128,7 @@ function TabNavigator() {
         }}
         name="SosScreen"
         component={SosScreen}
-      />
+      /> */}
 
       <Tab.Screen
         options={{

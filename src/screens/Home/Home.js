@@ -23,235 +23,281 @@ import FavoritesScreen from "../favorites";
 import { BlogsData } from "../../utils/blogsData";
 import BlogCard from "../favorites/_components/BlogCard";
 import TopNavigation from "../../components/TopNavigation";
+
+import { Accelerometer } from "expo-sensors";
+
 const HomeScreen = ({ navigation }) => {
+  const SHAKING_THRESHOLD = 2.5; // Ngưỡng gia tốc để nhận diện lắc
+  const DEBOUNCE_TIME = 500; // Thời gian giữa các lần lắc (500ms)
+
+  let lastShakeTime = 0; // Lưu thời gian lắc cuối cùng
+
   const [ModalVisible, setModalVisible] = useState(false);
   const [seeAllNearbySupport, setSeeAllNearbySupport] = useState(false);
+  const [acceleration, setAcceleration] = useState({ x: 0, y: 0, z: 0 });
+  const [shaking, setShaking] = useState(false);
 
   const navigateHandle = (navigationPath) => {
     setModalVisible(false);
     navigation.navigate(navigationPath);
   };
+  const handleLongPress = () => {
+    navigation.navigate("SosScreen");
+  };
+
+  useEffect(() => {
+    const subscription = Accelerometer.addListener((accelerometerData) => {
+      const totalAcceleration = Math.sqrt(
+        accelerometerData.x ** 2 +
+          accelerometerData.y ** 2 +
+          accelerometerData.z ** 2
+      );
+
+      // Kiểm tra nếu gia tốc vượt qua ngưỡng và chưa có lắc gần đây
+      if (totalAcceleration > SHAKING_THRESHOLD) {
+        const currentTime = Date.now();
+
+        // Kiểm tra nếu thời gian giữa hai lần lắc đã đủ lâu
+        if (currentTime - lastShakeTime > DEBOUNCE_TIME) {
+          lastShakeTime = currentTime; // Cập nhật thời gian lắc cuối cùng
+
+          // Thực hiện hành động khi có lắc (ví dụ: điều hướng)
+          console.log("Phone is shaken!");
+          navigation.navigate("SosScreen");
+        }
+      }
+    });
+
+    // Dọn dẹp khi component unmount
+    return () => subscription.remove();
+  }, [navigation]);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignContent: "center",
-            alignItems: "center",
-            paddingHorizontal: 24,
-          }}
-        >
-          <View style={{ flexDirection: "column", gap: 8 }}>
-            <View>
-              <Text style={{ fontSize: 14, color: "#374151" }}>Location</Text>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-              <Icon name="location-pin" size={20} color="#374151" />
-              <Text
-                style={{
-                  fontWeight: "semibold",
-                  fontSize: 14,
-                  color: "#374151",
-                }}
-              >
-                Seattle, Usa
-              </Text>
-              <Icon name="chevron-down" size={20} />
-            </View>
-          </View>
-          <View style={styles.iconWrapper}>
-            <Icons name="bells" size={27} />
-            <View style={styles.redDot} />
-          </View>
-        </View>
-        <View
-          style={{
-            paddingHorizontal: 24,
-            paddingVertical: 14,
-            width: "100%",
-            // height: 163,
-            borderRadius: 10,
-            gap: 10,
-          }}
-        >
-          <View style={styles.inputContainer}>
-            <Icons name="search1" size={24} style={styles.icon} />
-            <TextInput style={styles.input} placeholder=" Search ..." />
-          </View>
-          <ImageBackground
-            source={require("../../assets/img/womanhoping.jpg")}
-            resizeMode="cover"
-            style={{
-              width: "100%",
-              height: 163,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <View style={{ width: "60%", gap: 13, paddingLeft: 16 }}>
-              <Text
-                style={{
-                  color: "white",
-                  textShadowColor: "black", // Black border effect using shadow
-                  textShadowOffset: { width: -1, height: 2 },
-                  textShadowRadius: 1,
-                  fontSize: 18,
-                  fontWeight: "bold",
-                }}
-              >
-                Welcome
-              </Text>
-              <Text
-                style={{
-                  fontSize: "12",
-                  color: "white",
-                  textShadowColor: "black",
-                  textShadowOffset: { width: -1, height: 2 },
-                  textShadowRadius: 1,
-                }}
-              >
-                Welcome to the app dedicated to combation domestic violence
-              </Text>
-            </View>
-          </ImageBackground>
-        </View>
-        <View style={{ paddingHorizontal: 24, gap: 10 }}>
+      <TouchableOpacity onLongPress={handleLongPress}>
+        <ScrollView>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
+              alignContent: "center",
               alignItems: "center",
+              paddingHorizontal: 24,
             }}
           >
-            <Text style={{ fontSize: 16, fontWeight: "bold", color: "black" }}>
-              Categories
-            </Text>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.categoriesContainer}>
-            {categoriesData.slice(0, 8).map((item) => {
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  style={styles.category}
-                  onPress={() => navigation.navigate(item.navigationPath)}
-                >
-                  <CategoryCard props={item} />
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </View>
-        <View style={{ paddingHorizontal: 24, paddingVertical: 14, gap: 10 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontSize: 16, fontWeight: "bold", color: "black" }}>
-              Nearby Support Centers
-            </Text>
-            <TouchableOpacity onPress={() => setSeeAllNearbySupport(true)}>
-              <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{ width: "100%" }}>
-            <NearbySupportCard data={NearbySupportCentersData} />
-          </View>
-        </View>
-      </ScrollView>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={ModalVisible}
-        onRequestClose={() => setModalVisible(false)}
-        onTouchMove={() => setModalVisible(false)}
-      >
-        <TouchableOpacity onPress={() => setModalVisible(false)}>
-          <View style={styles.modalContainer}></View>
-        </TouchableOpacity>
-        <View style={styles.modalContent}>
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              height: 50,
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => setModalVisible(false)}
-              style={{ alignSelf: "flex-end" }}
-            >
-              <IconsAntDesign
-                name="closecircleo"
-                size={20}
-                onPress={() => setModalVisible(false)}
-              />
-            </TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: "bold",
-                color: "#1C2A3A",
-                alignSelf: "center",
-              }}
-            >
-              Categories
-            </Text>
-          </View>
-          <View style={styles.manycategoryContainer}>
-            {categoriesData.map((item) => {
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  style={styles.category}
-                  onPress={() => {
-                    navigation.navigate(item.navigationPath);
-                    setModalVisible(false);
+            <View style={{ flexDirection: "column", gap: 8 }}>
+              <View>
+                <Text style={{ fontSize: 14, color: "#374151" }}>Location</Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <Icon name="location-pin" size={20} color="#374151" />
+                <Text
+                  style={{
+                    fontWeight: "semibold",
+                    fontSize: 14,
+                    color: "#374151",
                   }}
                 >
-                  <CategoryCard props={item} />
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </View>
-      </Modal>
-      {/*  */}
-      {seeAllNearbySupport && (
-        <View style={styles.modalNearbySupportContainer}>
-          <View style={{ flexDirection: "column", gap: 16 }}>
-            <View style={{ flexDirection: "column", gap: 14 }}>
-              <View style={{ marginHorizontal: -24 }}>
-                <TopNavigation
-                  title="Nearby Support Centers"
-                  isHeart={false}
-                  gobackhandle={() => setSeeAllNearbySupport(false)}
-                />
-              </View>
-              <View style={styles.inputContainer}>
-                <Icons name="search1" size={24} style={styles.icon} />
-                <TextInput style={styles.input} placeholder=" Search ..." />
+                  Seattle, Usa
+                </Text>
+                <Icon name="chevron-down" size={20} />
               </View>
             </View>
-            <ScrollView>
-              <View style={{ flexDirection: "column", gap: 10 }}>
-                {BlogsData.map((item) => (
-                  <BlogCard props={item} key={item.id} />
-                ))}
-              </View>
-            </ScrollView>
+            <View style={styles.iconWrapper}>
+              <Icons name="bells" size={27} />
+              <View style={styles.redDot} />
+            </View>
           </View>
-        </View>
-      )}
+          <View
+            style={{
+              paddingHorizontal: 24,
+              paddingVertical: 14,
+              width: "100%",
+              // height: 163,
+              borderRadius: 10,
+              gap: 10,
+            }}
+          >
+            <View style={styles.inputContainer}>
+              <Icons name="search1" size={24} style={styles.icon} />
+              <TextInput style={styles.input} placeholder=" Search ..." />
+            </View>
+            <ImageBackground
+              source={require("../../assets/img/womanhoping.jpg")}
+              resizeMode="cover"
+              style={{
+                width: "100%",
+                height: 163,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <View style={{ width: "60%", gap: 13, paddingLeft: 16 }}>
+                <Text
+                  style={{
+                    color: "white",
+                    textShadowColor: "black", // Black border effect using shadow
+                    textShadowOffset: { width: -1, height: 2 },
+                    textShadowRadius: 1,
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Welcome
+                </Text>
+                <Text
+                  style={{
+                    fontSize: "12",
+                    color: "white",
+                    textShadowColor: "black",
+                    textShadowOffset: { width: -1, height: 2 },
+                    textShadowRadius: 1,
+                  }}
+                >
+                  Welcome to the app dedicated to combation domestic violence
+                </Text>
+              </View>
+            </ImageBackground>
+          </View>
+          <View style={{ paddingHorizontal: 24, gap: 10 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{ fontSize: 16, fontWeight: "bold", color: "black" }}
+              >
+                Categories
+              </Text>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.categoriesContainer}>
+              {categoriesData.slice(0, 8).map((item) => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    style={styles.category}
+                    onPress={() => navigation.navigate(item.navigationPath)}
+                  >
+                    <CategoryCard props={item} />
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+          <View style={{ paddingHorizontal: 24, paddingVertical: 14, gap: 10 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{ fontSize: 16, fontWeight: "bold", color: "black" }}
+              >
+                Nearby Support Centers
+              </Text>
+              <TouchableOpacity onPress={() => setSeeAllNearbySupport(true)}>
+                <Text style={{ fontSize: 14, color: "#6B7280" }}>See All</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: "100%" }}>
+              <NearbySupportCard data={NearbySupportCentersData} />
+            </View>
+          </View>
+        </ScrollView>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={ModalVisible}
+          onRequestClose={() => setModalVisible(false)}
+          onTouchMove={() => setModalVisible(false)}
+        >
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
+            <View style={styles.modalContainer}></View>
+          </TouchableOpacity>
+          <View style={styles.modalContent}>
+            <View
+              style={{
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: 50,
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={{ alignSelf: "flex-end" }}
+              >
+                <IconsAntDesign
+                  name="closecircleo"
+                  size={20}
+                  onPress={() => setModalVisible(false)}
+                />
+              </TouchableOpacity>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  color: "#1C2A3A",
+                  alignSelf: "center",
+                }}
+              >
+                Categories
+              </Text>
+            </View>
+            <View style={styles.manycategoryContainer}>
+              {categoriesData.map((item) => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    style={styles.category}
+                    onPress={() => {
+                      navigation.navigate(item.navigationPath);
+                      setModalVisible(false);
+                    }}
+                  >
+                    <CategoryCard props={item} />
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        </Modal>
+        {/*  */}
+        {seeAllNearbySupport && (
+          <View style={styles.modalNearbySupportContainer}>
+            <View style={{ flexDirection: "column", gap: 16 }}>
+              <View style={{ flexDirection: "column", gap: 14 }}>
+                <View style={{ marginHorizontal: -24 }}>
+                  <TopNavigation
+                    title="Nearby Support Centers"
+                    isHeart={false}
+                    gobackhandle={() => setSeeAllNearbySupport(false)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Icons name="search1" size={24} style={styles.icon} />
+                  <TextInput style={styles.input} placeholder=" Search ..." />
+                </View>
+              </View>
+              <ScrollView>
+                <View style={{ flexDirection: "column", gap: 10 }}>
+                  {BlogsData.map((item) => (
+                    <BlogCard props={item} key={item.id} />
+                  ))}
+                </View>
+              </ScrollView>
+            </View>
+          </View>
+        )}
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
