@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import TopNavigation from "../../components/TopNavigation";
 import Icons from "react-native-vector-icons/AntDesign";
 import { TextInput } from "react-native";
@@ -7,12 +15,12 @@ import { PsychiatristData } from "../../utils/psychiatristData";
 import FavoriteCard from "../favorites/_components/FavoriteCard";
 import NavigationBar from "../../components/NavigationBar";
 import ItemSection from "../AllExperts/_components/ItemSection";
-import { knowleadgeData } from "../../utils/knowleadgeData";   
+// import { knowleadgeData } from "../../utils/knowleadgeData";
 import KnowleadgeCard from "./_components/knowleadgeCard";
-import { fetchKnowledgeList } from "../../api/knowledgeApi";
+import { fetchKnowledgeList } from "../../api/apis";
 
 const KnowLeadgeScreen = ({ navigation }) => {
-  const [data, setData] = useState([]);
+  const [knowleadgeData, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,14 +31,13 @@ const KnowLeadgeScreen = ({ navigation }) => {
     try {
       const knowledgeData = await fetchKnowledgeList();
       setData(knowledgeData);
-      console.log(data)
+      console.log(knowledgeData);
     } catch (error) {
       console.error("Error in component:", error);
     } finally {
       setLoading(false);
     }
   };
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -53,20 +60,28 @@ const KnowLeadgeScreen = ({ navigation }) => {
           }}
         >
           {knowleadgeData.map((item) => (
-            <TouchableOpacity key={item.id} style={{ marginBottom: 8 }} onPress={() => navigation.navigate("KnowLeadgeArticle", { id: item.id }) }>
-              <KnowleadgeCard
-                props={item}
-              />
+            <TouchableOpacity
+              key={item.id}
+              style={{ marginBottom: 8 }}
+              onPress={() =>
+                navigation.navigate("KnowLeadgeArticle", { knowledge: item })
+              }
+            >
+              <KnowleadgeCard key={item.id} props={item} />
             </TouchableOpacity>
           ))}
         </ScrollView>
-        
       </View>
-      <View
-        style={{ position: "absolute", bottom: 0, paddingBottom: 16, backgroundColor: "#fff" }}
+      {/* <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          paddingBottom: 16,
+          backgroundColor: "#fff",
+        }}
       >
         <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

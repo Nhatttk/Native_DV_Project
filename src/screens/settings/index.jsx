@@ -191,11 +191,11 @@ const SettingScreen = ({ navigation }) => {
           {/*  */}
         </View>
       </View>
-      <View
+      {/* <View
         style={{ position: "absolute", bottom: 0, paddingBottom: 16, backgroundColor: "#fff" }}
       >
         <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </View>
   );
 };

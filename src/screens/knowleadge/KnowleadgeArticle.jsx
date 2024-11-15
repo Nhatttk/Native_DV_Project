@@ -56,15 +56,15 @@ const commentsData = [
 ];
 
 const KnowLeadgeArticle = ({ navigation, route }) => {
-  const { id } = route.params;
+  const { knowledge } = route.params;
   const [seeAllComment, setSeeAllComment] = React.useState(false);
   const [openKeyboard, setOpenKeyboard] = React.useState(false);
   return (
-    <SafeAreaView style={styles.container}>    
-        <View>
-          <TopNavigation navigation={navigation} title={"Knowleadge"} />
-        </View>
-        <KeyboardAvoidingView behavior="padding" >
+    <SafeAreaView style={styles.container}>
+      <View>
+        <TopNavigation navigation={navigation} title={"Knowleadge"} />
+      </View>
+      <KeyboardAvoidingView behavior="padding">
         <View style={styles.contentcontainer}>
           <ScrollView
             style={{
@@ -79,23 +79,12 @@ const KnowLeadgeArticle = ({ navigation, route }) => {
               <Text
                 style={{ fontSize: 20, fontWeight: "700", color: "#1C2A3A" }}
               >
-                Understanding Domestic Violence: Key Insights and Knowledge
+                {knowledge.short_description}
               </Text>
               <Text
                 style={{ fontSize: 14, fontWeight: "400", color: "#6B7280" }}
               >
-                Domestic violence includes various abusive behaviors that seek
-                to exert power and control over an intimate partner or family
-                member. This encompasses physical, emotional, sexual, and
-                psychological abuse, affecting countless individuals globally.
-                In this guide, you'll find: Types of Abuse: Understanding the
-                different forms and tactics used in domestic violence. Warning
-                Signs: Recognizing early indicators to identify potential abuse.
-                Impact on Victims: Insights into the psychological, emotional,
-                and physical toll. Resources for Help: Information on support
-                networks, intervention strategies, and ways to seek help.
-                Empowering yourself with knowledge can be the first step toward
-                prevention and support for those affected by domestic violence.
+                {knowledge.content}
               </Text>
             </View>
             <View

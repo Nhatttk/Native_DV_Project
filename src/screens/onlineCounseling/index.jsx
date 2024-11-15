@@ -101,7 +101,7 @@ console.log("comments: ",comments);
       </View>
       </KeyboardAvoidingView>
       {/*  */}
-      <View
+      {/* <View
         style={{
           position: "absolute",
           bottom: 0,
@@ -112,7 +112,7 @@ console.log("comments: ",comments);
         }}
       >
         <NavigationBar navigation={navigation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };
