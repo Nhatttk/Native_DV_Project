@@ -1,18 +1,72 @@
-import React from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState } from "react";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { loginApi } from "../../api/apis";
+import LoadingPopup from "../../components/loadingPopup";
+import { saveLoginData } from "../../api/storageData";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const handleInputChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const checkLogin = async () => {
+    console.log("Logging in...");
+    setLoading(true)
+    try {
+      const responseData = await loginApi(formData.username, formData.password); // Gọi hàm API login thực tế
+      console.log(responseData)
+      if (responseData.access != null) {
+        await saveLoginData(responseData.access)
+        navigation.navigate("TabNavigator");
+        setLoading(false)
+      } else {
+        console.log("Login failed, no access token found.");
+        setLoading(false)
+        setError(true)
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setLoading(false)
+      setError(true)
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
+      {loading && <LoadingPopup/>}
+      {error && Alert.alert(
+      'Notification', // Tiêu đề
+      'User name or password incorrect', // Nội dung
+      [
+        { text: 'OK', onPress: () => setError(false) },
+      ],
+      { cancelable: false } // Không cho phép đóng Alert bằng cách nhấn ra ngoài
+    )}
       <View style={styles.title}>
-        <Image style={styles.icon} source={require("../../assets/img/logogpt-removebg-preview.png")} />
+        <Image
+          style={styles.icon}
+          source={require("../../assets/img/logogpt-removebg-preview.png")}
+        />
         <Text
           style={{
             fontWeight: "bold",
@@ -35,7 +89,11 @@ const LoginScreen = ({ navigation }) => {
           color="#9CA3AF"
           style={{ paddingRight: 8 }}
         />
-        <TextInput placeholder="Your email" />
+        <TextInput
+          placeholder="User Name"
+          value={formData.username}
+          onChangeText={(value) => handleInputChange("username", value)}
+        />
       </View>
 
       <View style={styles.pass_input}>
@@ -45,10 +103,15 @@ const LoginScreen = ({ navigation }) => {
           color="#9CA3AF"
           style={{ paddingRight: 8 }}
         />
-        <TextInput placeholder="Password" secureTextEntry />
+        <TextInput placeholder="Password" secureTextEntry 
+        value={formData.password}
+        onChangeText={(value) => handleInputChange("password", value)}/>
       </View>
 
-      <TouchableOpacity style={styles.btn_signin} onPress={() => navigation.navigate("TabNavigator")}>
+      <TouchableOpacity
+        style={styles.btn_signin}
+        onPress={() => checkLogin()}
+      >
         <Text style={{ color: "#fff", fontSize: 16, fontFamily: "Inter" }}>
           Sign In
         </Text>
@@ -96,7 +159,11 @@ const LoginScreen = ({ navigation }) => {
 
       <View style={styles.footerContainer}>
         {/* Forgot Password */}
-        <TouchableOpacity onPress={()=>{navigation.navigate("ForgetPasswordScreen");}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("ForgetPasswordScreen");
+          }}
+        >
           <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </TouchableOpacity>
 
@@ -121,7 +188,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     width: 125,
     height: 85,
-    borderRadius: 180
+    borderRadius: 180,
   },
   title: {
     display: "flex",
@@ -212,7 +279,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
     color: "#1C64F2",
     marginVertical: 10,
-    marginBottom: 23
+    marginBottom: 23,
   },
   signUpContainer: {
     flexDirection: "row",

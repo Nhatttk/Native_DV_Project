@@ -1,3 +1,4 @@
 
 
-export const API_URL = "http://172.20.10.2:8000/api/";
+export const API_URL = "http://192.168.1.174:8000/api/";
+export const IMAGE_URL = "http://192.168.1.174:8000";

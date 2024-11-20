@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -16,11 +16,25 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+  });
+
+  const handleInputChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.title}>
-        <Image style={styles.icon} source={require("../../assets/img/logogpt-removebg-preview.png")} />
+        <Image
+          style={styles.icon}
+          source={require("../../assets/img/logogpt-removebg-preview.png")}
+        />
         <Text
           style={{
             fontWeight: "bold",
@@ -43,7 +57,11 @@ const SignUpScreen = ({navigation}) => {
           color="#9CA3AF"
           style={{ paddingRight: 8 }}
         />
-        <TextInput placeholder="Your name" />
+        <TextInput
+          placeholder="Your user name"
+          value={formData.username}
+          onChangeText={(value) => handleInputChange("username", value)}
+        />
       </View>
 
       <View style={styles.input}>
@@ -53,7 +71,11 @@ const SignUpScreen = ({navigation}) => {
           color="#9CA3AF"
           style={{ paddingRight: 8 }}
         />
-        <TextInput placeholder="Your email" />
+        <TextInput
+          placeholder="Your email"
+          value={formData.email}
+          onChangeText={(value) => handleInputChange("email", value)}
+        />
       </View>
 
       <View style={styles.input}>
@@ -63,12 +85,19 @@ const SignUpScreen = ({navigation}) => {
           color="#9CA3AF"
           style={{ paddingRight: 8 }}
         />
-        <TextInput placeholder="Password" secureTextEntry />
+        <TextInput
+          placeholder="Password"
+          secureTextEntry
+          value={formData.password}
+          onChangeText={(value) => handleInputChange("password", value)}
+        />
       </View>
 
       <TouchableOpacity
         style={styles.btn_signin}
-        onPress={() => navigation.navigate("ProfileDetails")}
+        onPress={() =>
+          navigation.navigate("ProfileDetails", { formData: formData })
+        }
       >
         <Text style={{ color: "#fff", fontSize: 16, fontFamily: "Inter" }}>
           Create Account
