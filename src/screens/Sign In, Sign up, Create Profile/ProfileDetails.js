@@ -14,13 +14,15 @@ import DatePicker from "react-native-datepicker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from "react-native-picker-select";
 import * as ImagePicker from "expo-image-picker";
-const ProfileDetails = ({ navigation }) => {
+const ProfileDetails = ({ navigation, route }) => {
   const [date, setDate] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedImage, setselectedImage] = useState([]);
   const [gender, setGender] = useState("");
   const pickerRef = useRef();
 
+  const {formData} = route.params
+  console.log(formData)
   const showDatePicker = () => {
     console.log("DatePicker shown");
     setDatePickerVisibility(true);
@@ -84,8 +86,8 @@ const ProfileDetails = ({ navigation }) => {
           />
         </TouchableOpacity>
 
-        <TextInput style={styles.tx_input} placeholder="Michael Jordan" />
-        <TextInput style={styles.tx_input} placeholder="Nickname" />
+        <TextInput style={styles.tx_input} placeholder="First Name" />
+        <TextInput style={styles.tx_input} placeholder="Last Name" />
         <TextInput style={styles.tx_input} placeholder="name@example.com" />
 
         <View style={styles.tx_input}>

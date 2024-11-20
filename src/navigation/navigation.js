@@ -205,6 +205,11 @@ function StackNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="TabNavigator"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Map"
         component={Map}
         options={{ headerShown: false }}
@@ -259,11 +264,7 @@ function StackNavigator() {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="TabNavigator"
-        component={TabNavigator}
-        options={{ headerShown: false }}
-      />
+      
       <Stack.Screen
         name="PsychiatristDetails"
         component={PsychiatristDetails}
