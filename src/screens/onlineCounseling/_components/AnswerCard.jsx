@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-const AnswerCard = ({ friendName = "Online Counseling Bot" }) => {
+const AnswerCard = ({ friendName = "Online Counseling Bot", answer }) => {
   return (
     <View
       style={[
@@ -36,8 +36,9 @@ const AnswerCard = ({ friendName = "Online Counseling Bot" }) => {
       {/* <View /> */}
       <View>
         <Text style={{ fontWeight: 500, fontSize: 14, color: "#4B5563" }}>
-          Sarah and her friend Emma are having coffee together. Emma notices
-          Sarah seems nervous and has a bruise on her wrist.
+          {/* Sarah and her friend Emma are having coffee together. Emma notices
+          Sarah seems nervous and has a bruise on her wrist. */}
+          {answer}
         </Text>
       </View>
     </View>

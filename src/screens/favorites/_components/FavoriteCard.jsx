@@ -43,20 +43,27 @@ const renderStars = (rating) => {
   );
 };
 const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
-  const { handleSetIsFavorites, handleSetIdItem } = useContext(IsFavoritesContext);  
+  const { handleSetIsFavorites, handleSetIdItem } =
+    useContext(IsFavoritesContext);
 
   const setCancleFavorites = (id) => {
     handleSetIsFavorites(true);
     handleSetIdItem(id);
-  }
+  };
 
   const CancelFavorites = (id) => {
     setCancleFavorites(id);
-  }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        <Image style={styles.image} source={{ uri: props.avatar }} />
+        {/* <Image style={styles.image} source={{ uri: props.imgUrl }} /> */}
+        <Image
+          style={styles.image}
+          source={{
+            uri: props.imgUrl,
+          }}
+        />
       </View>
       <View style={styles.info}>
         <View
@@ -67,7 +74,7 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
           }}
         >
           <Text style={{ fontWeight: "bold", fontSize: "16" }}>
-            {props.user.first_name + " " + props.user.last_name}
+            {props.name}
           </Text>
           {props.isFavorite && (
             <TouchableOpacity
@@ -81,7 +88,7 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
         <Text
           style={{ fontSize: "14", fontWeight: "semibold", color: "#4B5563" }}
         >
-          {props.jobTitle}
+          {props.specialization}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
           <Icons name="location" size={20} color="#4B5563" />
@@ -115,7 +122,7 @@ const styles = StyleSheet.create({
     gap: 10,
     borderRadius: 12,
     padding: 12,
-    width: 'auto',
+    width: "auto",
     height: 133,
     backgroundColor: "#fff",
     shadowColor: "#000000", // Shadow color
@@ -129,14 +136,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 8,
   },
-  avatar: {
-    height: 109,
-    width: 109,
-    borderRadius: 12,
-  },
+  // avatar: {
+  //   height: 109,
+  //   width: 109,
+  //   borderRadius: 12,
+  // },
   image: {
-    width: 109,
     height: 109,
+    width: 109,
     borderRadius: 12,
   },
   lineStyle: {

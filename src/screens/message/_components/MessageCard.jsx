@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const MessageCard = ({ props, navigation }) => {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(props.messBoxId)}>
+    <TouchableOpacity onPress={() => navigation.navigate("OnlineCounsellingScreen", { friendName: props.name })}>
     <View
       style={{
         flexDirection: "row",

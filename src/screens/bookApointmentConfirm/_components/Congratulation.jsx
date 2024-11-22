@@ -19,7 +19,7 @@ const Congratulation = ({ props}) => {
                 <Button
                     props={{
                         navigation: props.navigation,
-                        navigationPath: "HomeScreen",
+                        isHome: true,
                         title: "Done",
                 }}
                 customStyle={{marginHorizontal: 48}}

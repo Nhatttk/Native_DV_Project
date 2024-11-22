@@ -15,29 +15,29 @@ import { PsychiatristData } from "../../utils/psychiatristData";
 import FavoriteCard from "../favorites/_components/FavoriteCard";
 import NavigationBar from "../../components/NavigationBar";
 import ItemSection from "../AllExperts/_components/ItemSection";
-// import { knowleadgeData } from "../../utils/knowleadgeData";
+import { knowleadgeData } from "../../utils/knowleadgeData";
 import KnowleadgeCard from "./_components/knowleadgeCard";
 import { fetchKnowledgeList } from "../../api/apis";
 
 const KnowLeadgeScreen = ({ navigation }) => {
-  const [knowleadgeData, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [knowleadgeData, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  const fetchData = async () => {
-    try {
-      const knowledgeData = await fetchKnowledgeList();
-      setData(knowledgeData);
-      console.log(knowledgeData);
-    } catch (error) {
-      console.error("Error in component:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const knowledgeData = await fetchKnowledgeList();
+  //     setData(knowledgeData);
+  //     console.log(knowledgeData);
+  //   } catch (error) {
+  //     console.error("Error in component:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={styles.container}>

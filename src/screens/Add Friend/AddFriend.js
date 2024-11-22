@@ -187,7 +187,7 @@ const AddFriend = ({navigation}) => {
 
         <ScrollView>
           {user_data.map((user) => (
-            <UserView style={styles.user} key={user.id} user_data={user} />
+            <UserView style={styles.user} key={user.id} user_data={user} navigation={navigation} />
           ))}
         </ScrollView>
       </SafeAreaView>

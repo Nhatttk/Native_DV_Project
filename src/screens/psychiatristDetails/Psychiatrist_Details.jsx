@@ -12,7 +12,7 @@ const data = [
   {
     id: 1,
     imgUrl:
-      "https://media.istockphoto.com/id/1149405165/vi/video/nh%C3%A0-t%C3%A2m-l%C3%BD-h%E1%BB%8Dc-th%C3%A0nh-c%C3%B4ng-t%C6%B0-v%E1%BA%A5n-cho-n%E1%BB%AF-b%E1%BB%87nh-nh%C3%A2n-trong-v%C4%83n-ph%C3%B2ng-n%C3%B3i-chuy%E1%BB%87n-vi%E1%BA%BFt.jpg?s=640x640&k=20&c=FaS_hLTDCQyk1oi_d06_UHivxMKm3w7h1EtKbXL3aqE=",
+      "https://img.freepik.com/premium-photo/panic-attack-anxiety-disorder-menopause-woman-stressful-depressed-ptsd-patient-having-consultation-p_820340-48213.jpg?ga=GA1.1.1129896338.1727884341&semt=ais_hybrid",
     name: "Dr. John Doe",
     speciality: "Psychiatrist",
     address: "123 Main St, City, State ZIP",

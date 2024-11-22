@@ -13,7 +13,7 @@ const KnowleadgeCard = ({ props, onPressHandleRemoveFavorites }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        <Image style={styles.image} source={{ uri: props.image }} />
+        <Image style={styles.image} source={props.image} />
       </View>
       <View style={styles.info}>
         <View
@@ -30,7 +30,7 @@ const KnowleadgeCard = ({ props, onPressHandleRemoveFavorites }) => {
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <View>
             <Text style={{ fontSize: "12", color: "#6B7280" }}>
-              {props.user.username}
+              {props.author}
             </Text>
           </View>
         </View>

@@ -4,10 +4,12 @@ import { StyleSheet, View } from "react-native";
 
 const Button = ({ props, customStyle, handleConfirm, textStyles }) => {
   const handlePress = () => {
-    if (props.navigation) {
+    if (props.navigation && props.navigationPath) {
       props.navigation.navigate(props.navigationPath);
     } else if (handleConfirm) {
       handleConfirm();
+    } else if (props.navigation && props.isHome) {
+      props.navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
     }
   };
   return (

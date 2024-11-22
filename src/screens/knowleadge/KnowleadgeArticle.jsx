@@ -16,7 +16,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import NavigationBar from "../../components/NavigationBar";
 import CommentKnowleadgeCard from "./_components/CommentKnowleadgeCard";
 
-const commentsData = [
+const commentsDatas = [
   {
     id: 1,
     name: "John Doe",
@@ -28,27 +28,27 @@ const commentsData = [
   },
   {
     id: 2,
-    name: "John Doe",
+    name: "Mary Smith",
     avatarImage: require("../../assets/img/avatar.png"),
-    comment: "Hello there, how are you?",
+    comment: "greetings",
     status: "online",
     saw: false,
     time: "10:30 AM",
   },
   {
     id: 3,
-    name: "John Doe",
+    name: "Lily Johnson",
     avatarImage: require("../../assets/img/avatar.png"),
-    comment: "Hello there, how are you?",
+    comment: "good day",
     status: "online",
     saw: false,
     time: "10:30 AM",
   },
   {
     id: 4,
-    name: "John Doe",
+    name: "Emily Walker",
     avatarImage: require("../../assets/img/avatar.png"),
-    comment: "Hello there, how are you?",
+    comment: "hello",
     status: "online",
     saw: false,
     time: "10:30 AM",
@@ -56,15 +56,32 @@ const commentsData = [
 ];
 
 const KnowLeadgeArticle = ({ navigation, route }) => {
-  const { knowledge } = route.params;
+  const { id } = route.params;
   const [seeAllComment, setSeeAllComment] = React.useState(false);
   const [openKeyboard, setOpenKeyboard] = React.useState(false);
+  const [commentText, setCommentText] = React.useState("");
+  const [commentsData, setCommentsData] = React.useState(commentsDatas);
+
+  const handleChangeText = (text) => setCommentText(text);
+
+  const handleSend = () => {
+    setCommentsData([...commentsData, {
+      id: 5,
+      name: "manh nguyen",
+      avatarImage: require("../../assets/img/avatar.png"),
+      comment: commentText,
+      status: "online",
+      saw: false,
+      time: "10:30 AM",
+    },]);
+    setCommentText(""); // Clear input after sending
+  };
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <TopNavigation navigation={navigation} title={"Knowleadge"} />
-      </View>
-      <KeyboardAvoidingView behavior="padding">
+    <SafeAreaView style={styles.container}>    
+        <View>
+          <TopNavigation navigation={navigation} title={"Knowleadge"} />
+        </View>
+        <KeyboardAvoidingView behavior="padding" >
         <View style={styles.contentcontainer}>
           <ScrollView
             style={{
@@ -79,12 +96,23 @@ const KnowLeadgeArticle = ({ navigation, route }) => {
               <Text
                 style={{ fontSize: 20, fontWeight: "700", color: "#1C2A3A" }}
               >
-                {knowledge.short_description}
+                Understanding Domestic Violence: Key Insights and Knowledge
               </Text>
               <Text
                 style={{ fontSize: 14, fontWeight: "400", color: "#6B7280" }}
               >
-                {knowledge.content}
+                Domestic violence includes various abusive behaviors that seek
+                to exert power and control over an intimate partner or family
+                member. This encompasses physical, emotional, sexual, and
+                psychological abuse, affecting countless individuals globally.
+                In this guide, you'll find: Types of Abuse: Understanding the
+                different forms and tactics used in domestic violence. Warning
+                Signs: Recognizing early indicators to identify potential abuse.
+                Impact on Victims: Insights into the psychological, emotional,
+                and physical toll. Resources for Help: Information on support
+                networks, intervention strategies, and ways to seek help.
+                Empowering yourself with knowledge can be the first step toward
+                prevention and support for those affected by domestic violence.
               </Text>
             </View>
             <View
@@ -137,6 +165,8 @@ const KnowLeadgeArticle = ({ navigation, route }) => {
                   <TextInput
                     style={styles.input}
                     placeholder=" Write a comment..."
+                    value={commentText}
+                    onChangeText={handleChangeText}
                   />
                 </View>
                 <View style={styles.iconContainer}>
@@ -145,7 +175,7 @@ const KnowLeadgeArticle = ({ navigation, route }) => {
                     name="send"
                     size={20}
                     color="#4B5563"
-                    onPress={() => setOpenKeyboard(false)}
+                    onPress={handleSend}
                   />
                 </View>
               </View>

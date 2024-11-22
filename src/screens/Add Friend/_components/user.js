@@ -3,7 +3,7 @@ import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-n
 import  Ionicons  from 'react-native-vector-icons/Ionicons';
 import { theme } from '../../../constains/theme';
 
-const UserView = ({user_data}) => {
+const UserView = ({user_data, navigation}) => {
     return (
       <View style={styles.container}>
         <Image
@@ -36,7 +36,7 @@ const UserView = ({user_data}) => {
             </View>
 
             {/* inbox button  */}
-            <TouchableOpacity style={styles.inbox_button}>
+            <TouchableOpacity style={styles.inbox_button} onPress={() => navigation.navigate("OnlineCounsellingScreen", { friendName: user_data.firstName + " " + user_data.lastName })}>
               <Text style={styles.textButton}>Inbox</Text>
             </TouchableOpacity>
           </View>

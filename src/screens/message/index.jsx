@@ -25,7 +25,7 @@ const messagesData = [
     },
     {
         id: 2,
-        name: "John Doe",
+        name: "Lee Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "online",
@@ -35,7 +35,7 @@ const messagesData = [
       },
     {
         id: 3,
-        name: "John Doe",
+        name: "Ethan Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "offline",
@@ -45,7 +45,7 @@ const messagesData = [
       },
     {
         id: 4,
-        name: "John Doe",
+        name: "Lee Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "online",
@@ -55,7 +55,7 @@ const messagesData = [
       },
     {
         id: 5,
-        name: "John Doe",
+        name: "Alex",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "offline",
