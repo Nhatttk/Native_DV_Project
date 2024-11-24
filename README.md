@@ -8,13 +8,17 @@ Breaking-Shadows is an application built to support abused people. I built it wh
 ### 2. Django
 
 ## Image of the app
+<div style="display: flex; justify-content: center; gap: 10px;">
+  ![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img1.jpg?raw=true)
+  ![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img2.jpg?raw=true)
+  ![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img3.jpg?raw=true)
+</div>
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+  ![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img4.jpg?raw=true)
+  ![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img5.jpg?raw=true)
+  ![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img6.jpg?raw=true)
+</div>
 
-![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img1.jpg?raw=true)
-![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img2.jpg?raw=true)
-![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img3.jpg?raw=true)
-![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img4.jpg?raw=true)
-![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img5.jpg?raw=true)
-![Breaking-Shadows-App](https://github.com/vanmanh23/Breaking-Shadows/blob/dev/src/assets/intro/img6.jpg?raw=true)
 
 
 
