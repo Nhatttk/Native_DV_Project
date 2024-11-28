@@ -23,7 +23,6 @@ const AllExpertScreen = ({ navigation }) => {
     try {
       const knowledgeData = await fetchExpertList();
       setData(knowledgeData);
-      console.log(knowledgeData);
     } catch (error) {
       console.error("Error in component:", error);
     } finally {

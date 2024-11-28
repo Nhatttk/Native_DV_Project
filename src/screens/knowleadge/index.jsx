@@ -31,7 +31,6 @@ const KnowLeadgeScreen = ({ navigation }) => {
     try {
       const knowledgeData = await fetchKnowledgeList();
       setData(knowledgeData);
-      console.log(knowledgeData);
     } catch (error) {
       console.error("Error in component:", error);
     } finally {
@@ -72,16 +71,6 @@ const KnowLeadgeScreen = ({ navigation }) => {
           ))}
         </ScrollView>
       </View>
-      {/* <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          paddingBottom: 16,
-          backgroundColor: "#fff",
-        }}
-      >
-        <NavigationBar navigation={navigation} />
-      </View> */}
     </SafeAreaView>
   );
 };
