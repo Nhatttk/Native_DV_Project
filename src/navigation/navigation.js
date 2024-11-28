@@ -38,6 +38,7 @@ import ChatWithFriend from "../screens/AllFriends/ChatWithFriend";
 import Notifications from "../screens/profile/Notifications";
 import KnowLeadgeArticle from "../screens/knowleadge/KnowleadgeArticle";
 import LoadingPopup from "../components/loadingPopup";
+import PrivateChatScreen from "../screens/message/_components/PrivateChat";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -212,6 +213,11 @@ function StackNavigator() {
       <Stack.Screen
         name="Map"
         component={Map}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PrivateChatScreen"
+        component={PrivateChatScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

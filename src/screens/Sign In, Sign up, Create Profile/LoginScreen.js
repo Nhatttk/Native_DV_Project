@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -13,9 +13,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { loginApi } from "../../api/apis";
+import { getUserDataFromToken, loginApi } from "../../api/apis";
 import LoadingPopup from "../../components/loadingPopup";
 import { saveLoginData } from "../../api/storageData";
 
@@ -23,9 +23,11 @@ const LoginScreen = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    username: "nhattk",
+    password: "ngominhnhat123",
   });
+
+
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
@@ -35,9 +37,10 @@ const LoginScreen = ({ navigation, route }) => {
     setLoading(true)
     try {
       const responseData = await loginApi(formData.username, formData.password); // Gọi hàm API login thực tế
-      console.log(responseData)
+      console.log(responseData.access)
       if (responseData.access != null) {
-        await saveLoginData(responseData.access)
+        const userData = await getUserDataFromToken(responseData.access)
+        await saveLoginData(userData)
         navigation.navigate("TabNavigator");
         setLoading(false)
       } else {
@@ -46,7 +49,6 @@ const LoginScreen = ({ navigation, route }) => {
         setError(true)
       }
     } catch (error) {
-      console.error("Error during login:", error);
       setLoading(false)
       setError(true)
     }
@@ -91,6 +93,7 @@ const LoginScreen = ({ navigation, route }) => {
         />
         <TextInput
           placeholder="User Name"
+          importantForAutofill="yes"
           value={formData.username}
           onChangeText={(value) => handleInputChange("username", value)}
         />
@@ -104,6 +107,7 @@ const LoginScreen = ({ navigation, route }) => {
           style={{ paddingRight: 8 }}
         />
         <TextInput placeholder="Password" secureTextEntry 
+        importantForAutofill="yes"
         value={formData.password}
         onChangeText={(value) => handleInputChange("password", value)}/>
       </View>

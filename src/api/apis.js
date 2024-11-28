@@ -3,6 +3,27 @@ import axios from "axios";
 import {API_URL} from "./URL/apiUrl"
 import * as Location from "expo-location";
 
+
+export const getChats = async (username) => {
+  try {
+    const response = await axios.get(API_URL + `chats/${username}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getMessages = async (chatId) => {
+  try {
+    const response = await axios.get(API_URL + `chats/${chatId}/messages/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
 export const loginApi = async (username, password) => {
   try {
     const response = await axios.post(API_URL + "login/", {
@@ -11,7 +32,6 @@ export const loginApi = async (username, password) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error login:", error);
     throw error; // Ném lỗi để có thể xử lý tại component
   }
 };
@@ -21,7 +41,7 @@ export const getUserDataFromToken = async (token) => {
     const response = await axios.post(API_URL + "get-user/", {
       token: token,
     });
-    return response.data;
+    return response.data; 
   } catch (error) {
     console.error("Error token:", error);
     throw error; // Ném lỗi để có thể xử lý tại component

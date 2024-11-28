@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { IMAGE_URL } from "../../../api/URL/apiUrl";
 
-const AnswerCard = ({ friendName = "Online Counseling Bot" }) => {
+const AnswerCard = ({ props }) => {
   return (
     <View
       style={[
@@ -20,7 +21,7 @@ const AnswerCard = ({ friendName = "Online Counseling Bot" }) => {
         }}
       >
         <Image
-          source={require("../../../assets/img/avatar2.png")}
+          source={{ uri: `${IMAGE_URL}${props.question.sender.avatar}` }}
           style={{
             width: 30,
             height: 30,
@@ -30,14 +31,13 @@ const AnswerCard = ({ friendName = "Online Counseling Bot" }) => {
           }}
         />
         <Text style={{ fontWeight: "bold", fontSize: 16, color: "#1C2A3A" }}>
-          {friendName}
+          {props.question.sender.user.username}
         </Text>
       </View>
       {/* <View /> */}
       <View>
         <Text style={{ fontWeight: 500, fontSize: 14, color: "#4B5563" }}>
-          Sarah and her friend Emma are having coffee together. Emma notices
-          Sarah seems nervous and has a bruise on her wrist.
+          {props.question.content}
         </Text>
       </View>
     </View>

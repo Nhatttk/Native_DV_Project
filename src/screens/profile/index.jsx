@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import IconsFontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import IconsAntDesign from "react-native-vector-icons/AntDesign";
 import IconsIonicons from "react-native-vector-icons/Ionicons";
@@ -9,7 +9,7 @@ import IconsMaterialCommunityIcons from "react-native-vector-icons/MaterialCommu
 import NavigationBar from "../../components/NavigationBar";
 import { TouchableOpacity } from "react-native";
 import Button from "../../components/button";
-import { getLoginData } from "../../api/storageData";
+import { getLoginData, removeLoginData } from "../../api/storageData";
 import { getUserDataFromToken } from "../../api/apis";
 import LoadingPopup from "../../components/loadingPopup";
 import { API_URL, IMAGE_URL } from "../../api/URL/apiUrl";
@@ -20,22 +20,26 @@ const ProfileScreen = ({ navigation }) => {
   const[profileData, setProfileData] = useState(null)
   useEffect(() => {
     const fetchData = async () => {
-      const accessToken = await getLoginData();
-      // Xử lý accessToken sau khi lấy xong
-      if (accessToken != null) {
-        const userData = await getUserDataFromToken(accessToken)
-        console.log(userData)
-        setUserData(userData.user)
-        setProfileData(userData.user.profile)
-        console.log("dahsja"+profileData.avatar)
-      }
-    };
+        const user = await getLoginData();
+
+        console.log(user)
+        setUserData(user.user)
+        setProfileData(user.user.profile)
+    }
    fetchData();
   }, []);
   
-  if (!userData) {
-    <LoadingPopup/>
+  const removeLogin = async () => {
+    try {
+      await removeLoginData()
+    } catch (error) {
+      Alert(error)
+    }
   }
+
+  if (!userData || !profileData) {
+    return (<LoadingPopup/>)
+  } else {
     return (
       <SafeAreaView style={styles.container}>
         <View>
@@ -255,9 +259,10 @@ const ProfileScreen = ({ navigation }) => {
                       <Button
                         props={{
                           navigation: navigation,
-                          navigationPath: "HomeScreen",
+                          navigationPath: "LoginScreen",
                           title: "Yes, Logout",
                         }}
+                        handleConfirm={removeLogin}
                         customStyle={{
                           backgroundColor: "#1C2A3A",
                           height: 40,
@@ -270,6 +275,8 @@ const ProfileScreen = ({ navigation }) => {
           </View>}
       </SafeAreaView>
     );
+  }
+    
   }
 
   
