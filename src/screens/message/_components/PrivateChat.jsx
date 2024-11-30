@@ -12,12 +12,12 @@ import {
   ScrollView,
 } from "react-native";
 import { getMessages } from "../../../api/apis";
-import AnswerCard from "../../onlineCounseling/_components/AnswerCard";
-import QuestionCard from "../../onlineCounseling/_components/QuestionCard";
 import TopNavigation from "../../../components/TopNavigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { getLoginData } from "../../../api/storageData";
+import AnswerCard from "./AnswerCard";
+import QuestionCard from "./QuestionCard";
 
 const PrivateChatScreen = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
