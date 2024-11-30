@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -25,7 +25,7 @@ const messagesData = [
     },
     {
         id: 2,
-        name: "Lee Doe",
+        name: "John Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "online",
@@ -35,7 +35,7 @@ const messagesData = [
       },
     {
         id: 3,
-        name: "Ethan Doe",
+        name: "John Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "offline",
@@ -45,7 +45,7 @@ const messagesData = [
       },
     {
         id: 4,
-        name: "Lee Doe",
+        name: "John Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "online",
@@ -55,7 +55,7 @@ const messagesData = [
       },
     {
         id: 5,
-        name: "Alex",
+        name: "John Doe",
         avatarImage: require("../../assets/img/avatar.png"),
         message: "Hello there, how are you?",
         status: "offline",
@@ -66,6 +66,23 @@ const messagesData = [
 ]
 
 const MessageScreen = ({ navigation }) => {
+
+  const [messagesData, setMessagesData] = useState([])
+  useEffect(()=> {
+    fetchingMessagesData()
+  },[])
+
+  const fetchingMessagesData = async () => {
+    try {
+      const userData = await getLoginData()
+      const chats = await getChats(userData ? userData.user.username : "");
+      setMessagesData(chats)
+      console.log("messagesData.id", messagesData)
+    } catch (error) {
+      console.log("Erorr fetching chats");
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -85,8 +102,9 @@ const MessageScreen = ({ navigation }) => {
           <View style={{ flexDirection: "column", gap: 16 }}>
 {/*  */}
           {messagesData.map((item) => (
+          
             <View key={item.id}>
-                <MessageCard props={item} navigation={navigation}/>
+                <MessageCard props={item} private_id ={item.id} navigation={navigation}/>
             </View>
           ))}
           </View>

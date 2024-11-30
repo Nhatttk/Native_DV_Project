@@ -27,17 +27,17 @@ const KnowLeadgeScreen = ({ navigation }) => {
   //   fetchData();
   // }, []);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const knowledgeData = await fetchKnowledgeList();
-  //     setData(knowledgeData);
-  //     console.log(knowledgeData);
-  //   } catch (error) {
-  //     console.error("Error in component:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const fetchData = async () => {
+    try {
+      const knowledgeData = await fetchKnowledgeList();
+      setData(knowledgeData);
+      console.log(knowledgeData);
+    } catch (error) {
+      console.error("Error in component:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -72,16 +72,6 @@ const KnowLeadgeScreen = ({ navigation }) => {
           ))}
         </ScrollView>
       </View>
-      {/* <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          paddingBottom: 16,
-          backgroundColor: "#fff",
-        }}
-      >
-        <NavigationBar navigation={navigation} />
-      </View> */}
     </SafeAreaView>
   );
 };

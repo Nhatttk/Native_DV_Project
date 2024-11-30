@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import IconsFontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import IconsAntDesign from "react-native-vector-icons/AntDesign";
 import IconsIonicons from "react-native-vector-icons/Ionicons";
@@ -9,6 +9,10 @@ import IconsMaterialCommunityIcons from "react-native-vector-icons/MaterialCommu
 import NavigationBar from "../../components/NavigationBar";
 import { TouchableOpacity } from "react-native";
 import Button from "../../components/button";
+import { getLoginData, removeLoginData } from "../../api/storageData";
+import { getUserDataFromToken } from "../../api/apis";
+import LoadingPopup from "../../components/loadingPopup";
+import { API_URL, IMAGE_URL } from "../../api/URL/apiUrl";
 const ProfileScreen = ({ navigation }) => {
   const [isLogout, setIsLogout] = useState(false);
 
@@ -126,20 +130,19 @@ const ProfileScreen = ({ navigation }) => {
         <View
           style={{ width: "100%", height: 1, backgroundColor: "#E5E7EB" }}
         />
-        <TouchableOpacity
+        <View
           style={{
             flexDirection: "row",
             alignItems: "flex-start",
             alignSelf: "flex-start",
             gap: 16,
           }}
-          onPress={() => navigation.navigate("SettingScreen")}
         >
           <IconsIonicons name="settings-outline" size={24} color="#1C2A3A" />
           <Text style={{ fontSize: 18, color: "#6B7280", fontWeight: "300" }}>
             Settings
           </Text>
-        </TouchableOpacity>
+        </View>
         <View
           style={{ width: "100%", height: 1, backgroundColor: "#E5E7EB" }}
         />

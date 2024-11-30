@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import Icons from "react-native-vector-icons/EvilIcons";
-import IconAntDesign from "react-native-vector-icons/AntDesign";
-import IconFontAwesome from "react-native-vector-icons/FontAwesome";
-import { TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import { IsFavoritesContext } from "../../../utils/IsFavoritesContext";
 
 const KnowleadgeCard = ({ props, onPressHandleRemoveFavorites }) => {
@@ -13,7 +9,7 @@ const KnowleadgeCard = ({ props, onPressHandleRemoveFavorites }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        <Image style={styles.image} source={props.image} />
+        <Image style={styles.image} source={{ uri: props.image }} />
       </View>
       <View style={styles.info}>
         <View
@@ -30,7 +26,7 @@ const KnowleadgeCard = ({ props, onPressHandleRemoveFavorites }) => {
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <View>
             <Text style={{ fontSize: "12", color: "#6B7280" }}>
-              {props.author}
+              {props.user.username}
             </Text>
           </View>
         </View>
@@ -46,7 +42,7 @@ const styles = StyleSheet.create({
     gap: 10,
     borderRadius: 12,
     padding: 12,
-    width: 'auto',
+    width: "auto",
     height: 133,
     backgroundColor: "#fff",
     shadowColor: "#000000", // Shadow color
@@ -60,7 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     gap: 8,
-    flex: 1
+    flex: 1,
   },
   avatar: {
     height: 109,

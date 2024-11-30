@@ -2,6 +2,78 @@
 import axios from "axios";
 import {API_URL} from "./URL/apiUrl"
 import * as Location from "expo-location";
+import {API_URL_GEMINI} from '@env';
+// api.js
+export const callGenerateContentAPI = async (prompt) => {
+  const payload = {
+    contents: [
+      {
+        parts: [
+          {
+            text: prompt
+          }
+        ]
+      }
+    ]
+  };
+
+  try {
+    const response = await axios.post(API_URL_GEMINI, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data; 
+  } catch (error) {
+    throw error.response ? error.response.data : new Error("Network Error");
+  }
+};
+
+
+export const getChats = async (username) => {
+  try {
+    const response = await axios.get(API_URL + `chats/${username}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getMessages = async (chatId) => {
+  try {
+    const response = await axios.get(API_URL + `chats/${chatId}/messages/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const loginApi = async (username, password) => {
+  try {
+    const response = await axios.post(API_URL + "login/", {
+      username: username,
+      password:password
+    });
+    return response.data;
+  } catch (error) {
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getUserDataFromToken = async (token) => {
+  try {
+    const response = await axios.post(API_URL + "get-user/", {
+      token: token,
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Error token:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
 
 export const fetchKnowledgeList = async () => {
   try {

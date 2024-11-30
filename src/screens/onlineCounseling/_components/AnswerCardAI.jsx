@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { IMAGE_URL } from "../../../api/URL/apiUrl";
 
-const AnswerCard = ({ friendName = "Online Counseling Bot", answer }) => {
+const AnswerCardAI = ({ props }) => {
   return (
     <View
       style={[
@@ -20,7 +21,7 @@ const AnswerCard = ({ friendName = "Online Counseling Bot", answer }) => {
         }}
       >
         <Image
-          source={require("../../../assets/img/avatar2.png")}
+          source={{ uri: `https://media.istockphoto.com/id/1333838449/vector/chatbot-icon-support-bot-cute-smiling-robot-with-headset-the-symbol-of-an-instant-response.jpg?s=612x612&w=0&k=20&c=sJ_uGp9wJ5SRsFYKPwb-dWQqkskfs7Fz5vCs2w5w950=` }}
           style={{
             width: 30,
             height: 30,
@@ -30,15 +31,13 @@ const AnswerCard = ({ friendName = "Online Counseling Bot", answer }) => {
           }}
         />
         <Text style={{ fontWeight: "bold", fontSize: 16, color: "#1C2A3A" }}>
-          {friendName}
+          Online Counseling
         </Text>
       </View>
       {/* <View /> */}
       <View>
         <Text style={{ fontWeight: 500, fontSize: 14, color: "#4B5563" }}>
-          {/* Sarah and her friend Emma are having coffee together. Emma notices
-          Sarah seems nervous and has a bruise on her wrist. */}
-          {answer}
+          {props.answer}
         </Text>
       </View>
     </View>
@@ -55,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnswerCard;
+export default AnswerCardAI;
