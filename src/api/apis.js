@@ -2,6 +2,33 @@
 import axios from "axios";
 import {API_URL} from "./URL/apiUrl"
 import * as Location from "expo-location";
+import {API_URL_GEMINI} from '@env';
+// api.js
+export const callGenerateContentAPI = async (prompt) => {
+  const payload = {
+    contents: [
+      {
+        parts: [
+          {
+            text: prompt
+          }
+        ]
+      }
+    ]
+  };
+
+  try {
+    const response = await axios.post(API_URL_GEMINI, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data; 
+  } catch (error) {
+    throw error.response ? error.response.data : new Error("Network Error");
+  }
+};
 
 
 export const getChats = async (username) => {

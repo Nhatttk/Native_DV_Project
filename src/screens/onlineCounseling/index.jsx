@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  ActivityIndicator,
+  FlatList,
   Image,
   KeyboardAvoidingView,
   SafeAreaView,
@@ -13,79 +15,109 @@ import {
 import TopNavigation from "../../components/TopNavigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import NavigationBar from "../../components/NavigationBar";
-import AnswerCard from "./_components/AnswerCard";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import QuestionCard from "./_components/QuestionCard";
+import { callGenerateContentAPI } from "../../api/apis";
+import AnswerCardAI from "./_components/AnswerCardAI";
+import QuestionCardAI from "./_components/QuestionCardAI";
 
 const OnlineCounseling = ({ navigation }) => {
   const [addfile, setAddfile] = React.useState(false);
-  const [commentText, setCommentText] = React.useState("");
-  const [comments, setComments] = React.useState([]);
+  const [message, setMessage] = React.useState("");
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+  const flatListRef = useRef(null);
 
-  const handleChangeText = (text) => setCommentText(text);
-  const handleSend = () => {
-    setComments([...comments, commentText]);
-    setCommentText(""); // Clear input after sending
+  useEffect(() => {
+    flatListRef.current?.scrollToEnd({ animated: true });
+  }, [messages]);
+  const handleSend = async () => {
+    setIsLoading(true)
+    setMessages([
+      ...messages,
+      {
+        isAnswer: false,
+        message: message,
+      },
+    ]);
+    setMessage("");
+    const response = await callGenerateContentAPI(message);
+    if (response?.candidates?.[0]?.content?.parts?.[0]?.text != null) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          isAnswer: true,
+          message: response?.candidates?.[0]?.content?.parts?.[0]?.text,
+        },
+      ]);
+    } else {
+      setMessages((prev) => [
+        ...prev,
+        {
+          isAnswer: true,
+          message: "Some thing went wrong!",
+        },
+      ]);
+    }
+    setIsLoading(false)
   };
-console.log("comments: ",comments);
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView behavior="padding">
+        <View>
+          <TopNavigation navigation={navigation} title={"Online Counseling"} />
+        </View>
+        <View style={styles.contentcontainer}>
+          <View
+            style={{ height: 1, backgroundColor: "#E4E7EC", width: "100%" }}
+          />
+          <AnswerCardAI props={{ answer: "Hello, how can i help you?" }} />
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            renderItem={({ item }) => {
+              if (item.isAnswer) {
+                return <AnswerCardAI props={{ answer: item.message }} />;
+              } else {
+                return <QuestionCardAI props={{ message: item.message }} />;
+              }
+            }}
+            keyExtractor={(item, index) => index.toString()}
+          />
 
-        <KeyboardAvoidingView behavior="padding">
+          {isLoading && <ActivityIndicator size="large" color="#00ff00" />}
 
-      <View>
-        <TopNavigation navigation={navigation} title={"Online Counseling"} />
-      </View>
-      <View style={styles.contentcontainer}>
-        <View
-          style={{ height: 1, backgroundColor: "#E4E7EC", width: "100%" }}
-        />
-        <ScrollView
-          style={{
-            flexDirection: "column",
-            paddingHorizontal: 24,
-            marginTop: 16,
-            width:"100%",
-          }}
-        >
-          <AnswerCard />
-          <View style={{ flexDirection:"row",justifyContent: "flex-end",width:"100%", marginTop: 16 }}>
-          {comments.length > 0 && 
-            <View >
-              <QuestionCard props={{ question: comments[comments.length - 1] }} />
+          <View style={styles.message}>
+            <View>
+              {!addfile && (
+                <TouchableOpacity onPress={() => setAddfile(true)}>
+                  <Ionicons
+                    name="add-circle-outline"
+                    size={28}
+                    color="#1C2A3A"
+                  />
+                </TouchableOpacity>
+              )}
+              {addfile && (
+                <View style={{ flexDirection: "row", gap: 8 }}>
+                  <TouchableOpacity onPress={() => setAddfile(false)}>
+                    <AntDesign name="closecircle" size={28} color="#1C2A3A" />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Ionicons name="image-outline" size={28} color="#1C2A3A" />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Ionicons name="camera-outline" size={28} color="#1C2A3A" />
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
-          }  
-          </View>
-        </ScrollView>
-        <View style={styles.message}>
-          <View>
-            {!addfile && (
-              <TouchableOpacity onPress={() => setAddfile(true)}>
-                <Ionicons name="add-circle-outline" size={28} color="#1C2A3A" />
-              </TouchableOpacity>
-            )}
-            {addfile && (
-              <View style={{ flexDirection: "row", gap: 8 }}>
-                <TouchableOpacity onPress={() => setAddfile(false)}>
-                  <AntDesign name="closecircle" size={28} color="#1C2A3A" />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionicons name="image-outline" size={28} color="#1C2A3A" />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionicons name="camera-outline" size={28} color="#1C2A3A" />
-                </TouchableOpacity>
-              </View>
-            )}
-          </View>
-            <View
-              style={[styles.inputContainer]}
-            >
+            <View style={[styles.inputContainer]}>
               <TextInput
                 placeholder="Send message...."
                 style={styles.input}
-                onChangeText={handleChangeText}
+                value={message}
+                onChangeText={setMessage}
               />
               <View style={styles.iconContainer}>
                 <MaterialIcons name="tag-faces" size={20} color="#4B5563" />
@@ -97,22 +129,9 @@ console.log("comments: ",comments);
                 />
               </View>
             </View>
+          </View>
         </View>
-      </View>
       </KeyboardAvoidingView>
-      {/*  */}
-      {/* <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          paddingBottom: 16,
-          backgroundColor: "#fff",
-        }}
-      >
-        <NavigationBar navigation={navigation} />
-      </View> */}
     </SafeAreaView>
   );
 };
@@ -148,7 +167,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 8,
     marginHorizontal: 10,
-    flex: 1
+    flex: 1,
   },
   iconContainer: {
     flexDirection: "row",

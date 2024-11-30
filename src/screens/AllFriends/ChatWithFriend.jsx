@@ -15,8 +15,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import NavigationBar from "../../components/NavigationBar";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import AnswerCard from "../onlineCounseling/_components/AnswerCard";
-import QuestionCard from "../onlineCounseling/_components/QuestionCard";
+import AnswerCard from "../onlineCounseling/_components/AnswerCardAI";
+import QuestionCard from "../onlineCounseling/_components/QuestionCardAI";
 
 const ChatWithFriend = ({ navigation, route }) => {
     const { userName } = route.params;
