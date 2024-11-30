@@ -4,6 +4,17 @@ import {API_URL} from "./URL/apiUrl"
 import * as Location from "expo-location";
 import {API_URL_GEMINI} from '@env';
 // api.js
+
+export const getEmergencyList= async () => {
+  try {
+    const response = await axios.get(API_URL + `emergency-help/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+}
+
 export const callGenerateContentAPI = async (prompt) => {
   const payload = {
     contents: [
@@ -89,7 +100,8 @@ export const fetchKnowledgeList = async () => {
 
 export const fetchExpertList = async () => {
   try {
-    const response = await axios.get(API_URL + "experts/");
+    const response = await axios.get(API_URL + "get-expert-user/");
+    console.log("expert: ", response.data)
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);

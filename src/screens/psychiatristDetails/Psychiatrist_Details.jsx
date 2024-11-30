@@ -7,17 +7,7 @@ import AchivementCard from "./_components/AchivementCard";
 import UserCard from "./_components/UserCard";
 import { Button } from "react-native";
 import { TouchableOpacity } from "react-native";
-
-const data = [
-  {
-    id: 1,
-    imgUrl:
-      "https://media.istockphoto.com/id/1149405165/vi/video/nh%C3%A0-t%C3%A2m-l%C3%BD-h%E1%BB%8Dc-th%C3%A0nh-c%C3%B4ng-t%C6%B0-v%E1%BA%A5n-cho-n%E1%BB%AF-b%E1%BB%87nh-nh%C3%A2n-trong-v%C4%83n-ph%C3%B2ng-n%C3%B3i-chuy%E1%BB%87n-vi%E1%BA%BFt.jpg?s=640x640&k=20&c=FaS_hLTDCQyk1oi_d06_UHivxMKm3w7h1EtKbXL3aqE=",
-    name: "Dr. John Doe",
-    speciality: "Psychiatrist",
-    address: "123 Main St, City, State ZIP",
-  },
-];
+import { IMAGE_URL } from "../../api/URL/apiUrl";
 const achievementData = [
   {
     id: 1,
@@ -44,7 +34,8 @@ const achievementData = [
     icon: "message",
   },
 ];
-const PsychiatristDetails = ({ navigation }) => {
+const PsychiatristDetails = ({ navigation, route }) => {
+  const data = route.params.expert
   return (
     <SafeAreaView
       style={{
@@ -62,15 +53,15 @@ const PsychiatristDetails = ({ navigation }) => {
         />
       </View>
       <View style={styles.cardContainer}>
-        {data.map((item) => (
+        {/* {data.map((item) => ( */}
           <PsychiatristCard
-            key={item.id}
-            imgUrl={item.imgUrl}
-            name={item.name}
-            speciality={item.speciality}
-            address={item.address}
+            key={data.id}
+            imgUrl={`${IMAGE_URL}${data.avatar}`}
+            name={`${data.user.first_name} ${data.user.last_name}`}
+            speciality={data.jobTitle}
+            address={data.address}
           />
-        ))}
+        {/* ))} */}
       </View>
       <View style={styles.achivementContainer}>
         {achievementData.map((item) => (
