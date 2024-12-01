@@ -1,5 +1,11 @@
 {
   "expo": {
+    "scheme": "taofanj97",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "plugins": [
       [
         "expo-image-picker",
@@ -10,28 +16,45 @@
     ],
     "name": "tao-fan-j97",
     "slug": "tao-fan-j97",
+    "owner": "manhnguyen2003",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/slash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.taofanj97.googlelogin",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "CPBundleURLTypes": [
+          "com.googleusercontent.apps.820594936685-il7otu1eknjj48oe5oaadh28qa9ksss1"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.taofanj97.taofanj97"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b3aefc3a-cd36-4640-b87c-9b14cbe1d649"
+      }
     }
   }
 }

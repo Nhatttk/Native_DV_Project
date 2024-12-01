@@ -19,17 +19,17 @@ const AllExpertScreen = ({ navigation }) => {
   //   fetchData();
   // }, []);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const knowledgeData = await fetchExpertList();
-  //     setData(knowledgeData);
-  //     console.log(knowledgeData);
-  //   } catch (error) {
-  //     console.error("Error in component:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const fetchData = async () => {
+    try {
+      const knowledgeData = await fetchExpertList();
+      setData(knowledgeData);
+      console.log(knowledgeData);
+    } catch (error) {
+      console.error("Error in component:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>

@@ -13,20 +13,73 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { getUserDataFromToken, loginApi } from "../../api/apis";
 import LoadingPopup from "../../components/loadingPopup";
 import { saveLoginData } from "../../api/storageData";
 
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import * as AuthSession from "expo-auth-session";
+
+WebBrowser.maybeCompleteAuthSession();
+
 const LoginScreen = ({ navigation, route }) => {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+
+  const [accessToken, setAccessToken] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
+  const redirectUri = AuthSession.makeRedirectUri({
+    useProxy: true, // Sử dụng proxy của Expo để xử lý đăng nhập
+  });
+  console.log("redirectUri: ", redirectUri);
+  // const discovery = AuthSession.useAutoDiscovery('https://demo.identityserver.io');
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId:
+      "820594936685-b3uv4ean402ctukgauokkf55vphj6mn7.apps.googleusercontent.com",
+    scopes: ["profile", "email"],
+    // redirectUri: redirectUri,
+    redirectUri: "https://auth.expo.io/@manhnguyen2003/tao-fan-j97",
+  }
+);
+  // console.log("request: ", request);
+  useEffect(() => {
+    console.log("response: ", response);
+    if (response?.type === "success") {
+      setAccessToken(response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const fetchUserInfo = async () => {
+    if (!accessToken) return;
+    try {
+      let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const user = await response.json();
+      setUserInfo(user);
+    } catch (error) {
+      console.log("Error fetching user info:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchUserInfo();
+    }
+  }, [accessToken]);
+
+
+  // console.log("accessToken: ", accessToken);
+  // console.log("userInfo: ", userInfo);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     username: "nhattk",
     password: "ngominhnhat123",
   });
-
 
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
@@ -34,36 +87,35 @@ const LoginScreen = ({ navigation, route }) => {
 
   const checkLogin = async () => {
     console.log("Logging in...");
-    setLoading(true)
+    setLoading(true);
     try {
       const responseData = await loginApi(formData.username, formData.password); // Gọi hàm API login thực tế
-      console.log(responseData.access)
+      console.log(responseData.access);
       if (responseData.access != null) {
-        const userData = await getUserDataFromToken(responseData.access)
-        await saveLoginData(userData)
+        const userData = await getUserDataFromToken(responseData.access);
+        await saveLoginData(userData);
         navigation.navigate("TabNavigator");
-        setLoading(false)
+        setLoading(false);
       } else {
         console.log("Login failed, no access token found.");
-        setLoading(false)
-        setError(true)
+        setLoading(false);
+        setError(true);
       }
     } catch (error) {
-      setLoading(false)
-      setError(true)
+      setLoading(false);
+      setError(true);
     }
   };
   return (
     <SafeAreaView style={styles.container}>
-      {loading && <LoadingPopup/>}
-      {error && Alert.alert(
-      'Notification', // Tiêu đề
-      'User name or password incorrect', // Nội dung
-      [
-        { text: 'OK', onPress: () => setError(false) },
-      ],
-      { cancelable: false } // Không cho phép đóng Alert bằng cách nhấn ra ngoài
-    )}
+      {loading && <LoadingPopup />}
+      {error &&
+        Alert.alert(
+          "Notification", // Tiêu đề
+          "User name or password incorrect", // Nội dung
+          [{ text: "OK", onPress: () => setError(false) }],
+          { cancelable: false } // Không cho phép đóng Alert bằng cách nhấn ra ngoài
+        )}
       <View style={styles.title}>
         <Image
           style={styles.icon}
@@ -106,16 +158,16 @@ const LoginScreen = ({ navigation, route }) => {
           color="#9CA3AF"
           style={{ paddingRight: 8 }}
         />
-        <TextInput placeholder="Password" secureTextEntry 
-        importantForAutofill="yes"
-        value={formData.password}
-        onChangeText={(value) => handleInputChange("password", value)}/>
+        <TextInput
+          placeholder="Password"
+          secureTextEntry
+          importantForAutofill="yes"
+          value={formData.password}
+          onChangeText={(value) => handleInputChange("password", value)}
+        />
       </View>
 
-      <TouchableOpacity
-        style={styles.btn_signin}
-        onPress={() => checkLogin()}
-      >
+      <TouchableOpacity style={styles.btn_signin} onPress={() => checkLogin()}>
         <Text style={{ color: "#fff", fontSize: 16, fontFamily: "Inter" }}>
           Sign In
         </Text>
@@ -127,7 +179,7 @@ const LoginScreen = ({ navigation, route }) => {
         <View style={styles.line_item} />
       </View>
 
-      <TouchableOpacity style={styles.btn_google}>
+      <TouchableOpacity style={styles.btn_google} onPress={() => promptAsync()}>
         <Image
           source={require("../../assets/img/Google__G__logo.svg.webp")} // Đường dẫn đến logo Google
           style={styles.social_logo}
