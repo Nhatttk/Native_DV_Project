@@ -19,7 +19,54 @@ import { getUserDataFromToken, loginApi } from "../../api/apis";
 import LoadingPopup from "../../components/loadingPopup";
 import { saveLoginData } from "../../api/storageData";
 
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import * as AuthSession from "expo-auth-session";
+
+WebBrowser.maybeCompleteAuthSession();
+
 const LoginScreen = ({ navigation, route }) => {
+
+  const [accessToken, setAccessToken] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
+  console.log("redirectUri: ", redirectUri);
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId:
+      "820594936685-b3uv4ean402ctukgauokkf55vphj6mn7.apps.googleusercontent.com",
+    scopes: ["profile", "email"],
+    // redirectUri: redirectUri,
+    redirectUri: "https://auth.expo.io/@manhnguyen2003/tao-fan-j97",
+  }
+);
+  // console.log("request: ", request);
+  useEffect(() => {
+    console.log("response: ", response);
+    if (response?.type === "success") {
+      setAccessToken(response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const fetchUserInfo = async () => {
+    if (!accessToken) return;
+    try {
+      let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      const user = await response.json();
+      setUserInfo(user);
+    } catch (error) {
+      console.log("Error fetching user info:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchUserInfo();
+    }
+  }, [accessToken]);
+
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
