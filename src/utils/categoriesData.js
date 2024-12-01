@@ -19,7 +19,7 @@ export const categoriesData = [
         id: 2,
         title: "Emergency Help",
         imgUrl: emergenvy,
-        navigationPath: "PsychiatristDetails"
+        navigationPath: "EmergencyHelp"
     },
     {
         id: 3,

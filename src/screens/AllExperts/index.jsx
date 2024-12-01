@@ -9,6 +9,7 @@ import FavoriteCard from "../favorites/_components/FavoriteCard";
 import NavigationBar from "../../components/NavigationBar";
 import { useState } from "react";
 import { fetchExpertList } from "../../api/apis";
+import { TouchableOpacity } from "react-native";
 
 const AllExpertScreen = ({ navigation }) => {
 
@@ -79,8 +80,8 @@ const AllExpertScreen = ({ navigation }) => {
           }}
         >
           {PsychiatristData.map((item) => (
-            <TouchableOpacity key={item.id} onPress={() => navigation.navigate("PsychiatristDetails") }>
-            <View style={{ marginBottom: 8 }}>
+            <TouchableOpacity key={item.id} onPress={() => navigation.navigate("PsychiatristDetails", {expert: item})}>
+            <View key={item.id} style={{ marginBottom: 8 }}>
               <FavoriteCard
                 //   onPressHandleRemoveFavorites={onPressHandleRemoveFavorites}
                 props={item}

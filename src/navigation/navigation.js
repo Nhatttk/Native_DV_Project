@@ -39,6 +39,7 @@ import Notifications from "../screens/profile/Notifications";
 import KnowLeadgeArticle from "../screens/knowleadge/KnowleadgeArticle";
 import LoadingPopup from "../components/loadingPopup";
 import PrivateChatScreen from "../screens/message/_components/PrivateChat";
+import EmergencyHelp from "../screens/emergencyHelp";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -213,6 +214,11 @@ function StackNavigator() {
       <Stack.Screen
         name="Map"
         component={Map}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EmergencyHelp"
+        component={EmergencyHelp}
         options={{ headerShown: false }}
       />
       <Stack.Screen
