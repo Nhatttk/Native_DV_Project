@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation, route }) => {
   // const discovery = AuthSession.useAutoDiscovery('https://demo.identityserver.io');
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
-      "820594936685-b3uv4ean402ctukgauokkf55vphj6mn7.apps.googleusercontent.com",
+      "",
     scopes: ["profile", "email"],
     // redirectUri: redirectUri,
     redirectUri: "https://auth.expo.io/@manhnguyen2003/tao-fan-j97",
