@@ -44,7 +44,8 @@ const achievementData = [
     icon: "message",
   },
 ];
-const PsychiatristDetails = ({ navigation }) => {
+const PsychiatristDetails = ({ navigation, route }) => {
+  const data = route.params.expert
   return (
     <SafeAreaView
       style={{
@@ -62,15 +63,15 @@ const PsychiatristDetails = ({ navigation }) => {
         />
       </View>
       <View style={styles.cardContainer}>
-        {data.map((item) => (
+        {/* {data.map((item) => ( */}
           <PsychiatristCard
-            key={item.id}
-            imgUrl={item.imgUrl}
-            name={item.name}
-            speciality={item.speciality}
-            address={item.address}
+            key={data.id}
+            imgUrl={`${IMAGE_URL}${data.avatar}`}
+            name={`${data.user.first_name} ${data.user.last_name}`}
+            speciality={data.jobTitle}
+            address={data.address}
           />
-        ))}
+        {/* ))} */}
       </View>
       <View style={styles.achivementContainer}>
         {achievementData.map((item) => (

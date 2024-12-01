@@ -5,6 +5,7 @@ import IconAntDesign from "react-native-vector-icons/AntDesign";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import { TouchableOpacity } from "react-native";
 import { IsFavoritesContext } from "../../../utils/IsFavoritesContext";
+import { IMAGE_URL } from "../../../api/URL/apiUrl";
 
 const renderStars = (rating) => {
   const fullStars = Math.floor(rating); // Full stars
