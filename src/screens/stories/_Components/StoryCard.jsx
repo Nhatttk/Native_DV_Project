@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import IconEvilIcons from "react-native-vector-icons/EvilIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { IMAGE_URL } from "../../../api/URL/apiUrl";
 
 const StoryCard = ({ props, commentHandle }) => {
   const [openBoxCmt, setOpenBoxCmt] = React.useState(false);
@@ -24,7 +25,7 @@ const StoryCard = ({ props, commentHandle }) => {
       <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
         <View>
           <Image
-            source={{ uri: props.avatarImage }}
+            source={{ uri: `${IMAGE_URL}${props.profile.avatar}` }}
             style={{
               width: 30,
               height: 30,
@@ -37,13 +38,13 @@ const StoryCard = ({ props, commentHandle }) => {
         <View style={{ flexDirection: "column", gap: 6 }}>
           <View>
             <Text style={{ fontWeight: 700, color: "#1F2A37", fontSize: 16 }}>
-              {props.name}
+              {props.profile.user.username}
             </Text>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
             <IconEvilIcons name="location" size={20} color={"#4B5563"} />
             <Text style={{ fontSize: 14, color: "#4B5563", fontWeight: 400 }}>
-              {props.address}
+              {props.profile.address}
             </Text>
           </View>
         </View>
@@ -54,14 +55,14 @@ const StoryCard = ({ props, commentHandle }) => {
           {props.title}
         </Text>
         <Text style={{ fontWeight: 400, fontSize: 14, color: "#4B5563" }}>
-          {props.description}
+          {props.content}
         </Text>
         <Image
-          source={{ uri: props.imgUrl }}
+          source={{ uri: `${IMAGE_URL}${props.image}` }}
           style={{ width: "100%", height: 249 }}
         />
       </View>
-      {!openBoxCmt && (
+      {/* {!openBoxCmt && (
         <View style={{ gap: 12 }}>
           <View
             style={{
@@ -97,8 +98,8 @@ const StoryCard = ({ props, commentHandle }) => {
             </View>
           </View>
         </View>
-      )}
-      {openBoxCmt && (
+      )} */}
+      {/* {openBoxCmt && (
         <View style={styles.commentscontainer}>
           <View
             style={{
@@ -121,7 +122,7 @@ const StoryCard = ({ props, commentHandle }) => {
           <View style={{ height: "60%", marginBottom: 16 }}>
             <ScrollView>
               {/*  */}
-              <View style={{ gap: 16 }}>
+              {/* <View style={{ gap: 16 }}>
                 {props.comments.map((item) => (
                   <View
                     key={item.id}
@@ -174,17 +175,16 @@ const StoryCard = ({ props, commentHandle }) => {
                       </View>
                     </View>
                   </View>
-                ))}
-              </View>
-              {/*  */}
-            </ScrollView>
+                ))} */}
+              {/* </View> */}
+            {/* </ScrollView>
           </View>
           <View style={styles.commentsbox}>
             <TextInput style={styles.input} placeholder=" Search ..." />
             <Ionicons name="send-sharp" size={24} color={"#1F2A37"} />
           </View>
-        </View>
-      )}
+        </View> */}
+      {/* )} */} 
     </View>
   );
 };

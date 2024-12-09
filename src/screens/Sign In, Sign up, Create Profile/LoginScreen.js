@@ -19,54 +19,7 @@ import { getUserDataFromToken, loginApi } from "../../api/apis";
 import LoadingPopup from "../../components/loadingPopup";
 import { saveLoginData } from "../../api/storageData";
 
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
-import * as AuthSession from "expo-auth-session";
-
-WebBrowser.maybeCompleteAuthSession();
-
 const LoginScreen = ({ navigation, route }) => {
-
-  const [accessToken, setAccessToken] = useState(null);
-  const [userInfo, setUserInfo] = useState(null);
-
-  console.log("redirectUri: ", redirectUri);
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId:
-      "",
-    scopes: ["profile", "email"],
-
-    redirectUri: "",
-  }
-);
-
-  useEffect(() => {
-    console.log("response: ", response);
-    if (response?.type === "success") {
-      setAccessToken(response.authentication.accessToken);
-    }
-  }, [response]);
-
-  const fetchUserInfo = async () => {
-    if (!accessToken) return;
-    try {
-      let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
-      const user = await response.json();
-      setUserInfo(user);
-    } catch (error) {
-      console.log("Error fetching user info:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (accessToken) {
-      fetchUserInfo();
-    }
-  }, [accessToken]);
-
-
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
@@ -88,8 +41,8 @@ const LoginScreen = ({ navigation, route }) => {
       if (responseData.access != null) {
         const userData = await getUserDataFromToken(responseData.access)
         await saveLoginData(userData)
-        navigation.navigate("TabNavigator");
         setLoading(false)
+        navigation.navigate("TabNavigator");
       } else {
         console.log("Login failed, no access token found.");
         setLoading(false)
