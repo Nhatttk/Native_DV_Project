@@ -6,7 +6,8 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "name": "tao-fan-j97",
     "slug": "tao-fan-j97",

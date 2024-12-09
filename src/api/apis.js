@@ -127,3 +127,29 @@ export const sendEmail = async () => {
   }
 };
 
+export const postStory = async (formData) => {
+  try {
+    const response = await axios.post(
+      API_URL + "stories/",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const getStories = async () => {
+  try {
+    const response = await axios.get(API_URL + "stories/");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

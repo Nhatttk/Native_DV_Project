@@ -33,13 +33,13 @@ const LoginScreen = ({ navigation, route }) => {
   console.log("redirectUri: ", redirectUri);
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
-      "820594936685-b3uv4ean402ctukgauokkf55vphj6mn7.apps.googleusercontent.com",
+      "",
     scopes: ["profile", "email"],
-    // redirectUri: redirectUri,
-    redirectUri: "https://auth.expo.io/@manhnguyen2003/tao-fan-j97",
+
+    redirectUri: "",
   }
 );
-  // console.log("request: ", request);
+
   useEffect(() => {
     console.log("response: ", response);
     if (response?.type === "success") {
