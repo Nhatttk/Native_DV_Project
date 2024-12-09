@@ -17,7 +17,6 @@ import NavigationBar from "../../components/NavigationBar";
 import StoryCard from "./_Components/StoryCard";
 import IconsAntDesign from "react-native-vector-icons/AntDesign";
 import FormAddStory from "./_Components/FormAddStory";
-import LoginNotification from "./_Components/LoginNotification";
 import postStory, { getStories } from "../../api/apis";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IMAGE_URL } from "../../api/URL/apiUrl";
@@ -82,7 +81,8 @@ const StorieScreen = ({ navigation }) => {
         >
           <View>
             <Image
-              source={{ uri: `${IMAGE_URL}${userLogin.user.profile.avatar}` }}
+              source={require("../../assets/img/avatar.png")}
+              // source={{ uri: `${IMAGE_URL}${userLogin.user.profile.avatar}` }}
               style={{ width: 40, height: 40, borderRadius: 999 }}
             />
           </View>
