@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -8,35 +8,25 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
+  SafeAreaView,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 import { postStory } from "../../../api/apis";
+import LoadingPopup from "../../../components/loadingPopup";
 
-const FormAddStory = ({ onCancel }) => {
-  // const {
-  //   handleSubmit,
-  //   control,
-  //   formState: { errors },
-  // } = useForm(
-  //   {
-  //     defaultValues: {
-  //       nameStory: "",
-  //       storyContent: "",
-  //     },
-  //   },
-  // );
+const FormAddStory = ({ onCancel, setOpenDialog }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const onError = (errors, e) => {
     return console.log(errors);
   };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
@@ -46,37 +36,41 @@ const FormAddStory = ({ onCancel }) => {
       setImage(result.assets[0].uri);
     }
   };
-// 
-const onSubmit = async () => {
-  if (!title || !content) {
-    Alert.alert("Validation Error", "Title and content are required!");
-    return;
-  }
+  //
+  const onSubmit = async () => {
+    try {
+      setLoading(true);
+      if (!title || !content) {
+        Alert.alert("Validation Error", "Title and content are required!");
+        setLoading(false);
+      }
+      const formData = new FormData();
+      formData.append("title", title); // Tiêu đề
+      formData.append("content", content); // Nội dung
+      if (image) {
+        const uriParts = image.split(".");
+        const fileType = uriParts[uriParts.length - 1];
+        formData.append("image", {
+          uri: image,
+          name: `photo.${fileType}`,
+          type: `image/${fileType}`,
+        });
+      }
+      const res = formData.append("profile", "2"); // ID của profile, thay thế bằng ID thực tế
+      console.log(res);
 
-  const formData = new FormData();
-  formData.append("title", title); // Tiêu đề
-  formData.append("content", content); // Nội dung
-  if (image) {
-    const uriParts = image.split(".");
-    const fileType = uriParts[uriParts.length - 1];
-    formData.append("image", {
-      uri: image,
-      name: `photo.${fileType}`,
-      type: `image/${fileType}`,
-    });
-  }
-  const res = formData.append("profile", "2"); // ID của profile, thay thế bằng ID thực tế
-  console.log(res)
-  try {
-    await postStory(formData);
-  } catch (error) {
-    console.error("Error submitting story:", error);
-    Alert.alert("Error", "An error occurred while creating the story.");
-  }
-};
+      await postStory(formData);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error submitting story:", error);
+      Alert.alert("Error", "An error occurred while creating the story.");
+    }
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        {loading && <LoadingPopup loading={loading} completed={false} />}
         <Text style={styles.title}>Share Your Story</Text>
         <Text style={styles.label}>Title</Text>
         <TextInput
@@ -106,7 +100,7 @@ const onSubmit = async () => {
             <Button title="Cancel" onPress={onCancel} />
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
@@ -116,23 +110,23 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 12,
     marginTop: 5,
-    alignSelf: "flex-start",    
+    alignSelf: "flex-start",
   },
-    buttons: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        width: "100%",
-        marginTop: 20
-    },
-    inputStyle: {
-        backgroundColor: "white",
-        borderColor: "#6B7280",
-        width: "100%",
-        height: 30,
-        padding: 10,
-        borderRadius: 8,
-        borderWidth: 1,
-      },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginTop: 20,
+  },
+  inputStyle: {
+    backgroundColor: "white",
+    borderColor: "#6B7280",
+    width: "100%",
+    height: 30,
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
@@ -169,6 +163,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     borderRadius: 8,
     borderWidth: 1,
+  },
+  textArea: {
+    height: 100,
   },
 });
 

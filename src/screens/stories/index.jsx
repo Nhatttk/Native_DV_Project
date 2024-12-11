@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -26,24 +26,22 @@ const StorieScreen = ({ navigation }) => {
   const [commentText, setCommentText] = React.useState("");
   const [openDialog, setOpenDialog] = React.useState(false);
   const [stories, setStories] = React.useState([]);
-  // const [userLogin, setUserLogin] = useState({});
+  const [userLogin, setUserLogin] = useState({});
 
-  // useEffect(() => {
-  //   AsyncStorage.getItem("userData").then((value) => {
-  //     if (value) {
-  //       setUserLogin(JSON.parse(value));
-  //     }
-  //   })
-  // }, [])
-  
-  // console.log("userLogin: ",userLogin.user.profile.avatar);
-
+  useEffect(() => {
+    AsyncStorage.getItem("userData").then((value) => {
+      if (value) {
+        setUserLogin(JSON.parse(value));
+      }
+    })
+  }, [])
   const commentHandle = () => {
     console.log("commenttext: ", commentText);
   };
   const onCancel = () => {
     setOpenDialog(false);
   };
+  // const test = ()
   const HandleOpenDialog = () => {
       setOpenDialog(true);
   }
@@ -58,7 +56,7 @@ const StorieScreen = ({ navigation }) => {
     }
     fetchStories();
   }, []);
-  console.log("stories: ",stories)
+  console.log("setOpenDialog: ", openDialog);
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -81,8 +79,8 @@ const StorieScreen = ({ navigation }) => {
         >
           <View>
             <Image
-              source={require("../../assets/img/avatar.png")}
-              // source={{ uri: `${IMAGE_URL}${userLogin.user.profile.avatar}` }}
+              // source={require("../../assets/img/avatar.png")}
+              source={{ uri: `${IMAGE_URL}${userLogin.user?.profile.avatar}` }}
               style={{ width: 40, height: 40, borderRadius: 999 }}
             />
           </View>
@@ -150,7 +148,7 @@ const StorieScreen = ({ navigation }) => {
               />
             </View>
             <View style={styles.form}>
-              <FormAddStory onCancel={onCancel} />
+              <FormAddStory onCancel={onCancel} setOpenDialog={setOpenDialog}/>
             </View>
           </View>
         </View>
