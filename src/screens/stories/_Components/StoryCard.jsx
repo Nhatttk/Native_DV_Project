@@ -14,7 +14,6 @@ import { IMAGE_URL } from "../../../api/URL/apiUrl";
 
 const StoryCard = ({ props, commentHandle }) => {
   const [openBoxCmt, setOpenBoxCmt] = React.useState(false);
-  console.log(openBoxCmt);
   return (
     <View
       style={[
