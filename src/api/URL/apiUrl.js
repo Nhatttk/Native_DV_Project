@@ -1,2 +1,4 @@
-export const API_URL = "http://192.168.32.109:8000/api/";
-export const IMAGE_URL = "http://192.168.32.109:8000";
+export const IP = "172.16.0.220:8000"
+export const API_URL = `http://${IP}/api/`;
+export const IMAGE_URL = `http://${IP}`;
+export const Websocket_URL = `ws://${IP}/`;

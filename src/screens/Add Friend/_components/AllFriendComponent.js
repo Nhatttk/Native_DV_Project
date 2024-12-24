@@ -6,37 +6,21 @@ import { addRequestFriend } from '../../../api/apis';
 import UserData from '../../../UserData/UserData';
 import { IMAGE_URL } from '../../../api/URL/apiUrl';
 
-const UserView = ({user_data, action}) => {
-
-  const addFriend = async () => {
-    try {
-      await addRequestFriend(UserData.data.user.profile.pk, user_data.pk)
-      refresh()
-    } catch (error) {
-      console.log("Erorr add requet friend");
-    }
-  }
-
-  const refresh = () => {
-    action();
-  };
+const AllFriendsView = ({friend_data, action}) => {
 
     return (
       <View style={styles.container}>
         <Image
           style={styles.avatar}
-          source={{uri: `${IMAGE_URL}${user_data.avatar}` }}
+          source={{ uri: `${IMAGE_URL}${friend_data.avatar}` }}
         />
 
         <View style={styles.user_info}>
           {/* first row */}
           <View style={styles.firstRow}>
             <Text style={styles.textTitle}>
-              {user_data.user.first_name + " " + user_data.user.last_name}
+              {friend_data.user.first_name + " " + friend_data.user.last_name}
             </Text>
-            <TouchableOpacity onPress={addFriend}>
-        <Ionicons name="person-add-outline" size={24} color="#374151" />
-      </TouchableOpacity>
           </View>
           {/* br */}
           <View style={styles.br}></View>
@@ -44,13 +28,13 @@ const UserView = ({user_data, action}) => {
           {/* second row */}
           <View style={styles.secondRow}>
             {/* job title  */}
-            <Text style={styles.textContent}>{user_data.phone}</Text>
+            <Text style={styles.textContent}>{friend_data.phone}</Text>
 
             {/* location  */}
             <View style={styles.location}>
               <Ionicons name="location-outline" size={24} color="#374151" />
               <Text style={styles.textLocation}>
-                {user_data.address}
+                {friend_data.address}
               </Text>
             </View>
 
@@ -150,4 +134,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserView;
+export default AllFriendsView;

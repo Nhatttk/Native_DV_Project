@@ -21,8 +21,6 @@ const ProfileScreen = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
         const user = await getLoginData();
-
-        console.log(user)
         setUserData(user.user)
         setProfileData(user.user.profile)
     }

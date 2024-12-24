@@ -5,6 +5,95 @@ import * as Location from "expo-location";
 import {API_URL_GEMINI} from '@env';
 // api.js
 
+
+export const getAllBooking = async (pk) => {
+  try {
+    const response = await axios.get(API_URL + "bookings/?pk=" + pk);
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const addBooking = async (playload) => {
+  try {
+    const response = await axios.post(API_URL + "bookings/", 
+      playload
+    );
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getAllSuggestion = async (pk) => {
+  try {
+    const response = await axios.get(API_URL + "suggestion-friends/?pk=" + pk);
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getAllFriendsRequest = async (receiver_id) => {
+  try {
+    const response = await axios.get(API_URL + "send_friend_request/?pk=" + receiver_id);
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getAllFriends = async (user1_id) => {
+  try {
+    const response = await axios.get(API_URL + "friendships/?pk=" + user1_id);
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const addFriend = async (user1, user2) => {
+  try {
+    const response = await axios.post(API_URL + "friendships/", {
+      user1_id: user1,
+      user2_id: user2
+    });
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const addRequestFriend = async (sender_id, receiver_id) => {
+  try {
+    const response = await axios.post(API_URL + "send_friend_request/", {
+      sender_id: sender_id,
+      receiver_id: receiver_id
+    });
+    return response.data;
+  } catch (error) {
+    // console.error("Error calling api:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+
+export const getAllProfiles = async () => {
+  try {
+    const response = await axios.get(API_URL + `user-profiles/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+}
+
 export const getEmergencyList= async () => {
   try {
     const response = await axios.get(API_URL + `emergency-help/`);
@@ -88,7 +177,6 @@ export const getUserDataFromToken = async (token) => {
 
 export const fetchKnowledgeList = async () => {
   try {
-    console.log(API_URL)
     const response = await axios.get(API_URL + "knowledge/");
     return response.data;
   } catch (error) {
@@ -100,8 +188,7 @@ export const fetchKnowledgeList = async () => {
 
 export const fetchExpertList = async () => {
   try {
-    const response = await axios.get(API_URL + "get-expert-user/");
-    console.log("expert: ", response.data)
+    const response = await axios.get(API_URL + "experts/");
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);

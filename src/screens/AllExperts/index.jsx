@@ -41,12 +41,6 @@ const AllExpertScreen = ({ navigation }) => {
           <Icons name="search1" size={24} style={styles.icon} />
           <TextInput style={styles.input} placeholder=" Search ..." />
         </View>
-        <View style={{ flexDirection: "row", gap: 8 }}>
-          <ItemSection props={{ title: "All", isActive: false }} />
-          <ItemSection props={{ title: "General", isActive: true }} />
-          <ItemSection props={{ title: "psychiatrist", isActive: false }} />
-          <ItemSection props={{ title: "lawyer", isActive: false }} />
-        </View>
       </View>
       <View style={styles.contentcontainer}>
         <View
@@ -62,12 +56,8 @@ const AllExpertScreen = ({ navigation }) => {
             <Text
               style={{ fontSize: 16, fontWeight: "bold", color: "#1F2A37" }}
             >
-              12 founds
+              {PsychiatristData.length} founds
             </Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center",gap: 8 }}>
-            <Text style={{ fontSize: 14, fontWeight: 600, color: "#6B7280"  }}>Default</Text>
-            <Image style={{ width: 14, height: 14 }} source={require("../../assets/images/arrowUpDown.png")} />
           </View>
         </View>
         <ScrollView
@@ -80,7 +70,7 @@ const AllExpertScreen = ({ navigation }) => {
         >
           {PsychiatristData.map((item) => (
             <TouchableOpacity key={item.id} onPress={() => navigation.navigate("PsychiatristDetails", {expert: item})}>
-            <View key={item.id} style={{ marginBottom: 8 }}>
+            <View key={item.pk} style={{ marginBottom: 8 }}>
               <FavoriteCard
                 //   onPressHandleRemoveFavorites={onPressHandleRemoveFavorites}
                 props={item}

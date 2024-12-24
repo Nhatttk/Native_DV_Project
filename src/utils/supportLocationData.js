@@ -1,7 +1,7 @@
 export const SupportLocationData = [
   {
     id: 1,
-    title: "ytytyt",
+    title: "Suport Center DaNang",
     address: "Da nang",
     type: "Hospital",
     latitude: 16.234,
@@ -9,7 +9,7 @@ export const SupportLocationData = [
   },
   {
     id: 2,
-    title: "ABc5645",
+    title: "HaiPhong SPCT",
     address: "Da nang",
     type: "Hospital",
     latitude: 16.254,

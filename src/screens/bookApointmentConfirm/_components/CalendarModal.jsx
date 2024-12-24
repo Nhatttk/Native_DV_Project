@@ -11,21 +11,24 @@ import { Calendar, CalendarUtils } from "react-native-calendars";
 import testIDs from "../../../utils/testIDs";
 import { AntDesign } from "@expo/vector-icons";
 
-const CalendarScreen = ({props}) => {
+const CalendarScreen = ({onValueChange, props}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const INITIAL_DATE = currentDate.toISOString().split("T")[0];
-  const [selected, setSelected] = useState(INITIAL_DATE);
+  const [selected, setSelected] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(INITIAL_DATE);
   //
   const [hourSelected, setHourSelected] = useState(null);
   const selectHourHandle = (id) => {
     setHourSelected(id);
+    onValueChange(selected, id)
   };
   //
 
   const onDayPress = useCallback((day) => {
     setSelected(day.dateString);
+    onValueChange(day.dateString, hourSelected)
   }, []);
+
   const marked = useMemo(() => {
     return {
       [selected]: {
@@ -157,11 +160,11 @@ const CalendarScreen = ({props}) => {
             return (
               <TouchableOpacity
                 key={index}
-                onPress={() => selectHourHandle(item.id)}
+                onPress={() => selectHourHandle(item.time)}
               >
                 <View
                   style={{
-                    backgroundColor: hourSelected === item.id ? "#1C2A3A" : "#F9FAFB",
+                    backgroundColor: hourSelected === item.time ? "#1C2A3A" : "#F9FAFB",
                     paddingHorizontal: 19,
                     paddingVertical: 10,
                     borderRadius: 10,
@@ -170,7 +173,7 @@ const CalendarScreen = ({props}) => {
                 >
                   <Text
                     style={{
-                      color: hourSelected === item.id ? "white" : "#6B7280",
+                      color: hourSelected === item.time ? "white" : "#6B7280",
                       fontWeight: "500",
                       fontSize: 14,
                     }}

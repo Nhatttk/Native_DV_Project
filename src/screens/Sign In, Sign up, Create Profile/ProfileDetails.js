@@ -22,9 +22,7 @@ const ProfileDetails = ({ navigation, route }) => {
   const pickerRef = useRef();
 
   const {formData} = route.params
-  console.log(formData)
   const showDatePicker = () => {
-    console.log("DatePicker shown");
     setDatePickerVisibility(true);
   };
 

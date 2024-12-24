@@ -8,14 +8,14 @@ const notificationData = [
         id: 1,
         title: "Appointment Success",
         description: "You have successfully booked your appointment with Dr. Emily Walker.",
-        date: "2024-11-11T10:00:00",
+        date: "2024-12-24T10:00:00",
         type: "success",
     },
     {
         id: 2,
         title: "Appointment Cancelled",
         description: "You have successfully booked your appointment with Dr. Emily Walker.",
-        date: "2024-11-10T10:00:00",
+        date: "2024-12-24T10:00:00",
         type: "remove",
     },
     {
@@ -29,7 +29,7 @@ const notificationData = [
         id: 4,
         title: "Appointment Success",
         description: "You have successfully booked your appointment with Dr. Emily Walker.",
-        date: "2024-11-08T10:00:00",
+        date: "2024-12-23T10:00:00",
         type: "success",
     },
     {

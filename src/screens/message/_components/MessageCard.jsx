@@ -10,7 +10,6 @@ const MessageCard = ({ props, private_id, navigation }) => {
 
   useEffect(() => {
     checkUser()
-    console.log(friend)
   },[]);
 
   const checkUser = async () => {

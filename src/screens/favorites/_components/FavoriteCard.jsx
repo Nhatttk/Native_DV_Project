@@ -57,7 +57,7 @@ const FavoriteCard = ({ props, onPressHandleRemoveFavorites }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
-        <Image style={styles.image} source={{ uri: `${IMAGE_URL}${props.avatar}` }} />
+        <Image style={styles.image} source={{ uri: props.avatar }} />
       </View>
       <View style={styles.info}>
         <View

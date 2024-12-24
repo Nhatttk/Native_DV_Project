@@ -56,7 +56,7 @@ const PsychiatristDetails = ({ navigation, route }) => {
         {/* {data.map((item) => ( */}
           <PsychiatristCard
             key={data.id}
-            imgUrl={`${IMAGE_URL}${data.avatar}`}
+            imgUrl={`${data.avatar}`}
             name={`${data.user.first_name} ${data.user.last_name}`}
             speciality={data.jobTitle}
             address={data.address}
@@ -96,7 +96,7 @@ const PsychiatristDetails = ({ navigation, route }) => {
       </View>
       <View style={{ paddingHorizontal: 24, paddingVertical: 24 }}>
         {/* <Button style={styles.button} title="Book Appointment" /> */}
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("bookAppointmentConfirm")}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("bookAppointmentConfirm", {expert_id : data.pk})}>
             <Text style={{ color: "white", fontSize: 16, fontWeight: "medium" }}>Book Appointment</Text>
         </TouchableOpacity>
       </View>

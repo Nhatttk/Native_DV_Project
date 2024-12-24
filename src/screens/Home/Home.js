@@ -25,6 +25,8 @@ import BlogCard from "../favorites/_components/BlogCard";
 import TopNavigation from "../../components/TopNavigation";
 
 import { Accelerometer } from "expo-sensors";
+import WebSocketService from "../../socket/WebSocketService";
+import UserData from "../../UserData/UserData";
 
 const HomeScreen = ({ navigation }) => {
   const SHAKING_THRESHOLD = 2.5; // Ngưỡng gia tốc để nhận diện lắc
@@ -35,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
   const [ModalVisible, setModalVisible] = useState(false);
   const [seeAllNearbySupport, setSeeAllNearbySupport] = useState(false);
   const [acceleration, setAcceleration] = useState({ x: 0, y: 0, z: 0 });
-  const [shaking, setShaking] = useState(false);
+  const [userData, setUserData] = useState();
 
   const navigateHandle = (navigationPath) => {
     setModalVisible(false);
@@ -43,6 +45,12 @@ const HomeScreen = ({ navigation }) => {
   };
   const handleLongPress = () => {
     navigation.navigate("SosScreen");
+  };
+
+  const fetchDataLogin = async () => {
+    await UserData.getData()
+    setUserData(UserData.data.user)
+    WebSocketService.connect(UserData.data.user.profile.pk);
   };
 
   useEffect(() => {
@@ -67,7 +75,9 @@ const HomeScreen = ({ navigation }) => {
         }
       }
     });
-
+    
+    fetchDataLogin()
+    
     // Dọn dẹp khi component unmount
     return () => subscription.remove();
   }, [navigation]);

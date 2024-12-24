@@ -10,7 +10,6 @@ import {
   TouchableWithoutFeedback,
   SafeAreaView,
 } from "react-native";
-import { useForm, Controller } from "react-hook-form";
 import * as ImagePicker from "expo-image-picker";
 import { postStory } from "../../../api/apis";
 import LoadingPopup from "../../../components/loadingPopup";
