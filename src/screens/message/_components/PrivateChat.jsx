@@ -18,7 +18,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { getLoginData } from "../../../api/storageData";
 import AnswerCard from "./AnswerCard";
 import QuestionCard from "./QuestionCard";
-
+import { Websocket_URL } from "../../../api/URL/apiUrl";
 const PrivateChatScreen = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -29,7 +29,7 @@ const PrivateChatScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const socket = new WebSocket(
-      `ws://192.168.1.170:8000/ws/private-chat/${route.params.private_id}/`
+      `${Websocket_URL}ws/private-chat/${route.params.private_id}/`
     );
     setWs(socket);
     

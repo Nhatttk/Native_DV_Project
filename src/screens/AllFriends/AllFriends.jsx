@@ -37,7 +37,6 @@ const AllFriends = ({ navigation }) => {
           }}
         >
           <View style={{ flexDirection: "column", gap: 16 }}>
-{/*  */} 
           {
             PsychiatristData.map((item) => (
               <View key={item.id}>

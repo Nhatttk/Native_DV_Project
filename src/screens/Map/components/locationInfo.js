@@ -35,7 +35,7 @@ const LocationInfo = ({data, setLocation}) => {
             width={100}
             height={100}
             source={{
-              uri: "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:quality(100)/avatar_dep_cho_nam_0_d82ba08b05.jpg",
+              uri: "https://naturalhistory.si.edu/sites/default/files/styles/wysiwyg/public/media/image/msc.jpg.webp?itok=1A_J5HBS",
             }}
             style={styles.profileImage}
           />

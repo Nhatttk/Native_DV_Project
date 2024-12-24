@@ -2,41 +2,36 @@ import React from 'react';
 import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import  Ionicons  from 'react-native-vector-icons/Ionicons';
 import { theme } from '../../../constains/theme';
-import { addRequestFriend } from '../../../api/apis';
+import { addFriend, addRequestFriend } from '../../../api/apis';
 import UserData from '../../../UserData/UserData';
 import { IMAGE_URL } from '../../../api/URL/apiUrl';
 
-const UserView = ({user_data, action}) => {
-
-  const addFriend = async () => {
-    try {
-      await addRequestFriend(UserData.data.user.profile.pk, user_data.pk)
-      refresh()
-    } catch (error) {
-      console.log("Erorr add requet friend");
+const RequestFriendView = ({request_data, action}) => {
+    {
+        console.log("request_data", request_data)
     }
-  }
 
-  const refresh = () => {
-    action();
-  };
-
+    const acceptFriend = async () => {
+      try {
+        await addFriend(UserData.data.user.profile.pk, request_data.pk)
+        action()
+      } catch (error) {
+        console.log("Erorr add requet friend");
+      }
+    }
     return (
       <View style={styles.container}>
         <Image
           style={styles.avatar}
-          source={{uri: `${IMAGE_URL}${user_data.avatar}` }}
+          source={{ uri: `${IMAGE_URL}${request_data.avatar}` }}
         />
 
         <View style={styles.user_info}>
           {/* first row */}
           <View style={styles.firstRow}>
             <Text style={styles.textTitle}>
-              {user_data.user.first_name + " " + user_data.user.last_name}
+              {request_data.user.first_name + " " + request_data.user.last_name}
             </Text>
-            <TouchableOpacity onPress={addFriend}>
-        <Ionicons name="person-add-outline" size={24} color="#374151" />
-      </TouchableOpacity>
           </View>
           {/* br */}
           <View style={styles.br}></View>
@@ -44,19 +39,19 @@ const UserView = ({user_data, action}) => {
           {/* second row */}
           <View style={styles.secondRow}>
             {/* job title  */}
-            <Text style={styles.textContent}>{user_data.phone}</Text>
+            <Text style={styles.textContent}>{request_data.phone}</Text>
 
             {/* location  */}
             <View style={styles.location}>
               <Ionicons name="location-outline" size={24} color="#374151" />
               <Text style={styles.textLocation}>
-                {user_data.address}
+                {request_data.address}
               </Text>
             </View>
 
             {/* inbox button  */}
-            <TouchableOpacity style={styles.inbox_button}>
-              <Text style={styles.textButton}>Inbox</Text>
+            <TouchableOpacity style={styles.inbox_button} onPress={acceptFriend}>
+              <Text style={{color: '#fff'}}>Accept</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -146,8 +141,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     alignItems: "center",
-    color: "#1C2A3A",
+    backgroundColor: "#1C2A3A",
   },
 });
 
-export default UserView;
+export default RequestFriendView;

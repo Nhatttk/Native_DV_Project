@@ -20,7 +20,6 @@ import QuestionCard from "../onlineCounseling/_components/QuestionCardAI";
 
 const ChatWithFriend = ({ navigation, route }) => {
     const { userName } = route.params;
-    console.log("userName: ",userName);
   const [addfile, setAddfile] = React.useState(false);
   const [commentText, setCommentText] = React.useState("");
   const [comments, setComments] = React.useState([]);
