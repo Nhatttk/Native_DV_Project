@@ -240,3 +240,23 @@ export const getStories = async () => {
     throw error;
   }
 }
+
+export const getAllEmailHelp = async (pk) => {
+  try {
+    const response = await axios.get(API_URL + "profile-emails/?pk=" + pk);
+    return response.data;
+  } catch (error) {
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};
+export const AddAllEmailHelp = async (id, email) => {
+  try {
+    const response = await axios.post(API_URL + "profile-emails/", {
+      pk: id,
+      email: email
+    });
+    return response.data;
+  } catch (error) {
+    throw error; // Ném lỗi để có thể xử lý tại component
+  }
+};

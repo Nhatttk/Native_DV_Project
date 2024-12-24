@@ -40,6 +40,7 @@ import KnowLeadgeArticle from "../screens/knowleadge/KnowleadgeArticle";
 import LoadingPopup from "../components/loadingPopup";
 import PrivateChatScreen from "../screens/message/_components/PrivateChat";
 import EmergencyHelp from "../screens/emergencyHelp";
+import AddEmailUgentHelf from "../screens/profile/AddEmailUgentHelf";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -370,6 +371,11 @@ function StackNavigator() {
       <Stack.Screen
         name="KnowLeadgeArticle"
         component={KnowLeadgeArticle}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddEmailUgentHelf"
+        component={AddEmailUgentHelf}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

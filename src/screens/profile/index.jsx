@@ -94,6 +94,27 @@ const ProfileScreen = ({ navigation }) => {
           </Text>
         </View>
         <View style={styles.ProfileItem}>
+        <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "flex-start",
+              alignSelf: "flex-start",
+              gap: 16,
+            }}
+            onPress={() => navigation.navigate("AddEmailUgentHelf")}
+          >
+            <IconsMaterialCommunityIcons
+              name="email-plus-outline"
+              size={24}
+              color="#1C2A3A"
+            />
+            <Text style={{ fontSize: 18, color: "#6B7280", fontWeight: "300" }}>
+              Add email for urgent help
+            </Text>
+          </TouchableOpacity>
+          <View
+            style={{ width: "100%", height: 1, backgroundColor: "#E5E7EB" }}
+          />
           <View
             style={{
               flexDirection: "row",
